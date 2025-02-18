@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ClasseByLevel index{% endblock %}
+
+{% block body %}
+    <h1>ClasseByLevel index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Classe</th>
+                <th>Level</th>
+                <th>Bm</th>
+                <th>Capacités</th>
+                <th>Rage</th>
+                <th>Damage</th>
+                <th>Cantrip</th>
+                <th>Knowing_spells</th>
+                <th>Spell_one</th>
+                <th>Spell_two</th>
+                <th>Spell_three</th>
+                <th>Spell_four</th>
+                <th>Spell_five</th>
+                <th>Spell_six</th>
+                <th>Spell_seven</th>
+                <th>Spell_eight</th>
+                <th>Spell_nine</th>
+                <th>Sorcery_point</th>
+                <th>Martial_art</th>
+                <th>Ki</th>
+                <th>Movement_without_armor</th>
+                <th>Slot_space</th>
+                <th>Slot_level</th>
+                <th>Invocation_know</th>
+                <th>Sneak_attack</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for classe_by_level in classe_by_levels %}
+            <tr>
+                <td>{{ classe_by_level.id }}</td>
+                <td>{{ classe_by_level.classe.name }}</td>
+                <td>{{ classe_by_level.level }}</td>
+                <td>{{ classe_by_level.bm }}</td>
+                <td>
+                    {% for skill in classe_by_level.skills %}
+                        {{ skill.name }},
+                    {% endfor %}
+                </td>
+                <td>{{ classe_by_level.rage }}</td>
+                <td>{{ classe_by_level.damage }}</td>
+                <td>{{ classe_by_level.cantrip }}</td>
+                <td>{{ classe_by_level.knowingSpells }}</td>
+                <td>{{ classe_by_level.spellOne }}</td>
+                <td>{{ classe_by_level.spellTwo }}</td>
+                <td>{{ classe_by_level.spellThree }}</td>
+                <td>{{ classe_by_level.spellFour }}</td>
+                <td>{{ classe_by_level.spellFive }}</td>
+                <td>{{ classe_by_level.spellSix }}</td>
+                <td>{{ classe_by_level.spellSeven }}</td>
+                <td>{{ classe_by_level.spellEight }}</td>
+                <td>{{ classe_by_level.spellNine }}</td>
+                <td>{{ classe_by_level.sorceryPoint }}</td>
+                <td>{{ classe_by_level.martialArt }}</td>
+                <td>{{ classe_by_level.ki }}</td>
+                <td>{{ classe_by_level.movementWithoutArmor }}</td>
+                <td>{{ classe_by_level.slotSpace }}</td>
+                <td>{{ classe_by_level.slotLevel }}</td>
+                <td>{{ classe_by_level.invocationKnow }}</td>
+                <td>{{ classe_by_level.sneakAttack }}</td>
+                <td>
+                    <a href="{{ path('app_classe_by_level_show', {'id': classe_by_level.id}) }}">show</a>
+                    <a href="{{ path('app_classe_by_level_edit', {'id': classe_by_level.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="25">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_classe_by_level_new') }}">Create new</a>
+{% endblock %}

@@ -25,6 +25,7 @@ class Classe
      * @var Collection<int, Spell>
      */
     #[ORM\ManyToMany(targetEntity: Spell::class, inversedBy: 'classes')]
+    #[ORM\JoinColumn(nullable: true)]
     private Collection $spells;
 
     #[ORM\Column(length: 255)]
@@ -42,7 +43,7 @@ class Classe
     #[ORM\Column(length: 255)]
     private ?string $competence = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 510)]
     private ?string $equipment = null;
 
     /**
