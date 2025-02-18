@@ -16,7 +16,11 @@
                 <th>Tool</th>
                 <th>Save</th>
                 <th>Competence</th>
-                <th>Equipment</th>
+                <th>Equipment1</th>
+                <th>Equipment2</th>
+                <th>Equipment3</th>
+                <th>Equipment4</th>
+                <th>Equipment5</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -31,7 +35,11 @@
                 <td>{{ classe.tool }}</td>
                 <td>{{ classe.save }}</td>
                 <td>{{ classe.competence }}</td>
-                <td>{{ classe.equipment }}</td>
+                <td>{{ classe.equipment1 }}</td>
+                <td>{{ classe.equipment2 }}</td>
+                <td>{{ classe.equipment3 }}</td>
+                <td>{{ classe.equipment4 }}</td>
+                <td>{{ classe.equipment5 }}</td>
                 <td>
                     <a href="{{ path('app_classe_show', {'id': classe.id}) }}">show</a>
                     <a href="{{ path('app_classe_edit', {'id': classe.id}) }}">edit</a>

@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ classe.name }}{% endblock %}
+
+{% block body_id 'classe' %}
+
+{% block main %}
+
+    <h1 class="classe-title">{{ classe.name }}</h1>
+
+    <h2 class="classe-subtitle">Points de vie</h2>
+    <p class="classe-dv"><b>DV : </b>1d{{ classe.dv }} par niveau de {{ classe.name }}</p>
+    <p class="classe-pv-lvl1"><b>Pv au niveau 1 : </b>{{ classe.dv }} + votre modificateur de Constitution</p>
+    <p class="classe-pv-lvls"><b>Pv aux niveaux suivants : </b>1d{{ classe.dv }} + votre modificateur de Constitution</p>
+
+    <h2 class="classe-subtitle">Maîtrises</h2>
+    <p class="classe-armor"><b>Armures : </b>{{ classe.armor }}</p>
+    <p class="classe-weapon"><b>Armes : </b>{{ classe.weapon }}</p>
+    <p class="classe-tool"><b>Outils : </b>{{ classe.tool }}</p>
+    <p class="classe-save"><b>Jets de sauvegarde : </b>{{ classe.save }}</p>
+    <p class="classe-competence"><b>Comnpétences : </b>{{ classe.competence }}</p>
+
+    <h2 class="classe-subtitle">Équipement</h2>
+    <p class="classe-equipment">Vous commencez avec l'équipement suivant, en plus de l'équipement accordé par votre historique :</p>
+    <ul class="classe-equipment-items">
+        <li class="classe-equipment-item">{{ classe.equipment1 }}</li>
+        {% if classe.equipment2 %}
+            <li class="classe-equipment-item">{{ classe. equipment2 }}</li>
+        {% endif %}
+        {% if classe.equipment3 %}
+            <li class="classe-equipment-item">{{ classe. equipment3 }}</li>
+        {% endif %}
+        {% if classe.equipment4 %}
+            <li class="classe-equipment-item">{{ classe. equipment4 }}</li>
+        {% endif %}
+        {% if classe.equipment5 %}
+            <li class="classe-equipment-item">{{ classe. equipment5 }}</li>
+        {% endif %}
+    </ul>
+
+    {% if classe.name == 'Barbare' %}
+        {% include 'classes/tables/_barbare.html.twig' %}
+    {% elseif classe.name == 'Barde' %}
+        {% include 'classes/tables/_barde.html.twig' %}
+    {% elseif classe.name == 'Clerc' %}
+        {% include 'classes/tables/_clerc.html.twig' %}
+    {% elseif classe.name == 'Druide' %}
+        {% include 'classes/tables/_druide.html.twig' %}
+    {% elseif classe.name == 'Ensorceleur' %}
+        {% include 'classes/tables/_ensorceleur.html.twig' %}
+    {% elseif classe.name == 'Guerrier' %}
+        {% include 'classes/tables/_guerrier.html.twig' %}
+    {% elseif classe.name == 'Magicien' %}
+        {% include 'classes/tables/_magicien.html.twig' %}
+    {% elseif classe.name == 'Moine' %}
+        {% include 'classes/tables/_moine.html.twig' %}
+    {% elseif classe.name == 'Occultiste' %}
+        {% include 'classes/tables/Occultiste.html.twig' %}
+    {% elseif classe.name == 'Paladin' %}
+        {% include 'classes/tables/_paladin.html.twig' %}
+    {% elseif classe.name == 'Rôdeur' %}
+        {% include 'classes/tables/_rodeur.html.twig' %}
+    {% elseif classe.name == 'Roublard' %}
+        {% include 'classes/tables/_roublard.html.twig' %}
+    {% endif %}
+
+{% endblock %}

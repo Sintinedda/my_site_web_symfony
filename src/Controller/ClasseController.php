@@ -22,6 +22,26 @@ final class ClasseController extends AbstractController
         ]);
     }
 
+    #[Route('/new', name: 'app_classe_new', methods: ['GET', 'POST'])]
+    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $classe = new Classe();
+        $form = $this->createForm(ClasseType::class, $classe);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($classe);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('app_classe_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->render('classe/new.html.twig', [
+            'classe' => $classe,
+            'form' => $form,
+        ]);
+    }
+
     #[Route('/{id}', name: 'app_classe_show', methods: ['GET'])]
     public function show(Classe $classe): Response
     {
