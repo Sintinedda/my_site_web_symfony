@@ -1,0 +1,46 @@
+{% block stylesheets %}{% endblock %}
+
+{% block javascripts %}{% endblock %}
+
+{% set _route = app.request.get('_route') %}
+
+<div class="nav-container">
+    <div class="nav-layer">
+        <div class="nav-logo">
+        </div>
+        <div class="nav-menu">
+            <ul class="nav-menu-items">
+                <li class="nav-menu-item">
+                    <a class="nav-menu-link" href="{{ path('app_view_classe_index') }}">Classes</a>
+                    <ul class="nav-menu-classe-items">
+                        
+                        {% for classe in classes %}
+                            <li class="nav-menu-classe-item">
+                                <a class="nav-menu-classe-link" href="{{ path('app_view_classe_show', { 'slug': classe.name }) }}">{{ classe.name }}</a>
+                            </li>
+                        {% endfor %}
+
+                    </ul>
+                </li>
+                <li class="nav-menu-item">
+                    <a class="nav-menu-link" href="">Races</a>
+                    <ul class="nav-menu-classe-items">
+                        
+                        {% for race in races %}
+                            <li class="nav-menu-classe-item">
+                                <a class="nav-menu-classe-link" 
+                                  href="">
+                                    {{ race.name }}
+                                </a>
+                            </li>
+                        {% endfor %}
+
+                    </ul>
+                </li>
+                <li class="nav-menu-item">
+                    <a class="nav-menu-link" href="">Sorts</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <meta name="view-transition" content="same-origin" />
+
         {% block stylesheets %}
         {% endblock %}
 
@@ -11,7 +12,16 @@
             {% block importmap %}{{ importmap('app') }}{% endblock %}
         {% endblock %}
     </head>
-    <body>
-        {% block body %}{% endblock %}
+    <body class="body" id="{% block body_id %}{% endblock %}">
+
+        {% block header %}
+            <header>
+                {{ render(controller('App\\Controller\\NavController::nav', { 'route': app.request.attributes.get('_route') })) }}
+            </header>
+        {% endblock %}
+
+        {% block body %}
+            <main>{% block main %}{% endblock %}</main>
+        {% endblock %}
     </body>
 </html>
