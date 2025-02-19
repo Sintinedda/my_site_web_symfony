@@ -1,0 +1,7 @@
+{% if skill.name == 'Incantation' %}
+    {% if classe.name == 'Barde' %}
+        {% include 'client/classe/spelling/_barde.html.twig' %}
+    {% elseif classe.name == 'Clerc' %}
+        {% include 'client/classe/spelling/_clerc.html.twig' %}
+    {% endif %}
+{% endif %}

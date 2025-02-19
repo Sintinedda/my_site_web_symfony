@@ -1,0 +1,48 @@
+{% set newArray = [] %}
+{% for level in classe.classeByLevels %}
+    {% for skill in level.skills %}
+        {% if skill.name not in newArray %}
+            <div class="classe-skill-div">
+                <h3 class="classe-skill-title">{{ skill.name }}</h2>
+                {% if skill.descr1 %}
+                    <p class="classe-skill-descr">{{ skill.descr1 }}</p>
+                {% endif %}
+                {% if skill.descr2 %}
+                    <p class="classe-skill-descr">{{ skill.descr2 }}<p>
+                {% endif %}
+                {% if skill.descr3 %}
+                    <p class="classe-skill-descr">{{ skill.descr3 }}<p>
+                {% endif %}
+                {% if skill.descr4 %}
+                    <p class="classe-skill-descr">{{ skill.descr4 }}<p>
+                {% endif %}
+                {% if skill.descr5 %}
+                    <p class="classe-skill-descr">{{ skill.descr5 }}<p>
+                {% endif %}
+                {% if skill.descr6 %}
+                    <p class="classe-skill-descr">{{ skill.descr6 }}<p>
+                {% endif %}
+                {% if skill.descr7 %}
+                    <p class="classe-skill-descr">{{ skill.descr7 }}<p>
+                {% endif %}
+                {% if skill.descr8 %}
+                    <p class="classe-skill-descr">{{ skill.descr8 }}<p>
+                {% endif %}
+                {% if skill.descr9 %}
+                    <p class="classe-skill-descr">{{ skill.descr9 }}<p>
+                {% endif %}
+                {% if skill.descr10 %}
+                    <p class="classe-skill-descr">{{ skill.descr10 }}<p>
+                {% endif %}
+
+                {# spelling #}
+                {% include 'client/classe/construct/_spelling.html.twig' %}
+ 
+                {# clerc #}
+                {% include 'client/classe/clerc/_skills.html.twig' %}
+
+            </div>
+        {% set newArray = newArray|merge([skill.name]) %}
+        {% endif %}
+    {% endfor %}
+{% endfor %}

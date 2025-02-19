@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des races{% endblock %}
+
+{% block body_id 'race-list' %}
+
+{% block main %}
+
+    <h1 class="race-title">Liste des races</h1>
+    <ul>
+        <li>Communes
+            <ul>
+                {% for common in commons %}
+                    <li><a href="{{ path('app_view_race_show', { 'slug': common.name }) }}">{{ common.name }}</a></li>
+                {% endfor %}
+            </ul>
+        </li>
+        <li>Exotiques
+            <ul>
+                {% for exotic in exotics %}
+                    <li><a href="{{ path('app_view_race_show', { 'slug': exotic.name }) }}">{{ exotic.name }}</a></li>
+                {% endfor %}
+            </ul>
+        </li>
+        <li>Monstrueuses
+            <ul>
+                {% for monstruou in monstruous %}
+                    <li><a href="{{ path('app_view_race_show', { 'slug': monstruou.name }) }}">{{ monstruou.name }}</a></li>
+                {% endfor %}
+            </ul>
+        </li>
+    </ul>
+
+{% endblock %}

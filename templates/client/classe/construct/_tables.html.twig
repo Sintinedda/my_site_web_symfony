@@ -1,0 +1,25 @@
+{% if classe.name == 'Barbare' %}
+    {% include 'client/classe/tables/_barbare.html.twig' %}
+{% elseif classe.name == 'Barde' %}
+    {% include 'client/classe/tables/_barde.html.twig' %}
+{% elseif classe.name == 'Clerc' %}
+    {% include 'client/classe/tables/_clerc.html.twig' %}
+{% elseif classe.name == 'Druide' %}
+    {% include 'client/classe/tables/_druide.html.twig' %}
+{% elseif classe.name == 'Ensorceleur' %}
+    {% include 'client/classe/tables/_ensorceleur.html.twig' %}
+{% elseif classe.name == 'Guerrier' %}
+    {% include 'client/classe/tables/_guerrier.html.twig' %}
+{% elseif classe.name == 'Magicien' %}
+    {% include 'client/classe/tables/_magicien.html.twig' %}
+{% elseif classe.name == 'Moine' %}
+    {% include 'client/classe/tables/_moine.html.twig' %}
+{% elseif classe.name == 'Occultiste' %}
+    {% include 'client/classe/tables/Occultiste.html.twig' %}
+{% elseif classe.name == 'Paladin' %}
+    {% include 'client/classe/tables/_paladin.html.twig' %}
+{% elseif classe.name == 'Rôdeur' %}
+    {% include 'client/classe/tables/_rodeur.html.twig' %}
+{% elseif classe.name == 'Roublard' %}
+    {% include 'client/classe/tables/_roublard.html.twig' %}
+{% endif %}

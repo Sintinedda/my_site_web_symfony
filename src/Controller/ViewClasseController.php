@@ -15,7 +15,7 @@ final class ViewClasseController extends AbstractController
     #[Route('/liste', name: 'app_view_classe_index', methods: ['GET'])]
     public function index(ClasseRepository $classeRepository): Response
     {
-        return $this->render('classes/index.html.twig', [
+        return $this->render('client/classe/index.html.twig', [
             'classes' => $classeRepository->findAll(),
         ]);
     }
@@ -25,7 +25,7 @@ final class ViewClasseController extends AbstractController
     {
         $classe = $em->getRepository(Classe::class)->findOneBy(['name' => $slug]);
 
-        return $this->render('classes/show.html.twig', [
+        return $this->render('client/classe/show.html.twig', [
             'classe' => $classe,
         ]);
     }

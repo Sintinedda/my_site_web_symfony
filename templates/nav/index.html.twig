@@ -23,18 +23,29 @@
                     </ul>
                 </li>
                 <li class="nav-menu-item">
-                    <a class="nav-menu-link" href="">Races</a>
+                    <a class="nav-menu-link" href="{{ path('app_view_race_index') }}">Races</a>
                     <ul class="nav-menu-classe-items">
-                        
-                        {% for race in races %}
-                            <li class="nav-menu-classe-item">
-                                <a class="nav-menu-classe-link" 
-                                  href="">
-                                    {{ race.name }}
-                                </a>
-                            </li>
-                        {% endfor %}
-
+                        <li>Communes
+                            <ul>
+                                {% for common in commons %}
+                                    <li><a href="{{ path('app_view_race_show', { 'slug': common.name }) }}">{{ common.name }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                        <li>Exotiques
+                            <ul>
+                                {% for exotic in exotics %}
+                                    <li><a href="{{ path('app_view_race_show', { 'slug': exotic.name }) }}">{{ exotic.name }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </li>
+                        <li>Monstrueuses
+                            <ul>
+                                {% for monstruou in monstruous %}
+                                    <li><a href="{{ path('app_view_race_show', { 'slug': monstruou.name }) }}">{{ monstruou.name }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </li>
                     </ul>
                 </li>
                 <li class="nav-menu-item">
