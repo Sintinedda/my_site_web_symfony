@@ -1,20 +1,74 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ClassesController!{% endblock %}
+{% block title %}Liste des classes{% endblock %}
 
-{% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+{% block body_id 'classe-list' %}
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/xampp/htdocs/my_site_web/src/Controller/ClassesController.php</code></li>
-        <li>Your template at <code>C:/xampp/htdocs/my_site_web/templates/classes/index.html.twig</code></li>
-    </ul>
-</div>
+{% block main %}
+
+    <div class="classes-container">
+        <h1 class="classes-title">Liste des classes</h1>
+        <div class="classes-item">
+            <h2 class="classes-name">
+                <a class="classes-name-link" href="{{ path('app_view_classe_show', { 'slug': 'Barbare' }) }}">Barbare</a>
+            </h2>
+        </div>
+        <div class="classes-item">
+            <h2 class="classes-name">
+                <a class="classes-name-link" href="{{ path('app_view_classe_show', { 'slug': 'Barde' }) }}">Barde</a>
+            </h2>
+        </div>
+        <div class="classes-item">
+            <h2 class="classes-name">
+                <a class="classes-name-link" href="{{ path('app_view_classe_show', { 'slug': 'Clerc' }) }}">Clerc</a>
+            </h2>
+        </div>
+        <div class="classes-item">
+            <h2 class="classes-name">
+                <a class="classes-name-link" href="{{ path('app_view_classe_show', { 'slug': 'Druide' }) }}">Druide</a>
+            </h2>
+        </div>
+        <div class="classes-item">
+            <h2 class="classes-name">
+                <a class="classes-name-link" href="{{ path('app_view_classe_show', { 'slug': 'Ensorceleur' }) }}">Ensorceleur</a>
+            </h2>
+        </div>
+        <div class="classes-item">
+            <h2 class="classes-name">
+                <a class="classes-name-link" href="{{ path('app_view_classe_show', { 'slug': 'Guerrier' }) }}">Guerrier</a>
+            </h2>
+        </div>
+        <div class="classes-item">
+            <h2 class="classes-name">
+                <a class="classes-name-link" href="{{ path('app_view_classe_show', { 'slug': 'Magicien' }) }}">Magicien</a>
+            </h2>
+        </div>
+        <div class="classes-item">
+            <h2 class="classes-name">
+                <a class="classes-name-link" href="{{ path('app_view_classe_show', { 'slug': 'Moine' }) }}">Moine</a>
+            </h2>
+        </div>
+        <div class="classes-item">
+            <h2 class="classes-name">
+                <a class="classes-name-link" href="{{ path('app_view_classe_show', { 'slug': 'Occultiste' }) }}">Occultiste</a>
+            </h2>
+        </div>
+        <div class="classes-item">
+            <h2 class="classes-name">
+                <a class="classes-name-link" href="{{ path('app_view_classe_show', { 'slug': 'Paladin' }) }}">Paladin</a>
+            </h2>
+        </div>
+        <div class="classes-item">
+            <h2 class="classes-name">
+                <a class="classes-name-link" href="{{ path('app_view_classe_show', { 'slug': 'Rôdeur' }) }}">Rôdeur</a>
+            </h2>
+        </div>
+        <div class="classes-item">
+            <h2 class="classes-name">
+                <a class="classes-name-link" href="{{ path('app_view_classe_show', { 'slug': 'Roublard' }) }}">Roublard</a>
+            </h2>
+        </div>
+    </div>
+
 {% endblock %}

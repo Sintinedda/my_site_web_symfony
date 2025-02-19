@@ -1,0 +1,80 @@
+<table class="classe-table">
+    <thead class="classe-thead">
+        <tr class="classe-thead-tr">
+            <th class="classe-th" rowspan="2">Niv</th>
+            <th class="classe-th" rowspan="2">BM</th>
+            <th class="classe-th" rowspan="2">Capacités</th>
+            <th class="classe-th" rowspan="2">Cantrips connus</th>
+            <th class="classe-th" rowspan="2">Sorts connus</th>
+            <th classe="classe-th" colspan="9">-Emplacements de sorts-</th>
+        </tr>
+        <tr class="classe-thead-tr">
+            <th class="classe-th">1</th> 
+            <th class="classe-th">2</th> 
+            <th class="classe-th">3</th> 
+            <th class="classe-th">4</th> 
+            <th class="classe-th">5</th> 
+            <th class="classe-th">6</th> 
+            <th class="classe-th">7</th> 
+            <th class="classe-th">8</th> 
+            <th class="classe-th">9</th> 
+        </tr>
+    </thead>
+    <tbody class="classe-tbody">
+        {% for level in classe.classeByLevels %}
+            <tr class="classe-tbody-tr">
+                <td class="classe-td">{{ level.level }}</td>
+                <td class="classe-td">+{{ level.bm }}</td>
+                <td class="classe-td">
+                    {% for skill in level.skills %}
+                        {{ skill.name }}
+                        {{ not loop.last ? ',' }}
+                    {% endfor %}
+                </td>
+                <td class="classe-td">{{ level.cantrip }}</td>
+                <td class="classe-td">{{ level.knowingSpells }}</td>
+                <td class="classe-td">{{ level.spellOne }}</td>
+                {% if level.spellTwo %}
+                    <td class="classe-td">{{ level.spellTwo }}</td>
+                {% else %}
+                    <td class="classe-td">-</td>
+                {%  endif %}
+                {% if level.spellThree %}
+                    <td class="classe-td">{{ level.spellThree }}</td>
+                {% else %}
+                    <td class="classe-td">-</td>
+                {%  endif %}
+                {% if level.spellFour %}
+                    <td class="classe-td">{{ level.spellFour }}</td>
+                {% else %}
+                    <td class="classe-td">-</td>
+                {%  endif %}
+                {% if level.spellFive %}
+                    <td class="classe-td">{{ level.spellFive }}</td>
+                {% else %}
+                    <td class="classe-td">-</td>
+                {%  endif %}
+                {% if level.spellSix %}
+                    <td class="classe-td">{{ level.spellSix }}</td>
+                {% else %}
+                    <td class="classe-td">-</td>
+                {%  endif %}
+                {% if level.spellSeven %}
+                    <td class="classe-td">{{ level.spellSeven }}</td>
+                {% else %}
+                    <td class="classe-td">-</td>
+                {%  endif %}
+                {% if level.spellEight %}
+                    <td class="classe-td">{{ level.spellEight }}</td>
+                {% else %}
+                    <td class="classe-td">-</td>
+                {%  endif %}
+                {% if level.spellNine %}
+                    <td class="classe-td">{{ level.spellNine }}</td>
+                {% else %}
+                    <td class="classe-td">-</td>
+                {%  endif %}
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
