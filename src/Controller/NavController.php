@@ -19,7 +19,9 @@ final class NavController extends AbstractController
             'user' => $this->getUser(),
             'route' => $route,
             'classes' => $em->getRepository(Classe::class)->findAll(),
-            'races' => $em->getRepository(Race::class)->findAll(),
+            'commons' => $em->getRepository(Race::class)->findBy(['type' => 'Commun']),
+            'exotics' => $em->getRepository(Race::class)->findBy(['type' => 'Exotique']),
+            'monstruous' => $em->getRepository(Race::class)->findBy(['type' => 'Monstrueuse']),
         ]);
     }
 }

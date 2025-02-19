@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ race.name }}{% endblock %}
+
+{% block body_id 'race-item' %}
+
+{% block main %}
+
+    <h1 class="race-title">{{ race.name }}</h1>
+
+    {% include 'client/race/construct/_source.html.twig' %}
+
+{% endblock %}

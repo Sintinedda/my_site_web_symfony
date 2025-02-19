@@ -1,0 +1,11 @@
+{% if skill.name == 'Domaine divin' %}
+    {% include 'client/classe/clerc/_domaine-divin.html.twig' %}
+{% endif %}
+
+{% if skill.name == 'Conduit divin' %}
+    {% include 'client/classe/clerc/_conduit-divin.html.twig' %}
+{% endif %}
+
+{% if skill.name == 'Destruction des morts-vivants' %}
+    {% include 'client/classe/clerc/_table-undead.html.twig' %}
+{% endif %}
