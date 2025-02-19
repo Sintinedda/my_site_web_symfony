@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 #[Route('/classe')]
-final class ClassesController extends AbstractController
+final class ViewClasseController extends AbstractController
 {
     #[Route('/liste', name: 'app_view_classe_index', methods: ['GET'])]
     public function index(ClasseRepository $classeRepository): Response

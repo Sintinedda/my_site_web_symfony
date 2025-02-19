@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Talent{% endblock %}
+
+{% block body %}
+    <h1>Talent</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ talent.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ talent.name }}</td>
+            </tr>
+            <tr>
+                <th>Descr1</th>
+                <td>{{ talent.descr1 }}</td>
+            </tr>
+            <tr>
+                <th>Descr2</th>
+                <td>{{ talent.descr2 }}</td>
+            </tr>
+            <tr>
+                <th>Descr3</th>
+                <td>{{ talent.descr3 }}</td>
+            </tr>
+            <tr>
+                <th>Descr4</th>
+                <td>{{ talent.descr4 }}</td>
+            </tr>
+            <tr>
+                <th>Descr5</th>
+                <td>{{ talent.descr5 }}</td>
+            </tr>
+            <tr>
+                <th>Descr6</th>
+                <td>{{ talent.descr6 }}</td>
+            </tr>
+            <tr>
+                <th>Descr7</th>
+                <td>{{ talent.descr7 }}</td>
+            </tr>
+            <tr>
+                <th>Descr8</th>
+                <td>{{ talent.descr8 }}</td>
+            </tr>
+            <tr>
+                <th>Descr9</th>
+                <td>{{ talent.descr9 }}</td>
+            </tr>
+            <tr>
+                <th>Descr10</th>
+                <td>{{ talent.descr10 }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_talent_index') }}">back to list</a>
+
+    <a href="{{ path('app_talent_edit', {'id': talent.id}) }}">edit</a>
+
+    {{ include('talent/_delete_form.html.twig') }}
+{% endblock %}
