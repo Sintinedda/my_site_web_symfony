@@ -2,7 +2,7 @@
 
 {% block title %}{{ classe.name }}{% endblock %}
 
-{% block body_id 'classe' %}
+{% block body_id 'classe-item' %}
 
 {% block main %}
 
@@ -63,5 +63,68 @@
     {% elseif classe.name == 'Roublard' %}
         {% include 'classes/tables/_roublard.html.twig' %}
     {% endif %}
+
+    {% set newArray = [] %}
+    {% for level in classe.classeByLevels %}
+        {% for skill in level.skills %}
+            {% if skill.name not in newArray %}
+                <div class="classe-skill-div">
+                    <h3 class="classe-skill-title">{{ skill.name }}</h2>
+                    {% if skill.descr1 %}
+                        <p class="classe-skill-descr">{{ skill.descr1 }}</p>
+                    {% endif %}
+                    {% if skill.descr2 %}
+                        <p class="classe-skill-descr">{{ skill.descr2 }}<p>
+                    {% endif %}
+                    {% if skill.descr3 %}
+                        <p class="classe-skill-descr">{{ skill.descr3 }}<p>
+                    {% endif %}
+                    {% if skill.descr4 %}
+                        <p class="classe-skill-descr">{{ skill.descr4 }}<p>
+                    {% endif %}
+                    {% if skill.descr5 %}
+                        <p class="classe-skill-descr">{{ skill.descr5 }}<p>
+                    {% endif %}
+                    {% if skill.descr6 %}
+                        <p class="classe-skill-descr">{{ skill.descr6 }}<p>
+                    {% endif %}
+                    {% if skill.descr7 %}
+                        <p class="classe-skill-descr">{{ skill.descr7 }}<p>
+                    {% endif %}
+                    {% if skill.descr8 %}
+                        <p class="classe-skill-descr">{{ skill.descr8 }}<p>
+                    {% endif %}
+                    {% if skill.descr9 %}
+                        <p class="classe-skill-descr">{{ skill.descr9 }}<p>
+                    {% endif %}
+                    {% if skill.descr10 %}
+                        <p class="classe-skill-descr">{{ skill.descr10 }}<p>
+                    {% endif %}
+
+                    {% if skill.name == 'Incantation' %}
+                        {% if classe.name == 'Barde' %}
+                            {% include 'classes/spelling/_barde.html.twig' %}
+                        {% elseif classe.name == 'Clerc' %}
+                            {% include 'classes/spelling/_clerc.html.twig' %}
+                        {% endif %}
+                    {% endif %}
+
+                    {% if skill.name == 'Domaine divin' %}
+                        {% include 'classes/clerc/_domaine-divin.html.twig' %}
+                    {% endif %}
+
+                    {% if skill.name == 'Conduit divin' %}
+                        {% include 'classes/clerc/_conduit-divin.html.twig' %}
+                    {% endif %}
+
+                    {% if skill.name == 'Destruction des morts-vivants' %}
+                        {% include 'classes/clerc/_table-undead.html.twig' %}
+                    {% endif %}
+
+                </div>
+            {% set newArray = newArray|merge([skill.name]) %}
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
 
 {% endblock %}

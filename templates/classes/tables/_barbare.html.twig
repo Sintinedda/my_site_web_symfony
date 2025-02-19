@@ -1,0 +1,27 @@
+<table class="classe-table">
+    <thead class="classe-thead">
+        <tr class="classe-thead-tr">
+            <th class="classe-th">Niv</th>
+            <th class="classe-th">BM</th>
+            <th class="classe-th">Capacités</th>
+            <th class="classe-th">Rages</th>
+            <th class="classe-th">Dégâts</th>
+        </tr>
+    </thead>
+    <tbody class="classe-tbody">
+        {% for level in classe.classeByLevels %}
+            <tr class="classe-tbody-tr">
+                <td class="classe-td">{{ level.level }}</td>
+                <td class="classe-td">+{{ level.bm }}</td>
+                <td class="classe-td">
+                    {% for skill in level.skills %}
+                        {{ skill.name }}
+                        {{ not loop.last ? ',' }}
+                    {% endfor %}
+                </td>
+                <td class="classe-td">{{ level.rage }}</td>
+                <td class="classe-td">+{{ level.damage }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
