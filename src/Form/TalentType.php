@@ -2,8 +2,9 @@
 
 namespace App\Form;
 
-use App\Entity\ClasseByLevel;
-use App\Entity\Skill;
+use App\Entity\SourceRace;
+use App\Entity\Subrace;
+use App\Entity\Talent;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -11,15 +12,13 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class SkillType extends AbstractType
+class TalentType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('name', TextType::class)
-            ->add('descr1', TextareaType::class, [
-                'required' => false
-            ])
+            ->add('descr1', TextareaType::class)
             ->add('descr2', TextAreaType::class, [
                 'required' => false
             ])
@@ -47,10 +46,17 @@ class SkillType extends AbstractType
             ->add('descr10', TextAreaType::class, [
                 'required' => false
             ])
-            ->add('classe', EntityType::class, [
-                'class' => ClasseByLevel::class,
+            ->add('race', EntityType::class, [
+                'class' => SourceRace::class,
                 'choice_label' => 'id',
                 'multiple' => true,
+                'required' => false
+            ])
+            ->add('subrace', EntityType::class, [
+                'class' => Subrace::class,
+                'choice_label' => 'id',
+                'multiple' => true,
+                'required' => false
             ])
         ;
     }
@@ -58,7 +64,7 @@ class SkillType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Skill::class,
+            'data_class' => Talent::class,
         ]);
     }
 }

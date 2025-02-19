@@ -18,40 +18,18 @@ class Race
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $carac_up = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $age = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $height = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $speed = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $description = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $language = null;
-
     /**
-     * @var Collection<int, Subrace>
+     * @var Collection<int, SourceRace>
      */
-    #[ORM\OneToMany(targetEntity: Subrace::class, mappedBy: 'race')]
-    private Collection $subraces;
+    #[ORM\OneToMany(targetEntity: SourceRace::class, mappedBy: 'race')]
+    private Collection $sourceRaces;
 
-    /**
-     * @var Collection<int, Talent>
-     */
-    #[ORM\ManyToMany(targetEntity: Talent::class, mappedBy: 'race')]
-    private Collection $talent;
+    #[ORM\Column(length: 255)]
+    private ?string $type = null;
 
     public function __construct()
     {
-        $this->subraces = new ArrayCollection();
-        $this->talent = new ArrayCollection();
+        $this->sourceRaces = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -71,131 +49,44 @@ class Race
         return $this;
     }
 
-    public function getCaracUp(): ?string
-    {
-        return $this->carac_up;
-    }
-
-    public function setCaracUp(string $carac_up): static
-    {
-        $this->carac_up = $carac_up;
-
-        return $this;
-    }
-
-    public function getAge(): ?string
-    {
-        return $this->age;
-    }
-
-    public function setAge(string $age): static
-    {
-        $this->age = $age;
-
-        return $this;
-    }
-
-    public function getHeight(): ?string
-    {
-        return $this->height;
-    }
-
-    public function setHeight(string $height): static
-    {
-        $this->height = $height;
-
-        return $this;
-    }
-
-    public function getSpeed(): ?string
-    {
-        return $this->speed;
-    }
-
-    public function setSpeed(string $speed): static
-    {
-        $this->speed = $speed;
-
-        return $this;
-    }
-
-    public function getDescription(): ?string
-    {
-        return $this->description;
-    }
-
-    public function setDescription(string $description): static
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    public function getLanguage(): ?string
-    {
-        return $this->language;
-    }
-
-    public function setLanguage(string $language): static
-    {
-        $this->language = $language;
-
-        return $this;
-    }
-
     /**
-     * @return Collection<int, Subrace>
+     * @return Collection<int, SourceRace>
      */
-    public function getSubraces(): Collection
+    public function getSourceRaces(): Collection
     {
-        return $this->subraces;
+        return $this->sourceRaces;
     }
 
-    public function addSubrace(Subrace $subrace): static
+    public function addSourceRace(SourceRace $sourceRace): static
     {
-        if (!$this->subraces->contains($subrace)) {
-            $this->subraces->add($subrace);
-            $subrace->setRace($this);
+        if (!$this->sourceRaces->contains($sourceRace)) {
+            $this->sourceRaces->add($sourceRace);
+            $sourceRace->setRace($this);
         }
 
         return $this;
     }
 
-    public function removeSubrace(Subrace $subrace): static
+    public function removeSourceRace(SourceRace $sourceRace): static
     {
-        if ($this->subraces->removeElement($subrace)) {
+        if ($this->sourceRaces->removeElement($sourceRace)) {
             // set the owning side to null (unless already changed)
-            if ($subrace->getRace() === $this) {
-                $subrace->setRace(null);
+            if ($sourceRace->getRace() === $this) {
+                $sourceRace->setRace(null);
             }
         }
 
         return $this;
     }
 
-    /**
-     * @return Collection<int, Talent>
-     */
-    public function getTalent(): Collection
+    public function getType(): ?string
     {
-        return $this->talent;
+        return $this->type;
     }
 
-    public function addTalent(Talent $talent): static
+    public function setType(string $type): static
     {
-        if (!$this->talent->contains($talent)) {
-            $this->talent->add($talent);
-            $talent->addRace($this);
-        }
-
-        return $this;
-    }
-
-    public function removeTalent(Talent $talent): static
-    {
-        if ($this->talent->removeElement($talent)) {
-            $talent->removeRace($this);
-        }
+        $this->type = $type;
 
         return $this;
     }

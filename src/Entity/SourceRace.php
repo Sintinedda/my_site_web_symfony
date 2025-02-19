@@ -2,25 +2,28 @@
 
 namespace App\Entity;
 
-use App\Repository\SubraceRepository;
+use App\Repository\SourceRaceRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: SubraceRepository::class)]
-class Subrace
+#[ORM\Entity(repositoryClass: SourceRaceRepository::class)]
+class SourceRace
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'subraces')]
+    #[ORM\ManyToOne(inversedBy: 'sourceRaces')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?SourceRace $source = null;
-
+    private ?Race $race = null;
+    
     #[ORM\Column(length: 255)]
     private ?string $name = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $source = null;
 
     #[ORM\Column(length: 1050, nullable: true)]
     private ?string $descr1 = null;
@@ -59,16 +62,20 @@ class Subrace
     private ?string $language = null;
 
     /**
+     * @var Collection<int, Subrace>
+     */
+    #[ORM\OneToMany(targetEntity: Subrace::class, mappedBy: 'source')]
+    private Collection $subraces;
+
+    /**
      * @var Collection<int, Talent>
      */
-    #[ORM\ManyToMany(targetEntity: Talent::class, mappedBy: 'subrace')]
+    #[ORM\ManyToMany(targetEntity: Talent::class, mappedBy: 'race')]
     private Collection $talent;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $book = null;
 
     public function __construct()
     {
+        $this->subraces = new ArrayCollection();
         $this->talent = new ArrayCollection();
     }
 
@@ -77,14 +84,14 @@ class Subrace
         return $this->id;
     }
 
-    public function getSource(): ?SourceRace
+    public function getRace(): ?Race
     {
-        return $this->source;
+        return $this->race;
     }
 
-    public function setSource(?SourceRace $source): static
+    public function setRace(?Race $race): static
     {
-        $this->source = $source;
+        $this->race = $race;
 
         return $this;
     }
@@ -97,6 +104,18 @@ class Subrace
     public function setName(string $name): static
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getSource(): ?string
+    {
+        return $this->source;
+    }
+
+    public function setSource(?string $source): static
+    {
+        $this->source = $source;
 
         return $this;
     }
@@ -246,6 +265,36 @@ class Subrace
     }
 
     /**
+     * @return Collection<int, Subrace>
+     */
+    public function getSubraces(): Collection
+    {
+        return $this->subraces;
+    }
+
+    public function addSubrace(Subrace $subrace): static
+    {
+        if (!$this->subraces->contains($subrace)) {
+            $this->subraces->add($subrace);
+            $subrace->setSource($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSubrace(Subrace $subrace): static
+    {
+        if ($this->subraces->removeElement($subrace)) {
+            // set the owning side to null (unless already changed)
+            if ($subrace->getSource() === $this) {
+                $subrace->setSource(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
      * @return Collection<int, Talent>
      */
     public function getTalent(): Collection
@@ -257,7 +306,7 @@ class Subrace
     {
         if (!$this->talent->contains($talent)) {
             $this->talent->add($talent);
-            $talent->addSubrace($this);
+            $talent->addRace($this);
         }
 
         return $this;
@@ -266,20 +315,8 @@ class Subrace
     public function removeTalent(Talent $talent): static
     {
         if ($this->talent->removeElement($talent)) {
-            $talent->removeSubrace($this);
+            $talent->removeRace($this);
         }
-
-        return $this;
-    }
-
-    public function getBook(): ?string
-    {
-        return $this->book;
-    }
-
-    public function setBook(?string $book): static
-    {
-        $this->book = $book;
 
         return $this;
     }

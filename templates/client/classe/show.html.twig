@@ -39,29 +39,29 @@
     </ul>
 
     {% if classe.name == 'Barbare' %}
-        {% include 'classes/tables/_barbare.html.twig' %}
+        {% include 'client/classe/tables/_barbare.html.twig' %}
     {% elseif classe.name == 'Barde' %}
-        {% include 'classes/tables/_barde.html.twig' %}
+        {% include 'client/classe/tables/_barde.html.twig' %}
     {% elseif classe.name == 'Clerc' %}
-        {% include 'classes/tables/_clerc.html.twig' %}
+        {% include 'client/classe/tables/_clerc.html.twig' %}
     {% elseif classe.name == 'Druide' %}
-        {% include 'classes/tables/_druide.html.twig' %}
+        {% include 'client/classe/tables/_druide.html.twig' %}
     {% elseif classe.name == 'Ensorceleur' %}
-        {% include 'classes/tables/_ensorceleur.html.twig' %}
+        {% include 'client/classe/tables/_ensorceleur.html.twig' %}
     {% elseif classe.name == 'Guerrier' %}
-        {% include 'classes/tables/_guerrier.html.twig' %}
+        {% include 'client/classe/tables/_guerrier.html.twig' %}
     {% elseif classe.name == 'Magicien' %}
-        {% include 'classes/tables/_magicien.html.twig' %}
+        {% include 'client/classe/tables/_magicien.html.twig' %}
     {% elseif classe.name == 'Moine' %}
-        {% include 'classes/tables/_moine.html.twig' %}
+        {% include 'client/classe/tables/_moine.html.twig' %}
     {% elseif classe.name == 'Occultiste' %}
-        {% include 'classes/tables/Occultiste.html.twig' %}
+        {% include 'client/classe/tables/Occultiste.html.twig' %}
     {% elseif classe.name == 'Paladin' %}
-        {% include 'classes/tables/_paladin.html.twig' %}
+        {% include 'client/classe/tables/_paladin.html.twig' %}
     {% elseif classe.name == 'Rôdeur' %}
-        {% include 'classes/tables/_rodeur.html.twig' %}
+        {% include 'client/classe/tables/_rodeur.html.twig' %}
     {% elseif classe.name == 'Roublard' %}
-        {% include 'classes/tables/_roublard.html.twig' %}
+        {% include 'client/classe/tables/_roublard.html.twig' %}
     {% endif %}
 
     {% set newArray = [] %}
@@ -103,22 +103,22 @@
 
                     {% if skill.name == 'Incantation' %}
                         {% if classe.name == 'Barde' %}
-                            {% include 'classes/spelling/_barde.html.twig' %}
+                            {% include 'client/classe/spelling/_barde.html.twig' %}
                         {% elseif classe.name == 'Clerc' %}
-                            {% include 'classes/spelling/_clerc.html.twig' %}
+                            {% include 'client/classe/spelling/_clerc.html.twig' %}
                         {% endif %}
                     {% endif %}
 
                     {% if skill.name == 'Domaine divin' %}
-                        {% include 'classes/clerc/_domaine-divin.html.twig' %}
+                        {% include 'client/classe/clerc/_domaine-divin.html.twig' %}
                     {% endif %}
 
                     {% if skill.name == 'Conduit divin' %}
-                        {% include 'classes/clerc/_conduit-divin.html.twig' %}
+                        {% include 'client/classe/clerc/_conduit-divin.html.twig' %}
                     {% endif %}
 
                     {% if skill.name == 'Destruction des morts-vivants' %}
-                        {% include 'classes/clerc/_table-undead.html.twig' %}
+                        {% include 'client/classe/clerc/_table-undead.html.twig' %}
                     {% endif %}
 
                 </div>
