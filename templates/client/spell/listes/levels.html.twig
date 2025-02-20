@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Listes des sorts par niveau{% endblock %}
+
+{% block body_id 'spell-list-level' %}
+
+{% block main %}
+
+    <h1>Listes des sorts par niveau</h1>
+    
+    {% include 'client/spell/construct/listes/_levels.html.twig' %}
+
+{% endblock %}

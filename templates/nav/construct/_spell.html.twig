@@ -1,0 +1,94 @@
+<a class="nav-menu-link" href="{{ path('app_view_spell_index') }}">Sorts</a>
+<ul class="nav-menu-item-list" id="menu-spells">
+    <li class="nav-menu-spell-items">
+        <a class="nav-menu-spell-items-link" href="{{ path('app_view_spell_all') }}">Tous les sorts</a>
+    </li>
+    <li class="nav-menu-spell-items">
+        <button class="nav-menu-items-btn" onclick="showSubsubmenu('menu-spells-level', 'nav-menu-items-list')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-square-fill" viewBox="0 0 16 16">
+                <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm6.5 4.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5a.5.5 0 0 1 1 0"/>
+            </svg>
+        </button>
+        <a class="nav-menu-spell-items-link" href="{{ path('app_view_spell_levels') }}">Par niveau</a>
+        <ul class="nav-menu-items-list" id="menu-spells-level">
+            <li class="nav-menu-spell-item">
+                <a class="nav-menu-spell-link" href="{{ path('app_view_spell_level', { 'level': 1 }) }}">Niveau 1</a>
+            </li>
+            <li class="nav-menu-spell-item">
+                <a class="nav-menu-spell-link" href="{{ path('app_view_spell_level', { 'level': 2 }) }}">Niveau 2</a>
+            </li>
+            <li class="nav-menu-spell-item">
+                <a class="nav-menu-spell-link" href="{{ path('app_view_spell_level', { 'level': 3 }) }}">Niveau 3</a>
+            </li>
+            <li class="nav-menu-spell-item">
+                <a class="nav-menu-spell-link" href="{{ path('app_view_spell_level', { 'level': 4 }) }}">Niveau 4</a>
+            </li>
+            <li class="nav-menu-spell-item">
+                <a class="nav-menu-spell-link" href="{{ path('app_view_spell_level', { 'level': 5 }) }}">Niveau 5</a>
+            </li>
+            <li class="nav-menu-spell-item">
+                <a class="nav-menu-spell-link" href="{{ path('app_view_spell_level', { 'level': 6 }) }}">Niveau 6</a>
+            </li>
+            <li class="nav-menu-spell-item">
+                <a class="nav-menu-spell-link" href="{{ path('app_view_spell_level', { 'level': 7 }) }}">Niveau 7</a>
+            </li>
+            <li class="nav-menu-spell-item">
+                <a class="nav-menu-spell-link" href="{{ path('app_view_spell_level', { 'level': 8 }) }}">Niveau 8</a>
+            </li>
+            <li class="nav-menu-spell-item">
+                <a class="nav-menu-spell-link" href="{{ path('app_view_spell_level', { 'level': 9 }) }}">Niveau 9</a>
+            </li>
+        </ul>
+    </li>
+    <li class="nav-menu-spell-items">
+        <button class="nav-menu-items-btn" onclick="showSubsubmenu('menu-spells-classe', 'nav-menu-items-list')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-square-fill" viewBox="0 0 16 16">
+                <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm6.5 4.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5a.5.5 0 0 1 1 0"/>
+            </svg>
+        </button>
+        <a class="nav-menu-spell-items-link" href="{{ path('app_view_spell_classes') }}">Par classe</a>
+        <ul class="nav-menu-items-list" id="menu-spells-classe">
+            {% for classe in classes %}
+                {% if classe.spells|length >= 1 %}
+                    <li class="nav-menu-spell-item">
+                        <a  class="nav-menu-spell-link" href="{{ path('app_view_spell_classe', { 'slug': classe.name }) }}">{{ classe.name }}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+    </li>
+    <li class="nav-menu-spell-items">
+        <button class="nav-menu-items-btn" onclick="showSubsubmenu('menu-spells-school', 'nav-menu-items-list')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-square-fill" viewBox="0 0 16 16">
+                <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm6.5 4.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5a.5.5 0 0 1 1 0"/>
+            </svg>
+        </button>
+        <a class="nav-menu-spell-items-link" href="{{ path('app_view_spell_schools') }}">Par école</a>
+        <ul class="nav-menu-items-list" id="menu-spells-school">
+            <li class="nav-menu-spell-item">
+                <a  class="nav-menu-spell-link" href="{{ path('app_view_spell_school', { 'slug': 'abjuration' }) }}">Abjuration</a>
+            </li>
+            <li class="nav-menu-spell-item">
+                <a  class="nav-menu-spell-link" href="{{ path('app_view_spell_school', { 'slug': 'divination' }) }}">Divination</a>
+            </li>
+            <li class="nav-menu-spell-item">
+                <a  class="nav-menu-spell-link" href="{{ path('app_view_spell_school', { 'slug': 'enchantement' }) }}">Enchantement</a>
+            </li>
+            <li class="nav-menu-spell-item">
+                <a  class="nav-menu-spell-link" href="{{ path('app_view_spell_school', { 'slug': 'invocation' }) }}">Évocation</a>
+            </li>
+            <li class="nav-menu-spell-item">
+                <a  class="nav-menu-spell-link" href="{{ path('app_view_spell_school', { 'slug': 'illusion' }) }}">Illusion</a>
+            </li>
+            <li class="nav-menu-spell-item">
+                <a  class="nav-menu-spell-link" href="{{ path('app_view_spell_school', { 'slug': 'invocation' }) }}">Invocation</a>
+            </li>
+            <li class="nav-menu-spell-item">
+                <a  class="nav-menu-spell-link" href="{{ path('app_view_spell_school', { 'slug': 'nécromancie' }) }}">Nécromancie</a>
+            </li>
+            <li class="nav-menu-spell-item">
+                <a  class="nav-menu-spell-link" href="{{ path('app_view_spell_school', { 'slug': 'transmutation' }) }}">Transmutation</a>
+            </li>
+        </ul>
+    </li>
+</ul>

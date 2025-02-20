@@ -1,0 +1,7 @@
+<ul>
+    {% for classe in classes %}
+        {% if classe.spells|length >= 1 %}
+            <li><a href="{{ path('app_view_spell_classe', { 'slug': classe.name }) }}">{{ classe.name }}</a></li>
+        {% endif %}
+    {% endfor %}
+</ul>

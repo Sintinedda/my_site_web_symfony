@@ -1,0 +1,48 @@
+<a class="nav-menu-link" href="{{ path('app_view_race_index') }}">Races</a>
+<ul class="nav-menu-item-list" id="menu-races">
+    <li class="nav-menu-race-items">
+        <button class="nav-menu-items-btn" onclick="showSubsubmenu('menu-races-common', 'nav-menu-items-list')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-square-fill" viewBox="0 0 16 16">
+                <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm6.5 4.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5a.5.5 0 0 1 1 0"/>
+            </svg>
+        </button>
+        <a class="nav-menu-race-items-link" href="">Communes</a>
+        <ul class="nav-menu-items-list" id="menu-races-common">
+            {% for common in commons %}
+                <li class="nav-menu-race-item">
+                    <a class="nav-menu-race-link" href="{{ path('app_view_race_show', { 'slug': common.name }) }}">{{ common.name }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </li>
+    <li class="nav-menu-race-items">
+        <button class="nav-menu-items-btn" onclick="showSubsubmenu('menu-races-exotic', 'nav-menu-items-list')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-square-fill" viewBox="0 0 16 16">
+                <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm6.5 4.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5a.5.5 0 0 1 1 0"/>
+            </svg>
+        </button>
+        <a class="nav-menu-race-items-link" href="">Exotiques</a>
+        <ul class="nav-menuitems-list" id="menu-races-exotic">
+            {% for exotic in exotics %}
+                <li class="nav-menu-race-item">
+                    <a class="nav-menu-race-link" href="{{ path('app_view_race_show', { 'slug': exotic.name }) }}">{{ exotic.name }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </li>
+    <li class="nav-menu-race-items">
+        <button class="nav-menu-items-btn" onclick="showSubsubmenu('menu-races-monstruous', 'nav-menu-items-list')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-square-fill" viewBox="0 0 16 16">
+                <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm6.5 4.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5a.5.5 0 0 1 1 0"/>
+            </svg>
+        </button>
+        <a class="nav-menu-race-items-link" href="">Monstrueuses</a>
+        <ul class="nav-menuitems-list" id="menu-races-monstruous">
+            {% for monstruou in monstruous %}
+                <li class="nav-menu-race-item">
+                    <a class="nav-menu-race-link" href="{{ path('app_view_race_show', { 'slug': monstruou.name }) }}">{{ monstruou.name }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </li>
+</ul>
