@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ sort.nameFr }}{% endblock %}
+
+{% block body_id 'spell-item' %}
+
+{% block main %}
+
+    <h1>{{ sort.nameFr }}</h1>
+
+    <p>[ {{ sort.nameEng }} ]</p>
+    <p><i>niveau {{ sort.level }} - {{ sort.school }} 
+        {% if sort.ritual == true %}
+            (rituel)
+        {% endif %}
+    </i></p>
+    <p><b>Temps d'incantation : </b>{{ sort.castingTime }}</p>
+    <p><b>Portée : </b>{{ sort.rangeEffect }}</p>
+    <p><b>Composantes : </b>{{ sort.components }} 
+        {% if sort.componentsIngredients %}
+            ({{ sort.componentsIngredients}})
+        {% endif %}
+    </p>
+    <p><b>Durée : </b>
+        {% if sort.concentration == true %}
+            concentration, 
+        {% endif %}
+        {{ sort.duration }}
+    </p>
+    <p>{{ sort.descr1 }}</p>
+    {% if sort.descr2 %}
+        <p>{{ sort.descr2 }}</p>
+    {% endif %}
+    {% if sort.descr3 %}
+        <p>{{ sort.descr3 }}</p>
+    {% endif %}
+    {% if sort.descr4 %}
+        <p>{{ sort.descr4 }}</p>
+    {% endif %}
+    {% if sort.descr5 %}
+        <p>{{ sort.descr5 }}</p>
+    {% endif %}
+    {% if sort.descr6 %}
+        <p>{{ sort.descr6 }}</p>
+    {% endif %}
+    {% if sort.descr7 %}
+        <p>{{ sort.descr7 }}</p>
+    {% endif %}
+    {% if sort.descr8 %}
+        <p>{{ sort.descr8 }}</p>
+    {% endif %}
+    {% if sort.descr9 %}
+        <p>{{ sort.descr9 }}</p>
+    {% endif %}
+    {% if sort.descr10 %}
+        <p>{{ sort.descr10 }}</p>
+    {% endif %}
+    {% if sort.upperLevel %}
+        <p><b><i>Aux niveaux supérieurs. </i></b>{{ sort.upperLevel }}</p>
+    {% endif %}
+    <p>
+        {% for classe in sort.classes %}
+            <span>{{ classe.name }}</span>
+        {% endfor %}
+        <span>{{ sort.source }}</span>
+    </p>
+
+{% endblock %}
