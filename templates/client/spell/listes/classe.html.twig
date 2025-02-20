@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Listes des sorts de la classe {{ classe }}{% endblock %}
+
+{% block body_id 'spell-list-classe' %}
+
+{% block main %}
+
+    <h1>Listes des sorts de la classe {{ classe }}</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Sort</th>
+                <th>Niv</th>
+                <th>École</th>
+                <th>Incantation</th>
+                <th>Portée</th>
+                <th>V, S, M</th>
+                <th>Concentration</th>
+                <th>Rituel</th>
+                <th>Source</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for sort in sorts %}
+                <tr>
+                    <td><a href="{{ path('app_view_spell_show', { 'slug': sort.nameFr }) }}">{{ sort.nameFr }}</a></td>
+                    <td>{{ sort.level }}</td>
+                    <td>{{ sort.school }}</td>
+                    <td>{{ sort.castingTime|length > 10 ? sort.castingTime|slice(0, 10) ~ '...' : sort.castingTime }}</td>
+                    <td>{{ sort.rangeEffect }}</td>
+                    <td>{{ sort.components }}</td>
+                    <td>
+                        {% if sort.concentration == true %}
+                            Concentration
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if sort.ritual == true %}
+                            Rituel
+                        {% endif %}
+                    </td>
+                    <td>{{ sort.source }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

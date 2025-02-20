@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Listes des sorts{% endblock %}
+
+{% block body_id 'spell-list' %}
+
+{% block main %}
+
+    <h1>Listes des sorts</h1>
+
+    <h2><a href="{{ path('app_view_spell_all') }}">Tous les sorts</a></h2>
+
+    <h2>Liste des sorts par niveau</h2>
+    <ul>
+        <li><a href="{{ path('app_view_spell_level', { 'level': 1 }) }}">Niveau 1</a></li>
+        <li><a href="{{ path('app_view_spell_level', { 'level': 2 }) }}">Niveau 2</a></li>
+        <li><a href="{{ path('app_view_spell_level', { 'level': 3 }) }}">Niveau 3</a></li>
+        <li><a href="{{ path('app_view_spell_level', { 'level': 4 }) }}">Niveau 4</a></li>
+        <li><a href="{{ path('app_view_spell_level', { 'level': 5 }) }}">Niveau 5</a></li>
+        <li><a href="{{ path('app_view_spell_level', { 'level': 6 }) }}">Niveau 6</a></li>
+        <li><a href="{{ path('app_view_spell_level', { 'level': 7 }) }}">Niveau 7</a></li>
+        <li><a href="{{ path('app_view_spell_level', { 'level': 8 }) }}">Niveau 8</a></li>
+        <li><a href="{{ path('app_view_spell_level', { 'level': 9 }) }}">Niveau 9</a></li>
+    </ul>
+
+    <h2>Liste des sorts par classe</h2>
+    <ul>
+        {% for classe in classes %}
+            {% if classe.spells|length >= 1 %}
+                <li><a href="{{ path('app_view_spell_classe', { 'slug': classe.name }) }}">{{ classe.name }}</a></li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+
+    <h2>Liste des sorts par école</h2>
+    <ul>
+        <li><a href="{{ path('app_view_spell_school', { 'slug': 'abjuration' }) }}">Abjuration</a></li>
+        <li><a href="{{ path('app_view_spell_school', { 'slug': 'divination' }) }}">Divination</a></li>
+        <li><a href="{{ path('app_view_spell_school', { 'slug': 'enchantement' }) }}">Enchantement</a></li>
+        <li><a href="{{ path('app_view_spell_school', { 'slug': 'invocation' }) }}">Évocation</a></li>
+        <li><a href="{{ path('app_view_spell_school', { 'slug': 'illusion' }) }}">Illusion</a></li>
+        <li><a href="{{ path('app_view_spell_school', { 'slug': 'invocation' }) }}">Invocation</a></li>
+        <li><a href="{{ path('app_view_spell_school', { 'slug': 'nécromancie' }) }}">Nécromancie</a></li>
+        <li><a href="{{ path('app_view_spell_school', { 'slug': 'transmutation' }) }}">Transmutation</a></li>
+    </ul>
+
+{% endblock %}

@@ -21,13 +21,6 @@ class Classe
     #[ORM\Column]
     private ?int $dv = null;
 
-    /**
-     * @var Collection<int, Spell>
-     */
-    #[ORM\ManyToMany(targetEntity: Spell::class, inversedBy: 'classes')]
-    #[ORM\JoinColumn(nullable: true)]
-    private Collection $spells;
-
     #[ORM\Column(length: 255)]
     private ?string $armor = null;
 
@@ -64,10 +57,16 @@ class Classe
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $equipment5 = null;
 
+    /**
+     * @var Collection<int, Spell>
+     */
+    #[ORM\ManyToMany(targetEntity: Spell::class, mappedBy: 'classes')]
+    private Collection $spells;
+
     public function __construct()
     {
-        $this->spells = new ArrayCollection();
         $this->classeByLevels = new ArrayCollection();
+        $this->spells = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -95,30 +94,6 @@ class Classe
     public function setDv(int $dv): static
     {
         $this->dv = $dv;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Spell>
-     */
-    public function getSpells(): Collection
-    {
-        return $this->spells;
-    }
-
-    public function addSpell(Spell $spell): static
-    {
-        if (!$this->spells->contains($spell)) {
-            $this->spells->add($spell);
-        }
-
-        return $this;
-    }
-
-    public function removeSpell(Spell $spell): static
-    {
-        $this->spells->removeElement($spell);
 
         return $this;
     }
@@ -269,6 +244,33 @@ class Classe
     public function setEquipment5(?string $equipment5): static
     {
         $this->equipment5 = $equipment5;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Spell>
+     */
+    public function getSpells(): Collection
+    {
+        return $this->spells;
+    }
+
+    public function addSpell(Spell $spell): static
+    {
+        if (!$this->spells->contains($spell)) {
+            $this->spells->add($spell);
+            $spell->addClass($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSpell(Spell $spell): static
+    {
+        if ($this->spells->removeElement($spell)) {
+            $spell->removeClass($this);
+        }
 
         return $this;
     }

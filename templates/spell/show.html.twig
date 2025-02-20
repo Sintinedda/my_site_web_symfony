@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Spell{% endblock %}
+
+{% block body %}
+    <h1>Spell</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ spell.id }}</td>
+            </tr>
+            <tr>
+                <th>Name_fr</th>
+                <td>{{ spell.nameFr }}</td>
+            </tr>
+            <tr>
+                <th>Name_eng</th>
+                <td>{{ spell.nameEng }}</td>
+            </tr>
+            <tr>
+                <th>Level</th>
+                <td>{{ spell.level }}</td>
+            </tr>
+            <tr>
+                <th>School</th>
+                <td>{{ spell.school }}</td>
+            </tr>
+            <tr>
+                <th>Casting_time</th>
+                <td>{{ spell.castingTime }}</td>
+            </tr>
+            <tr>
+                <th>Range_effect</th>
+                <td>{{ spell.rangeEffect }}</td>
+            </tr>
+            <tr>
+                <th>Components</th>
+                <td>{{ spell.components }}</td>
+            </tr>
+            <tr>
+                <th>Components_ingredients</th>
+                <td>{{ spell.componentsIngredients }}</td>
+            </tr>
+            <tr>
+                <th>Duration</th>
+                <td>{{ spell.duration }}</td>
+            </tr>
+            <tr>
+                <th>Descr1</th>
+                <td>{{ spell.descr1 }}</td>
+            </tr>
+            <tr>
+                <th>Upper_level</th>
+                <td>{{ spell.upperLevel }}</td>
+            </tr>
+            <tr>
+                <th>Source</th>
+                <td>{{ spell.source }}</td>
+            </tr>
+            <tr>
+                <th>Ritual</th>
+                <td>{{ spell.ritual ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Concentration</th>
+                <td>{{ spell.concentration ? 'Yes' : 'No' }}</td>
+            </tr>
+            <tr>
+                <th>Descr2</th>
+                <td>{{ spell.descr2 }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_spell_index') }}">back to list</a>
+
+    <a href="{{ path('app_spell_edit', {'id': spell.id}) }}">edit</a>
+
+    {{ include('spell/_delete_form.html.twig') }}
+{% endblock %}
