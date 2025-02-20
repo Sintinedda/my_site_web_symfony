@@ -30,6 +30,12 @@ final class ViewSpellController extends AbstractController
         ]);
     }
 
+    #[Route('/niveau/liste', name: 'app_view_spell_levels', methods: ['GET'])]
+    public function indexByLevels(): Response
+    {
+        return $this->render('client/spell/listes/levels.html.twig');
+    }
+
     #[Route('/niveau={level}/liste', name: 'app_view_spell_level', methods: ['GET'])]
     public function indexByLevel(int $level, EntityManagerInterface $em): Response
     {
@@ -38,6 +44,14 @@ final class ViewSpellController extends AbstractController
         return $this->render('client/spell/listes/level.html.twig', [
             'sorts' => $sorts,
             'level' => $level
+        ]);
+    }
+
+    #[Route('/classe/liste', name: 'app_view_spell_classes', methods: ['GET'])]
+    public function indexByClasses(ClasseRepository $classeRepository): Response
+    {
+        return $this->render('client/spell/listes/classes.html.twig', [
+            'classes' => $classeRepository->findAll()
         ]);
     }
 
@@ -51,6 +65,12 @@ final class ViewSpellController extends AbstractController
             'sorts' => $sorts,
             'classe' => $slug
         ]);
+    }
+
+    #[Route('/école/liste', name: 'app_view_spell_schools', methods: ['GET'])]
+    public function indexBySchools(): Response
+    {
+        return $this->render('client/spell/listes/schools.html.twig');
     }
 
     #[Route('/école={slug}/liste', name: 'app_view_spell_school', methods: ['GET'])]
