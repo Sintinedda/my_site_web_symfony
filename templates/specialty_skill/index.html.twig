@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SpecialtySkill index{% endblock %}
+
+{% block body %}
+    <h1>SpecialtySkill index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Descr1</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for specialty_skill in specialty_skills %}
+            <tr>
+                <td>{{ specialty_skill.id }}</td>
+                <td>{{ specialty_skill.name }}</td>
+                <td>{{ specialty_skill.descr1 }}</td>
+                <td>
+                    <a href="{{ path('app_specialty_skill_show', {'id': specialty_skill.id}) }}">show</a>
+                    <a href="{{ path('app_specialty_skill_edit', {'id': specialty_skill.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_specialty_skill_new') }}">Create new</a>
+{% endblock %}

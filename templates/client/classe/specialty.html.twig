@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ specialty.name }}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent () }}
+    <link href="{{ asset('assets/css/classe/specialty.css') }}" rel="stylesheet"/>
+{% endblock %}
+
+{% block body_id 'specialty-item' %}
+
+
+{% block main %}
+
+    <div class="specialty-container">
+        <h1 class="specialty-title">{{ specialty.name }}</h1>
+        <p class="specialty-descr">{{ specialty.descr1|raw }}</p>
+        {% if specialty.descr2 %}
+            <p class="specialty-descr">{{ specialty.descr2|raw }}</p>
+        {% endif %}
+        <p class="specialty-source">Source : {{ specialty.source }}</p>
+        {% for skill in specialty.specialtySkills %}
+            <h2 class="specialty-skill-title">{{ skill.name }}</h2>
+            <p class="specialty-skill-descr">{{ skill.descr1|raw }}</p>
+            {% if skill.descr2 %}
+                <p class="specialty-skill-descr">{{ skill.descr2|raw }}</p>
+            {% endif %}
+            {% if skill.descr3 %}
+                <p class="specialty-skill-descr">{{ skill.descr3|raw }}</p>
+            {% endif %}
+            {% if skill.descr4 %}
+                <p class="specialty-skill-descr">{{ skill.descr4|raw }}</p>
+            {% endif %}
+            {% if skill.descr5 %}
+                <p class="specialty-skill-descr">{{ skill.descr5|raw }}</p>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+{% endblock %}

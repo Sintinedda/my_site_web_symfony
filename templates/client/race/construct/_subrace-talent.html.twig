@@ -1,35 +1,35 @@
 {# subrace talents #}
 {% for talent in subrace.talent %}
     <h4 class="race-talent-title">{{ talent.name }}</h4>
-    <p class="race-talent-description">{{ talent.descr1 }}</p>
+    <p class="race-talent-description">{{ talent.descr1|raw }}</p>
 
     {# talent description #}
     {% if talent.descr2 %}
-        <p class="race-talent-description">{{ talent.descr2 }}</p>
+        <p class="race-talent-description">{{ talent.descr2|raw }}</p>
     {% endif %}
     {% if talent.descr3 %}
-        <p class="race-talent-description">{{ talent.descr3 }}</p>
+        <p class="race-talent-description">{{ talent.descr3|raw }}</p>
     {% endif %}
     {% if talent.descr4 %}
-        <p class="race-talent-description">{{ talent.descr4 }}</p>
+        <p class="race-talent-description">{{ talent.descr4|raw }}</p>
     {% endif %}
     {% if talent.descr5 %}
-        <p class="race-talent-description">{{ talent.descr5 }}</p>
+        <p class="race-talent-description">{{ talent.descr5|raw }}</p>
     {% endif %}
     {% if talent.descr6 %}
-        <p class="race-talent-description">{{ talent.descr6 }}</p>
+        <p class="race-talent-description">{{ talent.descr6|raw }}</p>
     {% endif %}
     {% if talent.descr7 %}
-        <p class="race-talent-description">{{ talent.descr7 }}</p>
+        <p class="race-talent-description">{{ talent.descr7|raw }}</p>
     {% endif %}
     {% if talent.descr8 %}
-        <p class="race-talent-description">{{ talent.descr8 }}</p>
+        <p class="race-talent-description">{{ talent.descr8|raw }}</p>
     {% endif %}
     {% if talent.descr9 %}
-        <p class="race-talent-description">{{ talent.descr9 }}</p>
+        <p class="race-talent-description">{{ talent.descr9|raw }}</p>
     {% endif %}
     {% if talent.descr10 %}
-        <p class="race-talent-description">{{ talent.descr10 }}</p>
+        <p class="race-talent-description">{{ talent.descr10|raw }}</p>
     {% endif %}
 
     {# dragonborn #}

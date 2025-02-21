@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Incantation{% endblock %}
+
+{% block body %}
+    <h1>Incantation</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ incantation.id }}</td>
+            </tr>
+            <tr>
+                <th>Descr</th>
+                <td>{{ incantation.descr }}</td>
+            </tr>
+            <tr>
+                <th>Title1</th>
+                <td>{{ incantation.title1 }}</td>
+            </tr>
+            <tr>
+                <th>Descr_one1</th>
+                <td>{{ incantation.descrOne1 }}</td>
+            </tr>
+            <tr>
+                <th>Title2</th>
+                <td>{{ incantation.title2 }}</td>
+            </tr>
+            <tr>
+                <th>Descr_two1</th>
+                <td>{{ incantation.descrTwo1 }}</td>
+            </tr>
+            <tr>
+                <th>Descr_two2</th>
+                <td>{{ incantation.descrTwo2 }}</td>
+            </tr>
+            <tr>
+                <th>Desc_two3</th>
+                <td>{{ incantation.descTwo3 }}</td>
+            </tr>
+            <tr>
+                <th>Title3</th>
+                <td>{{ incantation.title3 }}</td>
+            </tr>
+            <tr>
+                <th>Descr_three1</th>
+                <td>{{ incantation.descrThree1 }}</td>
+            </tr>
+            <tr>
+                <th>Title4</th>
+                <td>{{ incantation.title4 }}</td>
+            </tr>
+            <tr>
+                <th>Descr_four1</th>
+                <td>{{ incantation.descrFour1 }}</td>
+            </tr>
+            <tr>
+                <th>Capacity</th>
+                <td>{{ incantation.capacity }}</td>
+            </tr>
+            <tr>
+                <th>Title5</th>
+                <td>{{ incantation.title5 }}</td>
+            </tr>
+            <tr>
+                <th>Descr_five1</th>
+                <td>{{ incantation.descrFive1 }}</td>
+            </tr>
+            <tr>
+                <th>Title6</th>
+                <td>{{ incantation.title6 }}</td>
+            </tr>
+            <tr>
+                <th>Descr_six1</th>
+                <td>{{ incantation.descrSix1 }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_incantation_index') }}">back to list</a>
+
+    <a href="{{ path('app_incantation_edit', {'id': incantation.id}) }}">edit</a>
+
+    {{ include('incantation/_delete_form.html.twig') }}
+{% endblock %}
