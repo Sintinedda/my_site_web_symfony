@@ -1,0 +1,22 @@
+<div class="classe-specialty">
+    <h5 class="classe-specialty-title">{{ classe.specialty.name }}</h5>
+    <p class="classe-specialty-descr">{{ classe.specialty.descr1|raw }}</p>
+    <table class="classe-specialty-table">
+        <thead class="classe-specialty-thead">
+            <tr class="classe-specialty-tr">
+                <th class="classe-specialty-th">{{ classe.specialty.name }}</th>
+                <th class="classe-specialty-th">Source</th>
+            </tr>
+        </thead>
+        <tbody class="classe-specialty-tbody">
+            {% for specialty in classe.specialty.specialtyItems|sort(a => a.name) %}
+                <tr class="classe-specialty-tr">
+                    <td class="classe-specialty-td">
+                        <a class="classe-specialty-link" href="{{ path('app_view_specialty_show', { 'slug': classe.name, 'slug2': specialty.name }) }}">{{ specialty.name }}</a>
+                    </td>
+                    <td class="classe-specialty-td">{{ specialty.source }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>

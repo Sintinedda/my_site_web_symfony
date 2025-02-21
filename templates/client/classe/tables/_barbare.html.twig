@@ -13,7 +13,7 @@
             <tr class="classe-tbody-tr">
                 <td class="classe-td">{{ level.level }}</td>
                 <td class="classe-td">+{{ level.bm }}</td>
-                <td class="classe-td">
+                <td class="classe-td skills">
                     {% for skill in level.skills %}
                         {{ skill.name }}
                         {{ not loop.last ? ',' }}

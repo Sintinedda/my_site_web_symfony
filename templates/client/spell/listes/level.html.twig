@@ -22,7 +22,7 @@
             </tr>
         </thead>
         <tbody>
-            {% for sort in sorts %}
+            {% for sort in sorts|sort(a => a.nameFr) %}
                 <tr>
                     <td><a href="{{ path('app_view_spell_show', { 'slug': sort.nameFr }) }}">{{ sort.nameFr }}</a></td>
                     <td>{{ sort.school }}</td>

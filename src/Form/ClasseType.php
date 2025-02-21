@@ -34,6 +34,7 @@ class ClasseType extends AbstractType
             ->add('equipment5', TextType::class, [
                 'required' => false
             ])
+            ->add('icon', TextType::class)
         ;
     }
 

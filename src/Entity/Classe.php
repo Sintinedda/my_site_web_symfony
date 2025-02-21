@@ -63,6 +63,15 @@ class Classe
     #[ORM\ManyToMany(targetEntity: Spell::class, mappedBy: 'classes')]
     private Collection $spells;
 
+    #[ORM\Column(length: 255)]
+    private ?string $icon = null;
+
+    #[ORM\OneToOne(mappedBy: 'classe', cascade: ['persist', 'remove'])]
+    private ?Specialty $specialty = null;
+
+    #[ORM\OneToOne(mappedBy: 'classe', cascade: ['persist', 'remove'])]
+    private ?Incantation $incantation = null;
+
     public function __construct()
     {
         $this->classeByLevels = new ArrayCollection();
@@ -271,6 +280,57 @@ class Classe
         if ($this->spells->removeElement($spell)) {
             $spell->removeClass($this);
         }
+
+        return $this;
+    }
+
+    public function getIcon(): ?string
+    {
+        return $this->icon;
+    }
+
+    public function setIcon(string $icon): static
+    {
+        $this->icon = $icon;
+
+        return $this;
+    }
+
+    public function getSpecialty(): ?Specialty
+    {
+        return $this->specialty;
+    }
+
+    public function setSpecialty(?Specialty $specialty): static
+    {
+        // unset the owning side of the relation if necessary
+        if ($specialty === null && $this->specialty !== null) {
+            $this->specialty->setClasse(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($specialty !== null && $specialty->getClasse() !== $this) {
+            $specialty->setClasse($this);
+        }
+
+        $this->specialty = $specialty;
+
+        return $this;
+    }
+
+    public function getIncantation(): ?Incantation
+    {
+        return $this->incantation;
+    }
+
+    public function setIncantation(Incantation $incantation): static
+    {
+        // set the owning side of the relation if necessary
+        if ($incantation->getClasse() !== $this) {
+            $incantation->setClasse($this);
+        }
+
+        $this->incantation = $incantation;
 
         return $this;
     }
