@@ -1,10 +1,5 @@
 <ul>
-    <li><a href="{{ path('app_view_spell_school', { 'slug': 'abjuration' }) }}">Abjuration</a></li>
-    <li><a href="{{ path('app_view_spell_school', { 'slug': 'divination' }) }}">Divination</a></li>
-    <li><a href="{{ path('app_view_spell_school', { 'slug': 'enchantement' }) }}">Enchantement</a></li>
-    <li><a href="{{ path('app_view_spell_school', { 'slug': 'invocation' }) }}">Évocation</a></li>
-    <li><a href="{{ path('app_view_spell_school', { 'slug': 'illusion' }) }}">Illusion</a></li>
-    <li><a href="{{ path('app_view_spell_school', { 'slug': 'invocation' }) }}">Invocation</a></li>
-    <li><a href="{{ path('app_view_spell_school', { 'slug': 'nécromancie' }) }}">Nécromancie</a></li>
-    <li><a href="{{ path('app_view_spell_school', { 'slug': 'transmutation' }) }}">Transmutation</a></li>
+    {% for school in schools %}
+        <li><a href="{{ path('app_view_spell_school', { 'slug': school.slug }) }}">{{ school.name }}</a></li>
+    {% endfor %}
 </ul>

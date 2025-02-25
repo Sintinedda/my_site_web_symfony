@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SourceRace index{% endblock %}
+
+{% block body %}
+    <h1>SourceRace index</h1>
+    <a href="{{ path('app_source_race_new') }}">Create new</a>
+    <br/><br/><br/>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Race</th>
+                <th>Name</th>
+                <th>Source</th>
+                <th>Descr1</th>
+                <th>Descr2</th>
+                <th>Descr3</th>
+                <th>Descr4</th>
+                <th>Descr5</th>
+                <th>Ability_inc</th>
+                <th>Type</th>
+                <th>Age</th>
+                <th>Alignment</th>
+                <th>Size</th>
+                <th>Speed</th>
+                <th>Language</th>
+                <th>Talents</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for source_race in source_races %}
+            <tr>
+                <td>{{ source_race.id }}</td>
+                <td>{{ source_race.race.name }}</td>
+                <td>{{ source_race.name }}</td>
+                <td>{{ source_race.source }}</td>
+                <td>{{ source_race.descr1 }}</td>
+                <td>{{ source_race.descr2 }}</td>
+                <td>{{ source_race.descr3 }}</td>
+                <td>{{ source_race.descr4 }}</td>
+                <td>{{ source_race.descr5 }}</td>
+                <td>{{ source_race.abilityInc }}</td>
+                <td>{{ source_race.type }}</td>
+                <td>{{ source_race.age }}</td>
+                <td>{{ source_race.alignment }}</td>
+                <td>{{ source_race.size }}</td>
+                <td>{{ source_race.speed }}</td>
+                <td>{{ source_race.language }}</td>
+                <td>
+                    {% for talent in source_race.talent %}
+                        {{ talent.name }}
+                    {% endfor %}
+                </td>
+                <td>
+                    <a href="{{ path('app_source_race_show', {'id': source_race.id}) }}">show</a>
+                    <a href="{{ path('app_source_race_edit', {'id': source_race.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="16">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

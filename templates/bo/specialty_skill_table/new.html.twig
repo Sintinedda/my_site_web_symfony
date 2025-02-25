@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New SpecialtySkillTable{% endblock %}
+
+{% block body %}
+    <h1>Create new SpecialtySkillTable</h1>
+
+    {{ include('bo/specialty_skill_table/_form.html.twig') }}
+
+    <a href="{{ path('app_specialty_skill_table_index') }}">back to list</a>
+{% endblock %}

@@ -1,0 +1,8 @@
+<a class="nav-menu-link" href="{{ path('app_view_classe_index') }}">Classes</a>
+<ul class="nav-menu-item-list" id="menu-classes">
+    {% for classe in classes %}
+        <li class="nav-menu-classe-item">
+            <a class="nav-menu-classe-link" href="{{ path('app_view_classe_show', { 'slug': classe.slug }) }}">{{ classe.name }}</a>
+        </li>
+    {% endfor %}
+</ul>

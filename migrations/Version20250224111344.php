@@ -1,0 +1,31 @@
+<?php
+
+declare(strict_types=1);
+
+namespace DoctrineMigrations;
+
+use Doctrine\DBAL\Schema\Schema;
+use Doctrine\Migrations\AbstractMigration;
+
+/**
+ * Auto-generated Migration: Please modify to your needs!
+ */
+final class Version20250224111344 extends AbstractMigration
+{
+    public function getDescription(): string
+    {
+        return '';
+    }
+
+    public function up(Schema $schema): void
+    {
+        // this up() migration is auto-generated, please modify it to your needs
+        $this->addSql('ALTER TABLE specialty_skill_table CHANGE name name VARCHAR(100) NOT NULL, CHANGE th1 th1 VARCHAR(100) NOT NULL, CHANGE th2 th2 VARCHAR(100) NOT NULL, CHANGE tr1_td1 tr1_td1 VARCHAR(100) NOT NULL, CHANGE tr1_td2 tr1_td2 VARCHAR(500) NOT NULL, CHANGE tr2_td1 tr2_td1 VARCHAR(100) DEFAULT NULL, CHANGE tr2_td2 tr2_td2 VARCHAR(500) DEFAULT NULL, CHANGE tr3_td1 tr3_td1 VARCHAR(100) DEFAULT NULL, CHANGE tr3_td2 tr3_td2 VARCHAR(500) DEFAULT NULL, CHANGE tr4_td1 tr4_td1 VARCHAR(100) DEFAULT NULL, CHANGE tr4_td2 tr4_td2 VARCHAR(500) DEFAULT NULL, CHANGE tr5_td1 tr5_td1 VARCHAR(100) DEFAULT NULL, CHANGE tr5_td2 tr5_td2 VARCHAR(500) DEFAULT NULL, CHANGE tr6_td1 tr6_td1 VARCHAR(100) DEFAULT NULL, CHANGE tr6_td2 tr6_td2 VARCHAR(500) DEFAULT NULL, CHANGE tr7_td1 tr7_td1 VARCHAR(100) DEFAULT NULL, CHANGE tr7_td2 tr7_td2 VARCHAR(500) DEFAULT NULL, CHANGE tr8_td1 tr8_td1 VARCHAR(100) DEFAULT NULL, CHANGE tr8_td2 tr8_td2 VARCHAR(500) DEFAULT NULL, CHANGE tr9_td1 tr9_td1 VARCHAR(100) DEFAULT NULL, CHANGE tr9_td2 tr9_td2 VARCHAR(500) DEFAULT NULL, CHANGE tr10_td1 tr10_td1 VARCHAR(100) DEFAULT NULL, CHANGE tr10_td2 tr10_td2 VARCHAR(500) DEFAULT NULL, CHANGE tr11_td1 tr11_td1 VARCHAR(100) DEFAULT NULL, CHANGE tr11_td2 tr11_td2 VARCHAR(500) DEFAULT NULL, CHANGE tr12_td1 tr12_td1 VARCHAR(100) DEFAULT NULL, CHANGE tr12_td2 tr12_td2 VARCHAR(500) DEFAULT NULL');
+    }
+
+    public function down(Schema $schema): void
+    {
+        // this down() migration is auto-generated, please modify it to your needs
+        $this->addSql('ALTER TABLE specialty_skill_table CHANGE name name VARCHAR(255) NOT NULL, CHANGE th1 th1 VARCHAR(255) NOT NULL, CHANGE th2 th2 VARCHAR(255) NOT NULL, CHANGE tr1_td1 tr1_td1 VARCHAR(255) NOT NULL, CHANGE tr1_td2 tr1_td2 VARCHAR(255) NOT NULL, CHANGE tr2_td1 tr2_td1 VARCHAR(255) DEFAULT NULL, CHANGE tr2_td2 tr2_td2 VARCHAR(255) DEFAULT NULL, CHANGE tr3_td1 tr3_td1 VARCHAR(255) DEFAULT NULL, CHANGE tr3_td2 tr3_td2 VARCHAR(255) DEFAULT NULL, CHANGE tr4_td1 tr4_td1 VARCHAR(255) DEFAULT NULL, CHANGE tr4_td2 tr4_td2 VARCHAR(255) DEFAULT NULL, CHANGE tr5_td1 tr5_td1 VARCHAR(255) DEFAULT NULL, CHANGE tr5_td2 tr5_td2 VARCHAR(255) DEFAULT NULL, CHANGE tr6_td1 tr6_td1 VARCHAR(255) DEFAULT NULL, CHANGE tr6_td2 tr6_td2 VARCHAR(255) DEFAULT NULL, CHANGE tr7_td1 tr7_td1 VARCHAR(255) DEFAULT NULL, CHANGE tr7_td2 tr7_td2 VARCHAR(255) DEFAULT NULL, CHANGE tr8_td1 tr8_td1 VARCHAR(255) DEFAULT NULL, CHANGE tr8_td2 tr8_td2 VARCHAR(255) DEFAULT NULL, CHANGE tr9_td1 tr9_td1 VARCHAR(255) DEFAULT NULL, CHANGE tr9_td2 tr9_td2 VARCHAR(255) DEFAULT NULL, CHANGE tr10_td1 tr10_td1 VARCHAR(255) DEFAULT NULL, CHANGE tr10_td2 tr10_td2 VARCHAR(255) DEFAULT NULL, CHANGE tr11_td1 tr11_td1 VARCHAR(255) DEFAULT NULL, CHANGE tr11_td2 tr11_td2 VARCHAR(255) DEFAULT NULL, CHANGE tr12_td1 tr12_td1 VARCHAR(255) DEFAULT NULL, CHANGE tr12_td2 tr12_td2 VARCHAR(255) DEFAULT NULL');
+    }
+}

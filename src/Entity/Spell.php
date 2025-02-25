@@ -8,6 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: SpellRepository::class)]
+#[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_NAME', fields: ['name_fr'])]
 class Spell
 {
     #[ORM\Id]
@@ -23,9 +24,6 @@ class Spell
 
     #[ORM\Column]
     private ?int $level = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $school = null;
 
     #[ORM\Column(length: 255)]
     private ?string $casting_time = null;
@@ -90,6 +88,12 @@ class Spell
     #[ORM\Column(length: 1050, nullable: true)]
     private ?string $descr10 = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $slug = null;
+
+    #[ORM\ManyToOne(inversedBy: 'spells')]
+    private ?SpellSchool $school = null;
+
     public function __construct()
     {
         $this->classes = new ArrayCollection();
@@ -132,18 +136,6 @@ class Spell
     public function setLevel(int $level): static
     {
         $this->level = $level;
-
-        return $this;
-    }
-
-    public function getSchool(): ?string
-    {
-        return $this->school;
-    }
-
-    public function setSchool(string $school): static
-    {
-        $this->school = $school;
 
         return $this;
     }
@@ -396,6 +388,30 @@ class Spell
     public function setDescr10(?string $descr10): static
     {
         $this->descr10 = $descr10;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): static
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getSchool(): ?SpellSchool
+    {
+        return $this->school;
+    }
+
+    public function setSchool(?SpellSchool $school): static
+    {
+        $this->school = $school;
 
         return $this;
     }

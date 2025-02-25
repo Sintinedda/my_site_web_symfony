@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New StatBlockAction{% endblock %}
+
+{% block body %}
+    <h1>Create new StatBlockAction</h1>
+
+    {{ include('bo/stat_block_action/_form.html.twig') }}
+
+    <a href="{{ path('app_stat_block_action_index') }}">back to list</a>
+{% endblock %}

@@ -9,13 +9,28 @@
             </tr>
         </thead>
         <tbody class="classe-specialty-tbody">
-            {% for specialty in classe.specialty.specialtyItems|sort(a => a.name) %}
-                <tr class="classe-specialty-tr">
-                    <td class="classe-specialty-td">
-                        <a class="classe-specialty-link" href="{{ path('app_view_specialty_show', { 'slug': classe.name, 'slug2': specialty.name }) }}">{{ specialty.name }}</a>
-                    </td>
-                    <td class="classe-specialty-td">{{ specialty.source }}</td>
-                </tr>
+            {% for specialty in classe.specialty.specialtyItems|sort((a, b) => a.slug <=> b.slug) %}
+                {% if specialty.ua == false %}
+                    <tr class="classe-specialty-tr">
+                        <td class="classe-specialty-td">
+                            <a class="classe-specialty-link" href="{{ path('app_view_specialty_show', { 'slug': classe.slug, 'slug2': specialty.slug }) }}">{{ specialty.name }}</a>
+                        </td>
+                        <td class="classe-specialty-td">{{ specialty.source }}</td>
+                    </tr>
+                {% endif %}
+            {% endfor %}
+            <tr class="classe-specialty-tr">
+                <th class="classe-specialty-th" colspan="2">Archives des Arcanes Déterrées</th>
+            </tr>
+            {% for specialty in classe.specialty.specialtyItems|sort((a, b) => a.slug <=> b.slug) %}
+                {% if specialty.ua == true %}
+                    <tr class="classe-specialty-tr">
+                        <td class="classe-specialty-td">
+                            <a class="classe-specialty-link" href="{{ path('app_view_specialty_show', { 'slug': classe.slug, 'slug2': specialty.slug }) }}">{{ specialty.name }}</a>
+                        </td>
+                        <td class="classe-specialty-td">{{ specialty.source }}</td>
+                    </tr>
+                {% endif %}
             {% endfor %}
         </tbody>
     </table>

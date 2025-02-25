@@ -1,0 +1,237 @@
+<table class="stat-block-table">
+    <tr>
+        <th colspan="6">{{ skill.statBlock.nameFr }}</th>
+    </tr>
+    <tr>
+        <td class="stat-block-name" colspan="6">[ {{ skill.statBlock.nameEng }} ]</th>
+    </tr>
+    <tr>
+        <td colspan="6"><i>{{ skill.statBlock.type }}
+            {% if skill.statBlock.alignement %}
+                , {{ skill.statBlock.alignement }}
+            {% endif %}
+        </i></td>
+    </tr>
+    <tr>
+        <td colspan="6"><b>Classe d'armure : </b>{{ skill.statBlock.armor }}</td>
+    </tr>
+    <tr>
+        <td colspan="6"><b>Points de vie : </b>{{ skill.statBlock.pv }}</td>
+    </tr>
+    <tr>
+        <td colspan="6"><b>Vitesse : </b>{{ skill.statBlock.speed }}</td>
+    </tr>
+    <tr>
+        <th>FOR</th>
+        <th>DEX</th>
+        <th>CON</th>
+        <th>INT</th>
+        <th>SAG</th>
+        <th>CHA</th>
+    </tr>
+    <tr>
+        <td>{{ skill.statBlock.strenght }}
+            {% if skill.statBlock.strenght == 1 %}
+                (-5)
+            {% elseif skill.statBlock.strenght == 2 or skill.statBlock.strenght == 3 %}
+                (-4)
+            {% elseif skill.statBlock.strenght == 4 or skill.statBlock.strenght == 5 %}
+                (-3)
+            {% elseif skill.statBlock.strenght == 6 or skill.statBlock.strenght == 7 %}
+                (-2)
+            {% elseif skill.statBlock.strenght == 8 or skill.statBlock.strenght == 9 %}
+                (-1)
+            {% elseif skill.statBlock.strenght == 10 or skill.statBlock.strenght == 11 %}
+                (0)
+            {% elseif skill.statBlock.strenght == 12 or skill.statBlock.strenght == 13 %}
+                (+1)
+            {% elseif skill.statBlock.strenght == 14 or skill.statBlock.strenght == 15 %}
+                (+2)
+            {% elseif skill.statBlock.strenght == 16 or skill.statBlock.strenght == 17 %}
+                (+3)
+            {% elseif skill.statBlock.strenght == 18 or skill.statBlock.strenght == 19 %}
+                (+4)
+            {% elseif skill.statBlock.strenght == 20 %}
+                (+5)
+            {% endif %}
+        </td>
+        <td>{{ skill.statBlock.dexterity }}
+            {% if skill.statBlock.strenght == 1 %}
+                (-5)
+            {% elseif skill.statBlock.dexterity == 2 or skill.statBlock.dexterity == 3 %}
+                (-4)
+            {% elseif skill.statBlock.dexterity == 4 or skill.statBlock.dexterity == 5 %}
+                (-3)
+            {% elseif skill.statBlock.dexterity == 6 or skill.statBlock.dexterity == 7 %}
+                (-2)
+            {% elseif skill.statBlock.dexterity == 8 or skill.statBlock.dexterity == 9 %}
+                (-1)
+            {% elseif skill.statBlock.dexterity == 10 or skill.statBlock.dexterity == 11 %}
+                (0)
+            {% elseif skill.statBlock.dexterity == 12 or skill.statBlock.dexterity == 13 %}
+                (+1)
+            {% elseif skill.statBlock.dexterity == 14 or skill.statBlock.dexterity == 15 %}
+                (+2)
+            {% elseif skill.statBlock.dexterity == 16 or skill.statBlock.dexterity == 17 %}
+                (+3)
+            {% elseif skill.statBlock.dexterity == 18 or skill.statBlock.dexterity == 19 %}
+                (+4)
+            {% elseif skill.statBlock.dexterity == 20 %}
+                (+5)
+            {% endif %}
+        </td>
+        <td>{{ skill.statBlock.constitution }}
+            {% if skill.statBlock.constitution == 1 %}
+                (-5)
+            {% elseif skill.statBlock.constitution == 2 or skill.statBlock.constitution == 3 %}
+                (-4)
+            {% elseif skill.statBlock.constitution == 4 or skill.statBlock.constitution == 5 %}
+                (-3)
+            {% elseif skill.statBlock.constitution == 6 or skill.statBlock.constitution == 7 %}
+                (-2)
+            {% elseif skill.statBlock.constitution == 8 or skill.statBlock.constitution == 9 %}
+                (-1)
+            {% elseif skill.statBlock.constitution == 10 or skill.statBlock.constitution == 11 %}
+                (0)
+            {% elseif skill.statBlock.constitution == 12 or skill.statBlock.constitution == 13 %}
+                (+1)
+            {% elseif skill.statBlock.constitution == 14 or skill.statBlock.constitution == 15 %}
+                (+2)
+            {% elseif skill.statBlock.constitution == 16 or skill.statBlock.constitution == 17 %}
+                (+3)
+            {% elseif skill.statBlock.constitution == 18 or skill.statBlock.constitution == 19 %}
+                (+4)
+            {% elseif skill.statBlock.constitution == 20 %}
+                (+5)
+            {% endif %}
+        </td>
+        <td>{{ skill.statBlock.intelligence }}
+            {% if skill.statBlock.intelligence == 1 %}
+                (-5)
+            {% elseif skill.statBlock.intelligence == 2 or skill.statBlock.intelligence == 3 %}
+                (-4)
+            {% elseif skill.statBlock.intelligence == 4 or skill.statBlock.intelligence == 5 %}
+                (-3)
+            {% elseif skill.statBlock.intelligence == 6 or skill.statBlock.intelligence == 7 %}
+                (-2)
+            {% elseif skill.statBlock.intelligence == 8 or skill.statBlock.intelligence == 9 %}
+                (-1)
+            {% elseif skill.statBlock.intelligence == 10 or skill.statBlock.intelligence == 11 %}
+                (0)
+            {% elseif skill.statBlock.intelligence == 12 or skill.statBlock.intelligence == 13 %}
+                (+1)
+            {% elseif skill.statBlock.intelligence == 14 or skill.statBlock.intelligence == 15 %}
+                (+2)
+            {% elseif skill.statBlock.intelligence == 16 or skill.statBlock.intelligence == 17 %}
+                (+3)
+            {% elseif skill.statBlock.intelligence == 18 or skill.statBlock.intelligence == 19 %}
+                (+4)
+            {% elseif skill.statBlock.intelligence == 20 %}
+                (+5)
+            {% endif %}
+        </td>
+        <td>{{ skill.statBlock.wisdow }}
+            {% if skill.statBlock.wisdow == 1 %}
+                (-5)
+            {% elseif skill.statBlock.wisdow == 2 or skill.statBlock.wisdow == 3 %}
+                (-4)
+            {% elseif skill.statBlock.wisdow == 4 or skill.statBlock.wisdow == 5 %}
+                (-3)
+            {% elseif skill.statBlock.wisdow == 6 or skill.statBlock.wisdow == 7 %}
+                (-2)
+            {% elseif skill.statBlock.wisdow == 8 or skill.statBlock.wisdow == 9 %}
+                (-1)
+            {% elseif skill.statBlock.wisdow == 10 or skill.statBlock.wisdow == 11 %}
+                (0)
+            {% elseif skill.statBlock.wisdow == 12 or skill.statBlock.wisdow == 13 %}
+                (+1)
+            {% elseif skill.statBlock.wisdow == 14 or skill.statBlock.wisdow == 15 %}
+                (+2)
+            {% elseif skill.statBlock.wisdow == 16 or skill.statBlock.wisdow == 17 %}
+                (+3)
+            {% elseif skill.statBlock.wisdow == 18 or skill.statBlock.wisdow == 19 %}
+                (+4)
+            {% elseif skill.statBlock.wisdow == 20 %}
+                (+5)
+            {% endif %}
+        </td>
+        <td>{{ skill.statBlock.charisma }}
+            {% if skill.statBlock.charisma == 1 %}
+                (-5)
+            {% elseif skill.statBlock.charisma == 2 or skill.statBlock.charisma == 3 %}
+                (-4)
+            {% elseif skill.statBlock.charisma == 4 or skill.statBlock.charisma == 5 %}
+                (-3)
+            {% elseif skill.statBlock.charisma == 6 or skill.statBlock.charisma == 7 %}
+                (-2)
+            {% elseif skill.statBlock.charisma == 8 or skill.statBlock.charisma == 9 %}
+                (-1)
+            {% elseif skill.statBlock.charisma == 10 or skill.statBlock.charisma == 11 %}
+                (0)
+            {% elseif skill.statBlock.charisma == 12 or skill.statBlock.charisma == 13 %}
+                (+1)
+            {% elseif skill.statBlock.charisma == 14 or skill.statBlock.charisma == 15 %}
+                (+2)
+            {% elseif skill.statBlock.charisma == 16 or skill.statBlock.charisma == 17 %}
+                (+3)
+            {% elseif skill.statBlock.charisma == 18 or skill.statBlock.charisma == 19 %}
+                (+4)
+            {% elseif skill.statBlock.charisma == 20 %}
+                (+5)
+            {% endif %}
+        </td>
+    </tr>
+    {% if skill.statBlock.competence %}
+        <tr>
+            <td colspan="6"><b>Compétences : </b>{{ skill.statBlock.competence }}</td>
+        </tr>
+    {% endif %}
+    {% if skill.statBlock.immunityDamage %}
+        <tr>
+            <td colspan="6"><b>Immunités aux dégâts : </b>{{ skill.statBlock.immunityDamage }}</td>
+        </tr>
+    {% endif %}
+    {% if skill.statBlock.immunityCondition %}
+        <tr>
+            <td colspan="6"><b>Immunités aux états : </b>{{ skill.statBlock.immunityCondition }}</td>
+        </tr>
+    {% endif %}
+    <tr>
+        <td colspan="6"><b>Sens : </b>{{ skill.statBlock.sens }}</td>
+    </tr>
+    <tr>
+        <td colspan="6"><b>Langues : </b>{{ skill.statBlock.language }}</td>
+    </tr>
+    <tr>
+        <td colspan="6"><b>Puissance : </b>{{ skill.statBlock.fp }}</td>
+    </tr>
+    <tr>
+        <td colspan="6"><b>Bonus de maîtrise (BM) : </b>{{ skill.statBlock.bm }}</td>
+    </tr>
+    <tr>
+        <th colspan="6">Capacités</th>
+    </tr>
+    {% for sk in skill.statBlock.statBlockSkills %}
+        <tr >
+            <td colspan="6"><b>{{ sk.name }}</b> {{ sk.descr|raw }}</td>
+        </tr>
+    {% endfor %}
+    <tr>
+        <th colspan="6">Actions</th>
+    </tr>
+    {% for action in skill.statBlock.statBlockActions %}
+        <tr>
+            <td colspan="6"><b>{{ action.name }}</b> {{ action.descr|raw }}</td>
+        </tr>
+    {% endfor %}  
+    {% if skill.statBlock.statBlockReactions|length >= 1 %}
+        <tr>
+            <th colspan="6">Réactions</th>
+        </tr>
+        {% for reaction in skill.statBlock.statBlockReactions %}
+            <tr>
+                <td colspan="6"><b>{{ reaction.name }}</b> {{ reaction.descr|raw }}</td>
+            </tr>
+        {% endfor %}  
+    {% endif %}
+</table>

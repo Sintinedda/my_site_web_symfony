@@ -6,6 +6,7 @@ use App\Entity\ClasseByLevel;
 use App\Entity\Skill;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -17,6 +18,14 @@ class SkillType extends AbstractType
     {
         $builder
             ->add('name', TextType::class)
+            ->add('part', TextType::class, [
+                'required' => false
+            ])
+            ->add('level', IntegerType::class, [
+                'required' => false
+            ])
+            ->add('optional')
+            ->add('show_descr')
             ->add('descr1', TextareaType::class, [
                 'required' => false
             ])

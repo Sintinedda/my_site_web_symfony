@@ -12,30 +12,49 @@
 
 {% block main %}
 
+    <h1 class="classe-title">Liste des classes</h1>
     <div class="classe-container">
-        <h1 class="classe-title">Liste des classes</h1>
         <ul class="classe-liste">
             {% for classe in classes %}
                 <li class="classe-item">
                     <div class="classe-icon-container">
                         <img class="classe-icon" src="{{ asset('assets/img/classe-icons/' ~ classe.icon) }}" alt="{{ classe.name }}"/>
                     </div>
-                    <a class="classe-link" href="{{ path('app_view_classe_show', { 'slug': classe.name }) }}">{{ classe.name }}</a>
+                    <a class="classe-link" href="{{ path('app_view_classe_show', { 'slug': classe.slug }) }}">{{ classe.name }}</a>
                     <ul class="classe-item-liste">
-                        <li class="classe-items">
-                            <a class="classe-items-link" href="">{{ classe.specialty.name }}</a>
+                        <li class="classe-items">{{ classe.specialty.name }}
                             <ul class="classe-items-liste">
-                                {% for specialty in classe.specialty.specialtyItems|sort(a => a.name) %}
-                                    <li class="classe-items-item">
-                                        <a class="classe-items-item-link" href="{{ path('app_view_specialty_show', { 'slug': classe.name, 'slug2': specialty.name }) }}">{{ specialty.name }}</a>
-                                         - {{ specialty.source }}
-                                    </li>
+                                {% for specialty in classe.specialty.specialtyItems|sort((a, b) => a.slug <=> b.slug) %}
+                                    {% if specialty.ua == false %}
+                                        <li class="classe-items-item">
+                                            <a class="classe-items-item-link" href="{{ path('app_view_specialty_show', { 'slug': classe.slug, 'slug2': specialty.slug }) }}">{{ specialty.name }}</a>
+                                        </li>
+                                    {% endif %}
                                 {% endfor %}
                             </ul>
-                        <li class="classe-items">Liens rapides
+                        </li>
+                        <li class="classe-items">Arcanes déterrées
                             <ul class="classe-items-liste">
+                                {% for specialty in classe.specialty.specialtyItems|sort((a, b) => a.slug <=> b.slug) %}
+                                    {% if specialty.ua == true %}
+                                        <li class="classe-items-item">
+                                            <a class="classe-items-item-link" href="{{ path('app_view_specialty_show', { 'slug': classe.slug, 'slug2': specialty.slug }) }}">{{ specialty.name }}</a>
+                                        </li>
+                                    {% endif %}
+                                {% endfor %}
                             </ul>
                         </li>
+                        {% if classe.spells|length >= 1 %}
+                            <li class="classe-items">Liens rapides
+                                <ul class="classe-items-liste">
+                                    {% if classe.spells|length >= 1 %}
+                                        <li class="classe-items-item">
+                                            <a class="classe-items-item-link" href="{{ path('app_view_spell_classe', { 'slug': classe.slug }) }}">Liste des sorts de {{ classe.name }}</a>
+                                        </li>
+                                    {% endif %}
+                                </ul>
+                            </li>
+                        {% endif %}
                     </ul>
                 </li>
             {% endfor %}

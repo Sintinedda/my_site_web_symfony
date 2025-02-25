@@ -6,26 +6,26 @@
 
 {% block main %}
 
-    <h1 class="race-title">Liste des races</h1>
+    <h1 class="races-title">Liste des races</h1>
     <ul>
         <li>Communes
             <ul>
                 {% for common in commons %}
-                    <li><a href="{{ path('app_view_race_show', { 'slug': common.name }) }}">{{ common.name }}</a></li>
+                    <li><a href="{{ path('app_view_race_show', { 'slug': common.slug }) }}">{{ common.name }}</a></li>
                 {% endfor %}
             </ul>
         </li>
         <li>Exotiques
             <ul>
                 {% for exotic in exotics %}
-                    <li><a href="{{ path('app_view_race_show', { 'slug': exotic.name }) }}">{{ exotic.name }}</a></li>
+                    <li><a href="{{ path('app_view_race_show', { 'slug': exotic.slug }) }}">{{ exotic.name }}</a></li>
                 {% endfor %}
             </ul>
         </li>
         <li>Monstrueuses
             <ul>
                 {% for monstruou in monstruous %}
-                    <li><a href="{{ path('app_view_race_show', { 'slug': monstruou.name }) }}">{{ monstruou.name }}</a></li>
+                    <li><a href="{{ path('app_view_race_show', { 'slug': monstruou.slug }) }}">{{ monstruou.name }}</a></li>
                 {% endfor %}
             </ul>
         </li>

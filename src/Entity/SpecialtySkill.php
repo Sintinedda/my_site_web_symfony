@@ -34,6 +34,18 @@ class SpecialtySkill
     #[ORM\Column(length: 1020, nullable: true)]
     private ?string $descr5 = null;
 
+    #[ORM\Column(length: 1020, nullable: true)]
+    private ?string $descr6 = null;
+
+    #[ORM\Column(length: 1020, nullable: true)]
+    private ?string $descr7 = null;
+
+    #[ORM\OneToOne(mappedBy: 'specialty_skill', cascade: ['persist', 'remove'])]
+    private ?SpecialtySkillTable $specialtySkillTable = null;
+
+    #[ORM\OneToOne(mappedBy: 'specialty_skill', cascade: ['persist', 'remove'])]
+    private ?StatBlock $statBlock = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -119,6 +131,69 @@ class SpecialtySkill
     public function setDescr5(?string $descr5): static
     {
         $this->descr5 = $descr5;
+
+        return $this;
+    }
+
+    public function getDescr6(): ?string
+    {
+        return $this->descr6;
+    }
+
+    public function setDescr6(?string $descr6): static
+    {
+        $this->descr6 = $descr6;
+
+        return $this;
+    }
+
+    public function getDescr7(): ?string
+    {
+        return $this->descr7;
+    }
+
+    public function setDescr7(?string $descr7): static
+    {
+        $this->descr7 = $descr7;
+
+        return $this;
+    }
+
+    public function getSpecialtySkillTable(): ?SpecialtySkillTable
+    {
+        return $this->specialtySkillTable;
+    }
+
+    public function setSpecialtySkillTable(SpecialtySkillTable $specialtySkillTable): static
+    {
+        // set the owning side of the relation if necessary
+        if ($specialtySkillTable->getSpecialtySkill() !== $this) {
+            $specialtySkillTable->setSpecialtySkill($this);
+        }
+
+        $this->specialtySkillTable = $specialtySkillTable;
+
+        return $this;
+    }
+
+    public function getStatBlock(): ?StatBlock
+    {
+        return $this->statBlock;
+    }
+
+    public function setStatBlock(?StatBlock $statBlock): static
+    {
+        // unset the owning side of the relation if necessary
+        if ($statBlock === null && $this->statBlock !== null) {
+            $this->statBlock->setSpecialtySkill(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($statBlock !== null && $statBlock->getSpecialtySkill() !== $this) {
+            $statBlock->setSpecialtySkill($this);
+        }
+
+        $this->statBlock = $statBlock;
 
         return $this;
     }

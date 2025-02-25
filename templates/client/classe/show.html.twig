@@ -11,36 +11,38 @@
 
 {% block main %}
 
-    <h1 class="classe-title">{{ classe.name }}</h1>
+    <h1 class="classe-show-title">{{ classe.name }}</h1>
 
-    <div class="classe-container">
-        <h2 class="classe-subtitle">Points de vie</h2>
-        <p class="classe-item"><b>DV : </b>1d{{ classe.dv }} par niveau de {{ classe.name }}</p>
-        <p class="classe-item"><b>Pv au niveau 1 : </b>{{ classe.dv }} + votre modificateur de Constitution</p>
-        <p class="classe-item"><b>Pv aux niveaux suivants : </b>1d{{ classe.dv }} + votre modificateur de Constitution</p>
+    <div class="container">
+        <p class="classe-show-descr">{{ classe.descr }}</p>
 
-        <h2 class="classe-subtitle">Maîtrises</h2>
-        <p class="classe-item"><b>Armures : </b>{{ classe.armor }}</p>
-        <p class="classe-item"><b>Armes : </b>{{ classe.weapon }}</p>
-        <p class="classe-item"><b>Outils : </b>{{ classe.tool }}</p>
-        <p class="classe-item"><b>Jets de sauvegarde : </b>{{ classe.save }}</p>
-        <p class="classe-item"><b>Comnpétences : </b>{{ classe.competence }}</p>
+        <h2 class="classe-show-subtitle">Points de vie</h2>
+        <p class="classe-show-item"><b>DV : </b>1d{{ classe.dv }} par niveau de {{ classe.name }}</p>
+        <p class="classe-show-item"><b>Pv au niveau 1 : </b>{{ classe.dv }} + votre modificateur de Constitution</p>
+        <p class="classe-show-item"><b>Pv aux niveaux suivants : </b>1d{{ classe.dv }} + votre modificateur de Constitution</p>
 
-        <h2 class="classe-subtitle">Équipement</h2>
-        <p class="classe-item">Vous commencez avec l'équipement suivant, en plus de l'équipement accordé par votre historique :</p>
-        <ul class="classe-equipment-list">
-            <li class="classe-equipment-item">{{ classe.equipment1 }}</li>
+        <h2 class="classe-show-subtitle">Maîtrises</h2>
+        <p class="classe-show-item"><b>Armures : </b>{{ classe.armor }}</p>
+        <p class="classe-show-item"><b>Armes : </b>{{ classe.weapon }}</p>
+        <p class="classe-show-item"><b>Outils : </b>{{ classe.tool }}</p>
+        <p class="classe-show-item"><b>Jets de sauvegarde : </b>{{ classe.save }}</p>
+        <p class="classe-show-item"><b>Comnpétences : </b>{{ classe.competence }}</p>
+
+        <h2 class="classe-show-subtitle">Équipement</h2>
+        <p class="classe-show-item">Vous commencez avec l'équipement suivant, en plus de l'équipement accordé par votre historique :</p>
+        <ul class="classe-show-equipment-list">
+            <li class="classe-show-equipment-item">{{ classe.equipment1 }}</li>
             {% if classe.equipment2 %}
-                <li class="classe-equipment-item">{{ classe. equipment2 }}</li>
+                <li class="classe-show-equipment-item">{{ classe. equipment2 }}</li>
             {% endif %}
             {% if classe.equipment3 %}
-                <li class="classe-equipment-item">{{ classe. equipment3 }}</li>
+                <li class="classe-show-equipment-item">{{ classe. equipment3 }}</li>
             {% endif %}
             {% if classe.equipment4 %}
-                <li class="classe-equipment-item">{{ classe. equipment4 }}</li>
+                <li class="classe-show-equipment-item">{{ classe. equipment4 }}</li>
             {% endif %}
             {% if classe.equipment5 %}
-                <li class="classe-equipment-item">{{ classe. equipment5 }}</li>
+                <li class="classe-show-equipment-item">{{ classe. equipment5 }}</li>
             {% endif %}
         </ul>
 

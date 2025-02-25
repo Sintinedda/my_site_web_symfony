@@ -18,8 +18,11 @@ class SpecialtyItem
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\ManyToOne(inversedBy: 'specialtyItems')]
-    private ?Specialty $specialty = null;
+    /**
+     * @var Collection<int, Specialty>
+     */
+    #[ORM\ManyToMany(targetEntity: Specialty::class, inversedBy: 'specialtyItems')]
+    private Collection $specialty;
 
     #[ORM\Column(length: 1020)]
     private ?string $descr1 = null;
@@ -36,8 +39,33 @@ class SpecialtyItem
     #[ORM\Column(length: 1020, nullable: true)]
     private ?string $descr2 = null;
 
+    #[ORM\OneToOne(mappedBy: 'specialtyItem', cascade: ['persist', 'remove'])]
+    private ?SpecialtyItemTable $specialtyItemTable = null;
+
+    #[ORM\Column]
+    private ?bool $ua = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $slug = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $part = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $part2 = null;
+
+    #[ORM\Column(length: 1020, nullable: true)]
+    private ?string $descr3 = null;
+
+    #[ORM\Column(length: 1020, nullable: true)]
+    private ?string $descr4 = null;
+
+    #[ORM\Column(length: 1020, nullable: true)]
+    private ?string $descr5 = null;
+
     public function __construct()
     {
+        $this->specialty = new ArrayCollection();
         $this->specialtySkills = new ArrayCollection();
     }
 
@@ -58,14 +86,26 @@ class SpecialtyItem
         return $this;
     }
 
-    public function getSpecialty(): ?Specialty
+    /**
+     * @return Collection<int, Specialty>
+     */
+    public function getSpecialty(): Collection
     {
         return $this->specialty;
     }
 
-    public function setSpecialty(?Specialty $specialty): static
+    public function setSpecialty(Specialty $specialty): static
     {
-        $this->specialty = $specialty;
+        if (!$this->specialty->contains($specialty)) {
+            $this->specialty->add($specialty);
+        }
+
+        return $this;
+    }
+
+    public function removeSpecialty(Specialty $specialty): static
+    {
+        $this->specialty->removeElement($specialty);
 
         return $this;
     }
@@ -132,6 +172,107 @@ class SpecialtyItem
     public function setDescr2(?string $descr2): static
     {
         $this->descr2 = $descr2;
+
+        return $this;
+    }
+
+    public function getSpecialtyItemTable(): ?SpecialtyItemTable
+    {
+        return $this->specialtyItemTable;
+    }
+
+    public function setSpecialtyItemTable(SpecialtyItemTable $specialtyItemTable): static
+    {
+        // set the owning side of the relation if necessary
+        if ($specialtyItemTable->getSpecialtyItem() !== $this) {
+            $specialtyItemTable->setSpecialtyItem($this);
+        }
+
+        $this->specialtyItemTable = $specialtyItemTable;
+
+        return $this;
+    }
+
+    public function isUa(): ?bool
+    {
+        return $this->ua;
+    }
+
+    public function setUa(bool $ua): static
+    {
+        $this->ua = $ua;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): static
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getPart(): ?string
+    {
+        return $this->part;
+    }
+
+    public function setPart(?string $part): static
+    {
+        $this->part = $part;
+
+        return $this;
+    }
+
+    public function getPart2(): ?string
+    {
+        return $this->part2;
+    }
+
+    public function setPart2(?string $part2): static
+    {
+        $this->part2 = $part2;
+
+        return $this;
+    }
+
+    public function getDescr3(): ?string
+    {
+        return $this->descr3;
+    }
+
+    public function setDescr3(?string $descr3): static
+    {
+        $this->descr3 = $descr3;
+
+        return $this;
+    }
+
+    public function getDescr4(): ?string
+    {
+        return $this->descr4;
+    }
+
+    public function setDescr4(?string $descr4): static
+    {
+        $this->descr4 = $descr4;
+
+        return $this;
+    }
+
+    public function getDescr5(): ?string
+    {
+        return $this->descr5;
+    }
+
+    public function setDescr5(?string $descr5): static
+    {
+        $this->descr5 = $descr5;
 
         return $this;
     }

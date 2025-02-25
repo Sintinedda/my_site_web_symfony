@@ -1,52 +1,64 @@
 {% set newArray = [] %}
 {% for level in classe.classeByLevels %}
-    {% for skill in level.skills %}
-        {% if skill.name not in newArray %}
-            <div class="classe-skill-div">
-                <h3 class="classe-skill-title">{{ skill.name }}</h2>
-                {% if skill.descr1 %}
-                    <p class="classe-skill-descr">{{ skill.descr1|raw }}</p>
-                {% endif %}
-                {% if skill.descr2 %}
-                    <p class="classe-skill-descr">{{ skill.descr2|raw }}<p>
-                {% endif %}
+    {% for skill in level.skills|sort((a, b) => a.level <=> b.level) %}
+        {% if skill.showDescr == true %}
+            {% if skill.name not in newArray %}
+                <div class="classe-skill-div">
+                    <h3 class="classe-skill-title">
+                        {{ skill.name }} 
+                        {% if skill.optional == true %}
+                            (Facultatif)
+                        {% endif %}
+                    </h3>
+                    {% if skill.descr1 %}
+                        <p class="classe-skill-descr">{{ skill.descr1|raw }}</p>
+                    {% endif %}
+                    {% if skill.descr2 %}
+                        <p class="classe-skill-descr">{{ skill.descr2|raw }}<p>
+                    {% endif %}
+                    {% if skill.descr3 %}
+                        <p class="classe-skill-descr">{{ skill.descr3|raw }}<p>
+                    {% endif %}
+                    {% if skill.descr4 %}
+                        <p class="classe-skill-descr">{{ skill.descr4|raw }}<p>
+                    {% endif %}
+                    {% if skill.descr5 %}
+                        <p class="classe-skill-descr">{{ skill.descr5|raw }}<p>
+                    {% endif %}
+                    {% if skill.descr6 %}
+                        <p class="classe-skill-descr">{{ skill.descr6|raw }}<p>
+                    {% endif %}
+                    {% if skill.descr7 %}
+                        <p class="classe-skill-descr">{{ skill.descr7|raw }}<p>
+                    {% endif %}
+                    {% if skill.descr8 %}
+                        <p class="classe-skill-descr">{{ skill.descr8|raw }}<p>
+                    {% endif %}
+                    {% if skill.descr9 %}
+                        <p class="classe-skill-descr">{{ skill.descr9|raw }}<p>
+                    {% endif %}
+                    {% if skill.descr10 %}
+                        <p class="classe-skill-descr">{{ skill.descr10|raw }}<p>
+                    {% endif %}
 
-                {# druide #}
-                {% include 'client/classe/druide/_skills.html.twig' %}
+                    {# spelling #}
+                    {% include 'client/classe/construct/_spelling.html.twig' %}
+    
+                    {% if skill.subSkill %}
+                        <h4 class="classe-skill-subtitle">{{ skill.subSkill.title1 }}</h4>
+                        <p class="classe-skill-descr">{{ skill.subSkill.descrOne }}</p>
+                        {% if skill.subSkill.descrOne2 %}
+                            <p class="classe-skill-descr">{{ skill.subSkill.descrOne2 }}</p>
+                        {% endif %}
+                    {% endif %}
 
-                {% if skill.descr3 %}
-                    <p class="classe-skill-descr">{{ skill.descr3|raw }}<p>
-                {% endif %}
-                {% if skill.descr4 %}
-                    <p class="classe-skill-descr">{{ skill.descr4|raw }}<p>
-                {% endif %}
-                {% if skill.descr5 %}
-                    <p class="classe-skill-descr">{{ skill.descr5|raw }}<p>
-                {% endif %}
-                {% if skill.descr6 %}
-                    <p class="classe-skill-descr">{{ skill.descr6|raw }}<p>
-                {% endif %}
-                {% if skill.descr7 %}
-                    <p class="classe-skill-descr">{{ skill.descr7|raw }}<p>
-                {% endif %}
-                {% if skill.descr8 %}
-                    <p class="classe-skill-descr">{{ skill.descr8|raw }}<p>
-                {% endif %}
-                {% if skill.descr9 %}
-                    <p class="classe-skill-descr">{{ skill.descr9|raw }}<p>
-                {% endif %}
-                {% if skill.descr10 %}
-                    <p class="classe-skill-descr">{{ skill.descr10|raw }}<p>
-                {% endif %}
+                    {% if skill.skillTable %}
+                        {% include 'client/classe/construct/_skills-table.html.twig' %}
+                    {% endif %}
 
-                {# spelling #}
-                {% include 'client/classe/construct/_spelling.html.twig' %}
- 
-                {# clerc #}
-                {% include 'client/classe/clerc/_skills.html.twig' %}
-
-            </div>
-        {% set newArray = newArray|merge([skill.name]) %}
+                </div>
+            {% set newArray = newArray|merge([skill.name]) %}
+            {% endif %}
         {% endif %}
     {% endfor %}
 {% endfor %}

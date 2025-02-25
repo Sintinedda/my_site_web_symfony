@@ -1,0 +1,126 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SkillTable{% endblock %}
+
+{% block body %}
+    <h1>SkillTable</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ skill_table.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ skill_table.name }}</td>
+            </tr>
+            <tr>
+                <th>Th1</th>
+                <td>{{ skill_table.th1 }}</td>
+            </tr>
+            <tr>
+                <th>Th2</th>
+                <td>{{ skill_table.th2 }}</td>
+            </tr>
+            <tr>
+                <th>Th3</th>
+                <td>{{ skill_table.th3 }}</td>
+            </tr>
+            <tr>
+                <th>Th4</th>
+                <td>{{ skill_table.th4 }}</td>
+            </tr>
+            <tr>
+                <th>Tr1_td1</th>
+                <td>{{ skill_table.tr1Td1 }}</td>
+            </tr>
+            <tr>
+                <th>Tr1_td2</th>
+                <td>{{ skill_table.tr1Td2 }}</td>
+            </tr>
+            <tr>
+                <th>Tr2_td1</th>
+                <td>{{ skill_table.tr2Td1 }}</td>
+            </tr>
+            <tr>
+                <th>Tr2_td2</th>
+                <td>{{ skill_table.tr2Td2 }}</td>
+            </tr>
+            <tr>
+                <th>Tr1_td3</th>
+                <td>{{ skill_table.tr1Td3 }}</td>
+            </tr>
+            <tr>
+                <th>Tr1_td4</th>
+                <td>{{ skill_table.tr1Td4 }}</td>
+            </tr>
+            <tr>
+                <th>Tr2_td3</th>
+                <td>{{ skill_table.tr2Td3 }}</td>
+            </tr>
+            <tr>
+                <th>Tr2_td4</th>
+                <td>{{ skill_table.tr2Td4 }}</td>
+            </tr>
+            <tr>
+                <th>Tr3_td1</th>
+                <td>{{ skill_table.tr3Td1 }}</td>
+            </tr>
+            <tr>
+                <th>Tr3_td2</th>
+                <td>{{ skill_table.tr3Td2 }}</td>
+            </tr>
+            <tr>
+                <th>Tr3_td3</th>
+                <td>{{ skill_table.tr3Td3 }}</td>
+            </tr>
+            <tr>
+                <th>Tr3_td4</th>
+                <td>{{ skill_table.tr3Td4 }}</td>
+            </tr>
+            <tr>
+                <th>Tr4_td1</th>
+                <td>{{ skill_table.tr4Td1 }}</td>
+            </tr>
+            <tr>
+                <th>Tr4_td2</th>
+                <td>{{ skill_table.tr4Td2 }}</td>
+            </tr>
+            <tr>
+                <th>Tr4_td3</th>
+                <td>{{ skill_table.tr4Td3 }}</td>
+            </tr>
+            <tr>
+                <th>Tr4_td4</th>
+                <td>{{ skill_table.tr4Td4 }}</td>
+            </tr>
+            <tr>
+                <th>Tr5_td1</th>
+                <td>{{ skill_table.tr5Td1 }}</td>
+            </tr>
+            <tr>
+                <th>Tr5_td2</th>
+                <td>{{ skill_table.tr5Td2 }}</td>
+            </tr>
+            <tr>
+                <th>Tr5_td3</th>
+                <td>{{ skill_table.tr5Td3 }}</td>
+            </tr>
+            <tr>
+                <th>Tr5_td4</th>
+                <td>{{ skill_table.tr5Td4 }}</td>
+            </tr>
+            <tr>
+                <th>Start</th>
+                <td>{{ skill_table.start ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_skill_table_index') }}">back to list</a>
+
+    <a href="{{ path('app_skill_table_edit', {'id': skill_table.id}) }}">edit</a>
+
+    {{ include('skill_table/_delete_form.html.twig') }}
+{% endblock %}

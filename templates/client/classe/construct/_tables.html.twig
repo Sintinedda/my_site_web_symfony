@@ -1,25 +1,179 @@
-{% if classe.name == 'Barbare' %}
-    {% include 'client/classe/tables/_barbare.html.twig' %}
-{% elseif classe.name == 'Barde' %}
-    {% include 'client/classe/tables/_barde.html.twig' %}
-{% elseif classe.name == 'Clerc' %}
-    {% include 'client/classe/tables/_clerc.html.twig' %}
-{% elseif classe.name == 'Druide' %}
-    {% include 'client/classe/tables/_druide.html.twig' %}
-{% elseif classe.name == 'Ensorceleur' %}
-    {% include 'client/classe/tables/_ensorceleur.html.twig' %}
-{% elseif classe.name == 'Guerrier' %}
-    {% include 'client/classe/tables/_guerrier.html.twig' %}
-{% elseif classe.name == 'Magicien' %}
-    {% include 'client/classe/tables/_magicien.html.twig' %}
-{% elseif classe.name == 'Moine' %}
-    {% include 'client/classe/tables/_moine.html.twig' %}
-{% elseif classe.name == 'Occultiste' %}
-    {% include 'client/classe/tables/Occultiste.html.twig' %}
-{% elseif classe.name == 'Paladin' %}
-    {% include 'client/classe/tables/_paladin.html.twig' %}
-{% elseif classe.name == 'Rôdeur' %}
-    {% include 'client/classe/tables/_rodeur.html.twig' %}
-{% elseif classe.name == 'Roublard' %}
-    {% include 'client/classe/tables/_roublard.html.twig' %}
-{% endif %}
+<table class="classe-table">
+    <thead class="classe-thead">
+        <tr class="classe-thead-tr">
+            <th class="classe-th" {% if classe.spell == true %}rowspan="2"{% endif %}>Niv</th>
+            <th class="classe-th" {% if classe.spell == true %}rowspan="2"{% endif %}>BM</th>
+            
+            {% if classe.sorceryPoint == true %}
+                <th class="classe-th" rowspan="2">Points de sorcellerie</th>
+            {% endif %}
+
+            <th class="classe-th" {% if classe.spell == true %}rowspan="2"{% endif %}>Capacités</th>
+            
+            {% if classe.rage == true %}
+                <th class="classe-th">Rages</th>
+            {% endif %}
+            {% if classe.damage == true %}
+                <th class="classe-th">Dégâts</th>
+            {% endif %}
+            {% if classe.cantrip == true %}
+                <th class="classe-th" {% if classe.spell == true %}rowspan="2"{% endif %}>Cantrips connus</th>
+            {% endif %}
+            {% if classe.knowingSpells == true %}
+                <th class="classe-th" {% if classe.spell == true %}rowspan="2"{% endif %}>Sorts connus</th>
+            {% endif %}
+            {% if classe.spell == true %}
+                <th class="classe-th colspan" colspan="9">-Emplacements de sorts-</th>
+            {% endif %}
+
+        </tr>
+        {% if classe.spell == true %}
+            <tr class="classe-thead-tr">
+                <th class="classe-th">1</th> 
+                <th class="classe-th">2</th> 
+                <th class="classe-th">3</th> 
+                <th class="classe-th">4</th> 
+                <th class="classe-th">5</th> 
+                <th class="classe-th">6</th> 
+                <th class="classe-th">7</th> 
+                <th class="classe-th">8</th> 
+                <th class="classe-th">9</th> 
+            </tr>
+        {% endif %}
+    </thead>
+    <tbody class="classe-tbody">
+        {% for level in classe.classeByLevels %}
+            <tr class="classe-tbody-tr">
+                <td class="classe-td">{{ level.level }}</td>
+                <td class="classe-td">+{{ level.bm }}</td>
+
+                {% if classe.sorceryPoint == true %}
+                    {% if level.sorceryPoint %}
+                        <td class="classe-td">{{ level.sorceryPoint }}</td>
+                    {% else %}
+                        <td class="classe-td">-</td>
+                    {% endif %}
+                {% endif %}
+
+                <td class="classe-td skills">
+                    {% for skill in level.skills %}
+                        {% if skill.optional == false %}
+                            {{ skill.name }} 
+                            {% if skill.part %}
+                                {{ skill.part }}
+                            {% endif %}
+                        {% elseif skill.optional == true %}
+                            <i>{{ skill.name }} (Facultatif)</i> 
+                            {% if skill.part %}
+                                {{ skill.part }}
+                            {% endif %}
+                        {% endif %}
+                        {{ not loop.last ? ',' }}
+                    {% endfor %}
+                </td>
+
+                {% if classe.rage == true %}
+                    <td class="classe-td">{{ level.rage }}</td>
+                {% endif %}
+                {% if classe.damage == true %}
+                    <td class="classe-td">+{{ level.damage }}</td>
+                {% endif %}
+                {% if classe.cantrip == true %}
+                    <td class="classe-td">{{ level.cantrip }}</td>
+                {% endif %}
+                {% if classe.knowingSpells == true %}
+                    <td class="classe-td">{{ level.knowingSpells }}</td>
+                {% endif %}
+                {% if classe.spell == true %}
+                    <td class="classe-td">{{ level.spellOne }}</td>
+                    {% if level.spellTwo %}
+                        <td class="classe-td">{{ level.spellTwo }}</td>
+                    {% else %}
+                        <td class="classe-td">-</td>
+                    {%  endif %}
+                    {% if level.spellThree %}
+                        <td class="classe-td">{{ level.spellThree }}</td>
+                    {% else %}
+                        <td class="classe-td">-</td>
+                    {%  endif %}
+                    {% if level.spellFour %}
+                        <td class="classe-td">{{ level.spellFour }}</td>
+                    {% else %}
+                        <td class="classe-td">-</td>
+                    {%  endif %}
+                    {% if level.spellFive %}
+                        <td class="classe-td">{{ level.spellFive }}</td>
+                    {% else %}
+                        <td class="classe-td">-</td>
+                    {%  endif %}
+                    {% if level.spellSix %}
+                        <td class="classe-td">{{ level.spellSix }}</td>
+                    {% else %}
+                        <td class="classe-td">-</td>
+                    {%  endif %}
+                    {% if level.spellSeven %}
+                        <td class="classe-td">{{ level.spellSeven }}</td>
+                    {% else %}
+                        <td class="classe-td">-</td>
+                    {%  endif %}
+                    {% if level.spellEight %}
+                        <td class="classe-td">{{ level.spellEight }}</td>
+                    {% else %}
+                        <td class="classe-td">-</td>
+                    {%  endif %}
+                    {% if level.spellNine %}
+                        <td class="classe-td">{{ level.spellNine }}</td>
+                    {% else %}
+                        <td class="classe-td">-</td>
+                    {%  endif %}
+                {% endif %}
+
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
