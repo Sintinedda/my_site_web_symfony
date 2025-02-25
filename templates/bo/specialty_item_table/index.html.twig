@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SpecialtyItemTable index{% endblock %}
+
+{% block body %}
+    <h1>SpecialtyItemTable index</h1>
+    <a href="{{ path('app_specialty_item_table_new') }}">Create new</a>
+    <br/><br/><br/>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Th1</th>
+                <th>Th2</th>
+                <th>Tr1_td1</th>
+                <th>Tr1_td2</th>
+                <th>Tr2_td1</th>
+                <th>Tr2_td2</th>
+                <th>Tr3_td1</th>
+                <th>Tr3_td2</th>
+                <th>Tr4_td1</th>
+                <th>Tr4_td2</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for specialty_item_table in specialty_item_tables %}
+            <tr>
+                <td>{{ specialty_item_table.id }}</td>
+                <td>{{ specialty_item_table.name }}</td>
+                <td>{{ specialty_item_table.th1 }}</td>
+                <td>{{ specialty_item_table.th2 }}</td>
+                <td>{{ specialty_item_table.tr1Td1 }}</td>
+                <td>{{ specialty_item_table.tr1Td2 }}</td>
+                <td>{{ specialty_item_table.tr2Td1 }}</td>
+                <td>{{ specialty_item_table.tr2Td2 }}</td>
+                <td>{{ specialty_item_table.tr3Td1 }}</td>
+                <td>{{ specialty_item_table.tr3Td2 }}</td>
+                <td>{{ specialty_item_table.tr4Td1 }}</td>
+                <td>{{ specialty_item_table.tr4Td2 }}</td>
+                <td>
+                    <a href="{{ path('app_specialty_item_table_show', {'id': specialty_item_table.id}) }}">show</a>
+                    <a href="{{ path('app_specialty_item_table_edit', {'id': specialty_item_table.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="13">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

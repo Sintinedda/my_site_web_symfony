@@ -34,6 +34,9 @@ class IncantationType extends AbstractType
             ->add('descr_three1', TextareaType::class, [
                 'required' => false
             ])
+            ->add('descr_three2', TextareaType::class, [
+                'required' => false
+            ])
             ->add('title4', TextType::class)
             ->add('descr_four1', TextareaType::class)
             ->add('capacity', ChoiceType::class, [
@@ -45,8 +48,12 @@ class IncantationType extends AbstractType
             ])
             ->add('title5', TextType::class)
             ->add('descr_five1', TextareaType::class)
-            ->add('title6', TextType::class)
-            ->add('descr_six1', TextareaType::class)
+            ->add('title6', TextType::class, [
+                'required' =>false
+            ])
+            ->add('descr_six1', TextareaType::class, [
+                'required' =>false
+            ])
             ->add('classe', EntityType::class, [
                 'class' => Classe::class,
                 'choice_label' => 'name',

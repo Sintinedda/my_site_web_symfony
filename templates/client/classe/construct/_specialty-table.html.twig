@@ -1,0 +1,35 @@
+<table class="specialty-table">
+    <thead class="specialty-thead">
+        <tr class="specialty-tr">
+            <th class="specialty-th" colspan="2">{{ specialty.specialtyItemTable.name }}</th>
+        </tr>
+        <tr class="specialty-tr">
+            <th class="specialty-th">{{ specialty.specialtyItemTable.th1 }}</th>
+            <th class="specialty-th">{{ specialty.specialtyItemTable.th2 }}</th>
+        </tr>
+    </thead>
+    <tbody class="specialty-tbody">
+        <tr class="specialty-tr">
+            <td class="specialty-td">{{ specialty.specialtyItemTable.tr1Td1 }}</td>
+            <td class="specialty-td">{{ specialty.specialtyItemTable.tr1Td2|raw }}</td>
+        </tr>
+        {% if specialty.specialtyItemTable.tr2Td1 %}
+            <tr class="specialty-tr">
+                <td class="specialty-td">{{ specialty.specialtyItemTable.tr2Td1 }}</td>
+                <td class="specialty-td">{{ specialty.specialtyItemTable.tr2Td2|raw }}</td>
+            </tr>
+        {% endif %}
+        {% if specialty.specialtyItemTable.tr3Td1 %}
+            <tr class="specialty-tr">
+                <td class="specialty-td">{{ specialty.specialtyItemTable.tr3Td1 }}</td>
+                <td class="specialty-td">{{ specialty.specialtyItemTable.tr3Td2|raw }}</td>
+            </tr>
+        {% endif %}
+        {% if specialty.specialtyItemTable.tr4Td1 %}
+            <tr class="specialty-tr">
+                <td class="specialty-td">{{ specialty.specialtyItemTable.tr4Td1 }}</td>
+                <td class="specialty-td">{{ specialty.specialtyItemTable.tr4Td2|raw }}</td>
+            </tr>
+        {% endif %}
+    </tbody>
+</table>

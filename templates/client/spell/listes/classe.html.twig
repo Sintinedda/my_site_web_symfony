@@ -25,9 +25,9 @@
         <tbody>
             {% for sort in sorts %}
                 <tr>
-                    <td><a href="{{ path('app_view_spell_show', { 'slug': sort.nameFr }) }}">{{ sort.nameFr }}</a></td>
+                    <td><a href="{{ path('app_view_spell_show', { 'slug': sort.slug }) }}">{{ sort.nameFr }}</a></td>
                     <td>{{ sort.level }}</td>
-                    <td>{{ sort.school }}</td>
+                    <td>{{ sort.school.name }}</td>
                     <td>{{ sort.castingTime|length > 10 ? sort.castingTime|slice(0, 10) ~ '...' : sort.castingTime }}</td>
                     <td>{{ sort.rangeEffect }}</td>
                     <td>{{ sort.components }}</td>

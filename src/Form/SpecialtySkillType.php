@@ -30,9 +30,15 @@ class SpecialtySkillType extends AbstractType
             ->add('descr5', TextareaType::class, [
                 'required' => false
             ])
+            ->add('descr6', TextareaType::class, [
+                'required' => false
+            ])
+            ->add('descr7', TextareaType::class, [
+                'required' => false
+            ])
             ->add('specialty', EntityType::class, [
                 'class' => SpecialtyItem::class,
-                'choice_label' => 'name',
+                'choice_label' => 'slug',
             ])
         ;
     }

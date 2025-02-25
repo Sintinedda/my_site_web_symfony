@@ -1,12 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Listes des sorts de l'école {{ school }}{% endblock %}
+{% block title %}Listes des sorts de l'école {{ school.name }}{% endblock %}
 
 {% block body_id 'spell-list-school' %}
 
 {% block main %}
 
-    <h1>Listes des sorts de l'école {{ school }}</h1>
+    <h1>Listes des sorts de l'école {{ school.name }}</h1>
 
     <table>
         <thead>
@@ -24,7 +24,7 @@
         <tbody>
             {% for sort in sorts %}
                 <tr>
-                    <td><a href="{{ path('app_view_spell_show', { 'slug': sort.nameFr }) }}">{{ sort.nameFr }}</a></td>
+                    <td><a href="{{ path('app_view_spell_show', { 'slug': sort.slug }) }}">{{ sort.nameFr }}</a></td>
                     <td>{{ sort.level }}</td>
                     <td>{{ sort.castingTime|length > 10 ? sort.castingTime|slice(0, 10) ~ '...' : sort.castingTime }}</td>
                     <td>{{ sort.rangeEffect }}</td>

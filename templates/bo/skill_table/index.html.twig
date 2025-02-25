@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SkillTable index{% endblock %}
+
+{% block body %}
+    <h1>SkillTable index</h1>
+    <a href="{{ path('app_skill_table_new') }}">Create new</a>
+    <br/><br/><br/>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Th1</th>
+                <th>Th2</th>
+                <th>Th3</th>
+                <th>Th4</th>
+                <th>Tr1_td1</th>
+                <th>Tr1_td2</th>
+                <th>Tr2_td1</th>
+                <th>Tr2_td2</th>
+                <th>Tr1_td3</th>
+                <th>Tr1_td4</th>
+                <th>Tr2_td3</th>
+                <th>Tr2_td4</th>
+                <th>Tr3_td1</th>
+                <th>Tr3_td2</th>
+                <th>Tr3_td3</th>
+                <th>Tr3_td4</th>
+                <th>Tr4_td1</th>
+                <th>Tr4_td2</th>
+                <th>Tr4_td3</th>
+                <th>Tr4_td4</th>
+                <th>Tr5_td1</th>
+                <th>Tr5_td2</th>
+                <th>Tr5_td3</th>
+                <th>Tr5_td4</th>
+                <th>Start</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for skill_table in skill_tables %}
+            <tr>
+                <td>{{ skill_table.id }}</td>
+                <td>{{ skill_table.name }}</td>
+                <td>{{ skill_table.th1 }}</td>
+                <td>{{ skill_table.th2 }}</td>
+                <td>{{ skill_table.th3 }}</td>
+                <td>{{ skill_table.th4 }}</td>
+                <td>{{ skill_table.tr1Td1 }}</td>
+                <td>{{ skill_table.tr1Td2 }}</td>
+                <td>{{ skill_table.tr2Td1 }}</td>
+                <td>{{ skill_table.tr2Td2 }}</td>
+                <td>{{ skill_table.tr1Td3 }}</td>
+                <td>{{ skill_table.tr1Td4 }}</td>
+                <td>{{ skill_table.tr2Td3 }}</td>
+                <td>{{ skill_table.tr2Td4 }}</td>
+                <td>{{ skill_table.tr3Td1 }}</td>
+                <td>{{ skill_table.tr3Td2 }}</td>
+                <td>{{ skill_table.tr3Td3 }}</td>
+                <td>{{ skill_table.tr3Td4 }}</td>
+                <td>{{ skill_table.tr4Td1 }}</td>
+                <td>{{ skill_table.tr4Td2 }}</td>
+                <td>{{ skill_table.tr4Td3 }}</td>
+                <td>{{ skill_table.tr4Td4 }}</td>
+                <td>{{ skill_table.tr5Td1 }}</td>
+                <td>{{ skill_table.tr5Td2 }}</td>
+                <td>{{ skill_table.tr5Td3 }}</td>
+                <td>{{ skill_table.tr5Td4 }}</td>
+                <td>{{ skill_table.start ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('app_skill_table_show', {'id': skill_table.id}) }}">show</a>
+                    <a href="{{ path('app_skill_table_edit', {'id': skill_table.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="28">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

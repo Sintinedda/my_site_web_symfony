@@ -59,11 +59,14 @@ class Incantation
     #[ORM\Column(length: 1020)]
     private ?string $descr_five1 = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
     private ?string $title6 = null;
 
-    #[ORM\Column(length: 1020)]
+    #[ORM\Column(length: 1020, nullable: true)]
     private ?string $descr_six1 = null;
+
+    #[ORM\Column(length: 1020, nullable: true)]
+    private ?string $descr_three2 = null;
 
     public function getId(): ?int
     {
@@ -255,7 +258,7 @@ class Incantation
         return $this->title6;
     }
 
-    public function setTitle6(string $title6): static
+    public function setTitle6(?string $title6): static
     {
         $this->title6 = $title6;
 
@@ -267,9 +270,21 @@ class Incantation
         return $this->descr_six1;
     }
 
-    public function setDescrSix1(string $descr_six1): static
+    public function setDescrSix1(?string $descr_six1): static
     {
         $this->descr_six1 = $descr_six1;
+
+        return $this;
+    }
+
+    public function getDescrThree2(): ?string
+    {
+        return $this->descr_three2;
+    }
+
+    public function setDescrThree2(?string $descr_three2): static
+    {
+        $this->descr_three2 = $descr_three2;
 
         return $this;
     }

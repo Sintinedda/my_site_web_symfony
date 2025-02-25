@@ -16,15 +16,33 @@ class SpecialtyItemType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->add('part', TextType::class, [
+                'required' => false
+            ])
+            ->add('part2', TextType::class, [
+                'required' => false
+            ])
             ->add('name', TextType::class)
+            ->add('slug',TextType::class)
             ->add('source', TextType::class)
             ->add('descr1', TextareaType::class)
             ->add('descr2', TextareaType::class, [
                 'required' => false
             ])
+            ->add('descr3', TextareaType::class, [
+                'required' => false
+            ])
+            ->add('descr4', TextareaType::class, [
+                'required' => false
+            ])
+            ->add('descr5', TextareaType::class, [
+                'required' => false
+            ])
+            ->add('ua')
             ->add('specialty', EntityType::class, [
                 'class' => Specialty::class,
                 'choice_label' => 'name',
+                'multiple' => true
             ])
         ;
     }

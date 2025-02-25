@@ -54,6 +54,24 @@ class Skill
     #[ORM\Column(length: 1024, nullable: true)]
     private ?string $descr10 = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $level = null;
+
+    #[ORM\Column]
+    private ?bool $optional = null;
+
+    #[ORM\Column]
+    private ?bool $show_descr = null;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $part = null;
+
+    #[ORM\OneToOne(mappedBy: 'skill', cascade: ['persist', 'remove'])]
+    private ?SubSkill $subSkill = null;
+
+    #[ORM\OneToOne(mappedBy: 'skill', cascade: ['persist', 'remove'])]
+    private ?SkillTable $skillTable = null;
+
     public function __construct()
     {
         $this->classe = new ArrayCollection();
@@ -216,6 +234,93 @@ class Skill
     public function setDescr10(?string $descr10): static
     {
         $this->descr10 = $descr10;
+
+        return $this;
+    }
+
+    public function getLevel(): ?int
+    {
+        return $this->level;
+    }
+
+    public function setLevel(?int $level): static
+    {
+        $this->level = $level;
+
+        return $this;
+    }
+
+    public function isOptional(): ?bool
+    {
+        return $this->optional;
+    }
+
+    public function setOptional(bool $optional): static
+    {
+        $this->optional = $optional;
+
+        return $this;
+    }
+
+    public function isShowDescr(): ?bool
+    {
+        return $this->show_descr;
+    }
+
+    public function setShowDescr(bool $show_descr): static
+    {
+        $this->show_descr = $show_descr;
+
+        return $this;
+    }
+
+    public function getPart(): ?string
+    {
+        return $this->part;
+    }
+
+    public function setPart(?string $part): static
+    {
+        $this->part = $part;
+
+        return $this;
+    }
+
+    public function getSubSkill(): ?SubSkill
+    {
+        return $this->subSkill;
+    }
+
+    public function setSubSkill(SubSkill $subSkill): static
+    {
+        // set the owning side of the relation if necessary
+        if ($subSkill->getSkill() !== $this) {
+            $subSkill->setSkill($this);
+        }
+
+        $this->subSkill = $subSkill;
+
+        return $this;
+    }
+
+    public function getSkillTable(): ?SkillTable
+    {
+        return $this->skillTable;
+    }
+
+    public function setSkillTable(?SkillTable $skillTable): static
+    {
+        // unset the owning side of the relation if necessary
+        if ($skillTable === null && $this->skillTable !== null) {
+            $this->skillTable->setSkill(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($skillTable !== null && $skillTable->getSkill() !== $this) {
+            $skillTable->setSkill($this);
+        }
+
+        $this->skillTable = $skillTable;
 
         return $this;
     }

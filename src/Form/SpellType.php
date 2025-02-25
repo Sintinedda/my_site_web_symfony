@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Classe;
 use App\Entity\Spell;
+use App\Entity\SpellSchool;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -19,19 +20,14 @@ class SpellType extends AbstractType
     {
         $builder
             ->add('name_fr', TextType::class)
+            ->add('slug', TextType::class)
             ->add('name_eng', TextType::class)
             ->add('level', IntegerType::class)
-            ->add('school', ChoiceType::class, [
-                'choices' => [
-                    'Abjuration' => 'abjuration',
-                    'Divination' => 'divination',
-                    'Enchantement' => 'enchantement',
-                    'Évocation' => 'évocation',
-                    'Illusion' => 'illusion',
-                    'Nécromancie' => 'nécromancie',
-                    'Transmutation' => 'transmutation'
-                ]
+            ->add('school', EntityType::class, [
+                'class' => SpellSchool::class,
+                'choice_label' => 'name'
             ])
+            ->add('ritual')
             ->add('casting_time', TextType::class)
             ->add('range_effect', TextType::class)
             ->add('components', ChoiceType::class, [
@@ -48,6 +44,7 @@ class SpellType extends AbstractType
             ->add('components_ingredients', TextType::class, [
                 'required' => false
             ])
+            ->add('concentration')
             ->add('duration', TextType::class)
             ->add('descr1', TextareaType::class)
             ->add('descr2', TextareaType::class, [
@@ -81,8 +78,6 @@ class SpellType extends AbstractType
                 'required' =>false
             ])
             ->add('source', TextType::class)
-            ->add('ritual')
-            ->add('concentration')
             ->add('classes', EntityType::class, [
                 'class' => Classe::class,
                 'choice_label' => 'name',

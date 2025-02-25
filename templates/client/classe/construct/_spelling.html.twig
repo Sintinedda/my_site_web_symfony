@@ -18,6 +18,9 @@
         <div class="classe-skill-subdiv">
             <h4 class="classe-skill-subtitle">{{ classe.incantation.title3 }}</h4>
             <p class="classe-skill-descr">{{ classe.incantation.descrThree1|raw }}</p>
+            {% if classe.incantation.descrThree2 %}
+                <p class="classe-skill-descr">{{ classe.incantation.descrThree2|raw }}</p>
+            {% endif %}
         </div>
     {% endif %}
     <div class="classe-skill-subdiv">
@@ -32,8 +35,10 @@
         <h4 class="classe-skill-subtitle">{{ classe.incantation.title5 }}</h4>
         <p class="classe-skill-descr">{{ classe.incantation.descrFive1|raw }}</p>
     </div>
-    <div class="classe-skill-subdiv">
-        <h4 class="classe-skill-subtitle">{{ classe.incantation.title6 }}</h4>
-        <p class="classe-skill-descr">{{ classe.incantation.descrSix1|raw }}</p>
-    </div>
+    {% if classe.incantation.title6 %}
+        <div class="classe-skill-subdiv">
+            <h4 class="classe-skill-subtitle">{{ classe.incantation.title6 }}</h4>
+            <p class="classe-skill-descr">{{ classe.incantation.descrSix1|raw }}</p>
+        </div>
+    {% endif %}
 {% endif %}

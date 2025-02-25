@@ -1,0 +1,46 @@
+{% set _route = app.request.get('_route') %}
+
+<div class="nav-container">
+    <div class="nav-logo">
+        <img class="nav-img" src="{{ asset('assets/img/logo.jpg') }}" alt="D enflammé"/>
+    </div>
+    <div class="nav-menu">
+        <button class="nav-menu-btn" onclick="showMenu('menu')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M3 18v-2h18v2zm0-5v-2h18v2zm0-5V6h18v2z"/>
+            </svg>
+        </button> 
+        <ul class="nav-menu-list" id="menu">
+            <li class="nav-menu-item">
+                <button class="nav-menu-item-btn" onclick="showSubmenu('menu-classes', 'nav-menu-item-list', 'nav-menu-items-list')">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-square-fill" viewBox="0 0 16 16">
+                        <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm6.5 4.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5a.5.5 0 0 1 1 0"/>
+                    </svg>
+                </button>
+                
+                {% include 'client/nav/construct/_classe.html.twig' %}
+
+            </li>
+            <li class="nav-menu-item">
+                <button class="nav-menu-item-btn" onclick="showSubmenu('menu-races', 'nav-menu-item-list', 'nav-menu-items-list')">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-square-fill" viewBox="0 0 16 16">
+                        <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm6.5 4.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5a.5.5 0 0 1 1 0"/>
+                    </svg>
+                </button>
+                
+                {% include 'client/nav/construct/_race.html.twig' %}
+
+            </li>
+            <li class="nav-menu-item">
+                <button class="nav-menu-item-btn" onclick="showSubmenu('menu-spells', 'nav-menu-item-list', 'nav-menu-items-list')">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-square-fill" viewBox="0 0 16 16">
+                        <path d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm6.5 4.5v5.793l2.146-2.147a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 1 1 .708-.708L7.5 10.293V4.5a.5.5 0 0 1 1 0"/>
+                    </svg>
+                </button>
+                
+                {% include 'client/nav/construct/_spell.html.twig' %}
+
+            </li>
+        </ul>
+    </div>
+</div>

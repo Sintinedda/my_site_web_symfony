@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit StatBlockSkill{% endblock %}
+
+{% block body %}
+    <h1>Edit StatBlockSkill</h1>
+
+    {{ include('bo/stat_block_skill/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_stat_block_skill_index') }}">back to list</a>
+
+    {{ include('bo/stat_block_skill/_delete_form.html.twig') }}
+{% endblock %}

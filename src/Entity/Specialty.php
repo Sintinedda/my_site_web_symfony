@@ -27,7 +27,7 @@ class Specialty
     /**
      * @var Collection<int, SpecialtyItem>
      */
-    #[ORM\OneToMany(targetEntity: SpecialtyItem::class, mappedBy: 'specialty')]
+    #[ORM\ManyToMany(targetEntity: SpecialtyItem::class, mappedBy: 'specialty')]
     private Collection $specialtyItems;
 
     public function __construct()
@@ -97,10 +97,7 @@ class Specialty
     public function removeSpecialtyItem(SpecialtyItem $specialtyItem): static
     {
         if ($this->specialtyItems->removeElement($specialtyItem)) {
-            // set the owning side to null (unless already changed)
-            if ($specialtyItem->getSpecialty() === $this) {
-                $specialtyItem->setSpecialty(null);
-            }
+            $specialtyItem->removeSpecialty($this);
         }
 
         return $this;
