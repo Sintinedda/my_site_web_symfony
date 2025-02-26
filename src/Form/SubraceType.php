@@ -17,6 +17,7 @@ class SubraceType extends AbstractType
     {
         $builder
             ->add('name', TextType::class)
+            ->add('slug', TextType::class)
             ->add('book', TextType::class, [
                 'required' => false
             ])

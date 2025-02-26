@@ -32,7 +32,8 @@
         <p class="race-talent-description">{{ talent.descr10|raw }}</p>
     {% endif %}
 
-    {# dragonborn #}
-    {% include 'client/race/dragonborn/_subrace-talent.html.twig' %}
+    {% if talent.talentTable %}
+        {% include 'client/race/construct/_talent-table.html.twig' %}
+    {% endif %}
 
 {% endfor %}

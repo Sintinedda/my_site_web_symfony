@@ -2,30 +2,41 @@
 
 {% block title %}Liste des races{% endblock %}
 
+{% block stylesheets %}
+    {{ parent () }}
+    <link href="{{ asset('assets/css/race/list.css') }}" rel="stylesheet"/>
+{% endblock %}
+
 {% block body_id 'race-list' %}
 
 {% block main %}
 
     <h1 class="races-title">Liste des races</h1>
-    <ul>
-        <li>Communes
-            <ul>
-                {% for common in commons %}
-                    <li><a href="{{ path('app_view_race_show', { 'slug': common.slug }) }}">{{ common.name }}</a></li>
+    <ul class="races-liste">
+        <li class="races-liste-item">Communes
+            <ul class="races-listes">
+                {% for common in commons|sort((a, b) => a.slug <=> b.slug) %}
+                    <li class="races-listes-item">
+                        <a class="races-listes-link" href="{{ path('app_view_race_show', { 'slug': common.slug }) }}">{{ common.name }}</a>
+                    </li>
                 {% endfor %}
             </ul>
         </li>
-        <li>Exotiques
-            <ul>
-                {% for exotic in exotics %}
-                    <li><a href="{{ path('app_view_race_show', { 'slug': exotic.slug }) }}">{{ exotic.name }}</a></li>
+        <li class="races-liste-item">Exotiques
+            <ul class="races-listes">
+                {% for exotic in exotics|sort((a, b) => a.slug <=> b.slug) %}
+                    <li class="races-listes-item">
+                        <a class="races-listes-link" href="{{ path('app_view_race_show', { 'slug': exotic.slug }) }}">{{ exotic.name }}</a>
+                    </li>
                 {% endfor %}
             </ul>
         </li>
-        <li>Monstrueuses
-            <ul>
-                {% for monstruou in monstruous %}
-                    <li><a href="{{ path('app_view_race_show', { 'slug': monstruou.slug }) }}">{{ monstruou.name }}</a></li>
+        <li class="races-liste-item">Monstrueuses
+            <ul class="races-listes">
+                {% for monstruou in monstruous|sort((a, b) => a.slug <=> b.slug) %}
+                    <li class="races-listes-item">
+                        <a class="races-listes-link" href="{{ path('app_view_race_show', { 'slug': monstruou.slug }) }}">{{ monstruou.name }}</a>
+                    </li>
                 {% endfor %}
             </ul>
         </li>

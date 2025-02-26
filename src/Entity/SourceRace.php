@@ -73,6 +73,9 @@ class SourceRace
     #[ORM\ManyToMany(targetEntity: Talent::class, mappedBy: 'race')]
     private Collection $talent;
 
+    #[ORM\Column(length: 255)]
+    private ?string $slug = null;
+
     public function __construct()
     {
         $this->subraces = new ArrayCollection();
@@ -317,6 +320,18 @@ class SourceRace
         if ($this->talent->removeElement($talent)) {
             $talent->removeRace($this);
         }
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): static
+    {
+        $this->slug = $slug;
 
         return $this;
     }

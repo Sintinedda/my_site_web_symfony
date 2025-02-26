@@ -1,6 +1,6 @@
-|raw{# sourceRace #}
+{# sourceRace #}
 {% for source in race.sourceRaces %}
-    <h2 class="race-source-title">{{ source.name }}</h2>
+    <h2 class="race-source-title" id="{{ source.slug }}">{{ source.name }}</h2>
 
     {# sourceRace items #}
     {% if source.descr1 %}
