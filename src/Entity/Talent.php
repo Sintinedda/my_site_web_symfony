@@ -60,6 +60,9 @@ class Talent
     #[ORM\ManyToMany(targetEntity: SourceRace::class, inversedBy: 'talent')]
     private Collection $race;
 
+    #[ORM\OneToOne(mappedBy: 'talent', cascade: ['persist', 'remove'])]
+    private ?TalentTable $talentTable = null;
+
     public function __construct()
     {
         $this->subrace = new ArrayCollection();
@@ -247,6 +250,28 @@ class Talent
     public function removeRace(SourceRace $race): static
     {
         $this->race->removeElement($race);
+
+        return $this;
+    }
+
+    public function getTalentTable(): ?TalentTable
+    {
+        return $this->talentTable;
+    }
+
+    public function setTalentTable(?TalentTable $talentTable): static
+    {
+        // unset the owning side of the relation if necessary
+        if ($talentTable === null && $this->talentTable !== null) {
+            $this->talentTable->setTalent(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($talentTable !== null && $talentTable->getTalent() !== $this) {
+            $talentTable->setTalent($this);
+        }
+
+        $this->talentTable = $talentTable;
 
         return $this;
     }

@@ -2,12 +2,37 @@
 
 {% block title %}{{ race.name }}{% endblock %}
 
+{% block stylesheets %}
+    {{ parent () }}
+    <link href="{{ asset('assets/css/race/show.css') }}" rel="stylesheet"/>
+{% endblock %}
+
 {% block body_id 'race-item' %}
 
 {% block main %}
 
     <h1 class="race-title">{{ race.name }}</h1>
 
-    {% include 'client/race/construct/_source.html.twig' %}
-
+    <div class="race-summary">
+        <p class="race-summary-title">Sommaire</p>
+        <ul class="race-summary-liste">
+            {% for source in race.sourceRaces %}
+                <li class="race-summary-liste-item">
+                    <a class="race-summary-liste-link" href="#{{ source.slug }}">{{ source.name }}</a>
+                    {% if source.subraces|length >= 1 %}
+                        <ul class="race-summary-listes">
+                            {% for subrace in source.subraces %}
+                                <li class="race-summary-listes-item">
+                                    <a class="race-summary-listes-link" href="#{{ source.slug }}-{{ subrace.slug }}">{{ subrace.name }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="container">
+        {% include 'client/race/construct/_source.html.twig' %}
+    </div>
 {% endblock %}

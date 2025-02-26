@@ -17,6 +17,7 @@ class SourceRaceType extends AbstractType
     {
         $builder
             ->add('name', TextType::class)
+            ->add('slug', TextType::class)
             ->add('source', TextType::class, [
                 'required' => false
             ])

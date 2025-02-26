@@ -1,48 +1,50 @@
 {# subrace #}
-{% for subrace in source.subraces %}
-    <h3 class="race-subrace-title">{{ subrace.name }}</h3>
+<div class="race-subrace">
+    {% for subrace in source.subraces %}
+        <h3 class="race-subrace-title" id="{{ source.slug }}-{{ subrace.slug }}">{{ subrace.name }}</h3>
 
-    {# subrace items #}
-    {% if subrace.book %}
-        <p class="race-book">Source : {{ subrace.book }}</p>
-    {% endif %}
-    {% if subrace.descr1 %}
-        <p class="race-description">{{ subrace.descr1|raw }}
-    {% endif %}
-    {% if subrace.descr2 %}
-        <p class="race-description">{{ subrace.descr2|raw }}
-    {% endif %}
-    {% if subrace.descr3 %}
-        <p class="race-description">{{ subrace.descr3|raw }}
-    {% endif %}
-    {% if subrace.descr4 %}
-        <p class="race-description">{{ subrace.descr4|raw }}
-    {% endif %}
-    {% if subrace.descr5 %}
-        <p class="race-description">{{ subrace.descr5|raw }}
-    {% endif %}
-    {% if subrace.abilityInc %}
-        <p class="race-item"><b>Amélioration de score de capacité : </b>{{ subrace.abilityInc }}</p>
-    {% endif %}
-    {% if subrace.type %}
-        <p class="race-item"><b>Type : </b>{{ subrace.type }}</p>
-    {% endif %}
-    {% if subrace.age %}
-        <p class="race-item"><b>Âge : </b>{{ subrace.age }}</p>
-    {% endif %}
-    {% if subrace.alignment %}
-        <p class="race-item"><b>Alignement : </b>{{ subrace.alignment }}</p>
-    {% endif %}
-    {% if subrace.size %}
-        <p class="race-item"><b>Taille : </b>{{ subrace.size }}</p>
-    {% endif %}
-    {% if subrace.speed %}
-        <p class="race-item"><b>Vitesse : </b>{{ subrace.speed }}</p>
-    {% endif %}
-    {% if subrace.language %}
-        <p class="race-item"><b>Languages : </b>{{ subrace.language }}</p>
-    {% endif %}
-    
-    {% include 'client/race/construct/_subrace-talent.html.twig' %}
+        {# subrace items #}
+        {% if subrace.book %}
+            <p class="race-book">Source : {{ subrace.book }}</p>
+        {% endif %}
+        {% if subrace.descr1 %}
+            <p class="race-description">{{ subrace.descr1|raw }}
+        {% endif %}
+        {% if subrace.descr2 %}
+            <p class="race-description">{{ subrace.descr2|raw }}
+        {% endif %}
+        {% if subrace.descr3 %}
+            <p class="race-description">{{ subrace.descr3|raw }}
+        {% endif %}
+        {% if subrace.descr4 %}
+            <p class="race-description">{{ subrace.descr4|raw }}
+        {% endif %}
+        {% if subrace.descr5 %}
+            <p class="race-description">{{ subrace.descr5|raw }}
+        {% endif %}
+        {% if subrace.abilityInc %}
+            <p class="race-item"><b>Amélioration de score de capacité : </b>{{ subrace.abilityInc }}</p>
+        {% endif %}
+        {% if subrace.type %}
+            <p class="race-item"><b>Type : </b>{{ subrace.type }}</p>
+        {% endif %}
+        {% if subrace.age %}
+            <p class="race-item"><b>Âge : </b>{{ subrace.age }}</p>
+        {% endif %}
+        {% if subrace.alignment %}
+            <p class="race-item"><b>Alignement : </b>{{ subrace.alignment }}</p>
+        {% endif %}
+        {% if subrace.size %}
+            <p class="race-item"><b>Taille : </b>{{ subrace.size }}</p>
+        {% endif %}
+        {% if subrace.speed %}
+            <p class="race-item"><b>Vitesse : </b>{{ subrace.speed }}</p>
+        {% endif %}
+        {% if subrace.language %}
+            <p class="race-item"><b>Languages : </b>{{ subrace.language }}</p>
+        {% endif %}
+        
+        {% include 'client/race/construct/_subrace-talent.html.twig' %}
 
-{% endfor %}
+    {% endfor %}
+</div>

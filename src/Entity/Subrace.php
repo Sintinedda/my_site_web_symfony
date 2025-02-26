@@ -67,6 +67,9 @@ class Subrace
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $book = null;
 
+    #[ORM\Column(length: 255)]
+    private ?string $slug = null;
+
     public function __construct()
     {
         $this->talent = new ArrayCollection();
@@ -280,6 +283,18 @@ class Subrace
     public function setBook(?string $book): static
     {
         $this->book = $book;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): static
+    {
+        $this->slug = $slug;
 
         return $this;
     }
