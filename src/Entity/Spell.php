@@ -94,6 +94,9 @@ class Spell
     #[ORM\ManyToOne(inversedBy: 'spells')]
     private ?SpellSchool $school = null;
 
+    #[ORM\Column(length: 500)]
+    private ?string $short_descr = null;
+
     public function __construct()
     {
         $this->classes = new ArrayCollection();
@@ -412,6 +415,18 @@ class Spell
     public function setSchool(?SpellSchool $school): static
     {
         $this->school = $school;
+
+        return $this;
+    }
+
+    public function getShortDescr(): ?string
+    {
+        return $this->short_descr;
+    }
+
+    public function setShortDescr(string $short_descr): static
+    {
+        $this->short_descr = $short_descr;
 
         return $this;
     }

@@ -2,67 +2,75 @@
 
 {% block title %}{{ sort.nameFr }}{% endblock %}
 
+{% block stylesheets %}
+    {{ parent () }}
+    <link href="{{ asset('assets/css/spell/show.css') }}" rel="stylesheet"/>
+{% endblock %}
+
 {% block body_id 'spell-item' %}
 
 {% block main %}
 
-    <h1>{{ sort.nameFr }}</h1>
-
-    <p>[ {{ sort.nameEng }} ]</p>
-    <p><i>niveau {{ sort.level }} - {{ sort.school.name }} 
-        {% if sort.ritual == true %}
-            (rituel)
+    <div class="container spell-container">
+        <h1 class="spell-name">{{ sort.nameFr }}</h1>
+        <p>[ {{ sort.nameEng }} ]</p>
+        <p><i>niveau {{ sort.level }} - {{ sort.school.name }} 
+            {% if sort.ritual == true %}
+                (rituel)
+            {% endif %}
+        </i></p>
+        <div class="spell-items">
+            <p><b>Temps d'incantation : </b>{{ sort.castingTime }}</p>
+            <p><b>Portée : </b>{{ sort.rangeEffect }}</p>
+            <p><b>Composantes : </b>{{ sort.components }} 
+                {% if sort.componentsIngredients %}
+                    ({{ sort.componentsIngredients}})
+                {% endif %}
+            </p>
+            <p><b>Durée : </b>
+                {% if sort.concentration == true %}
+                    concentration, 
+                {% endif %}
+                {{ sort.duration }}
+            </p>
+        </div>
+        <p>{{ sort.descr1|raw }}</p>
+        {% if sort.descr2 %}
+            <p>{{ sort.descr2|raw }}</p>
         {% endif %}
-    </i></p>
-    <p><b>Temps d'incantation : </b>{{ sort.castingTime }}</p>
-    <p><b>Portée : </b>{{ sort.rangeEffect }}</p>
-    <p><b>Composantes : </b>{{ sort.components }} 
-        {% if sort.componentsIngredients %}
-            ({{ sort.componentsIngredients}})
+        {% if sort.descr3 %}
+            <p>{{ sort.descr3|raw }}</p>
         {% endif %}
-    </p>
-    <p><b>Durée : </b>
-        {% if sort.concentration == true %}
-            concentration, 
+        {% if sort.descr4 %}
+            <p>{{ sort.descr4|raw }}</p>
         {% endif %}
-        {{ sort.duration }}
-    </p>
-    <p>{{ sort.descr1|raw }}</p>
-    {% if sort.descr2 %}
-        <p>{{ sort.descr2|raw }}</p>
-    {% endif %}
-    {% if sort.descr3 %}
-        <p>{{ sort.descr3|raw }}</p>
-    {% endif %}
-    {% if sort.descr4 %}
-        <p>{{ sort.descr4|raw }}</p>
-    {% endif %}
-    {% if sort.descr5 %}
-        <p>{{ sort.descr5|raw }}</p>
-    {% endif %}
-    {% if sort.descr6 %}
-        <p>{{ sort.descr6|raw }}</p>
-    {% endif %}
-    {% if sort.descr7 %}
-        <p>{{ sort.descr7|raw }}</p>
-    {% endif %}
-    {% if sort.descr8 %}
-        <p>{{ sort.descr8|raw }}</p>
-    {% endif %}
-    {% if sort.descr9 %}
-        <p>{{ sort.descr9|raw }}</p>
-    {% endif %}
-    {% if sort.descr10 %}
-        <p>{{ sort.descr10|raw }}</p>
-    {% endif %}
-    {% if sort.upperLevel %}
-        <p><b><i>Aux niveaux supérieurs. </i></b>{{ sort.upperLevel|raw }}</p>
-    {% endif %}
-    <p>
-        {% for classe in sort.classes %}
-            <span>{{ classe.name }}</span>
-        {% endfor %}
-        <span>{{ sort.source }}</span>
-    </p>
+        {% if sort.descr5 %}
+            <p>{{ sort.descr5|raw }}</p>
+        {% endif %}
+        {% if sort.descr6 %}
+            <p>{{ sort.descr6|raw }}</p>
+        {% endif %}
+        {% if sort.descr7 %}
+            <p>{{ sort.descr7|raw }}</p>
+        {% endif %}
+        {% if sort.descr8 %}
+            <p>{{ sort.descr8|raw }}</p>
+        {% endif %}
+        {% if sort.descr9 %}
+            <p>{{ sort.descr9|raw }}</p>
+        {% endif %}
+        {% if sort.descr10 %}
+            <p>{{ sort.descr10|raw }}</p>
+        {% endif %}
+        {% if sort.upperLevel %}
+            <p><b><i>Aux niveaux supérieurs. </i></b>{{ sort.upperLevel|raw }}</p>
+        {% endif %}
+        <div class="spell-spans">
+            {% for classe in sort.classes %}
+                <p class="spell-classe"> {{ classe.name }} </p>
+            {% endfor %}
+            <p class="spell-source"> {{ sort.source }} </p>
+        </div>
+    </div>
 
 {% endblock %}

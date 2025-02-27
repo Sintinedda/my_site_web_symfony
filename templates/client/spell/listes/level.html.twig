@@ -2,47 +2,31 @@
 
 {% block title %}Listes des sorts du niveau {{ level }}{% endblock %}
 
+{% block stylesheets %}
+    {{ parent () }}
+    <link href="{{ asset('assets/css/spell/lists.css') }}" rel="stylesheet"/>
+{% endblock %}
+
 {% block body_id 'spell-list-level' %}
 
 {% block main %}
 
-    <h1>Listes des sorts du niveau {{ level }}</h1>
-
-    <table>
-        <thead>
-            <tr>
-                <th>Sort</th>
-                <th>École</th>
-                <th>Incantation</th>
-                <th>Portée</th>
-                <th>V, S, M</th>
-                <th>Concentration</th>
-                <th>Rituel</th>
-                <th>Source</th>
-            </tr>
-        </thead>
-        <tbody>
+    <h1>Listes des sorts 
+        {% if level == 0 %}
+            mineurs
+        {% else %}
+            de niveau {{ level }}
+        {% endif %}
+    </h1>
+    <div class="container">
+        <ul class="spells-liste">
             {% for sort in sorts|sort((a, b) => a.nameFr <=> b.nameFr) %}
-                <tr>
-                    <td><a href="{{ path('app_view_spell_show', { 'slug': sort.slug }) }}">{{ sort.nameFr }}</a></td>
-                    <td>{{ sort.school.name }}</td>
-                    <td>{{ sort.castingTime|length > 10 ? sort.castingTime|slice(0, 10) ~ '...' : sort.castingTime }}</td>
-                    <td>{{ sort.rangeEffect }}</td>
-                    <td>{{ sort.components }}</td>
-                    <td>
-                        {% if sort.concentration == true %}
-                            Concentration
-                        {% endif %}
-                    </td>
-                    <td>
-                        {% if sort.ritual == true %}
-                            Rituel
-                        {% endif %}
-                    </td>
-                    <td>{{ sort.source }}</td>
-                </tr>
+                <li>
+                    <a href="{{ path('app_view_spell_show', { 'slug': sort.slug }) }}">{{ sort.nameFr }}</a>
+                    : {{ sort.shortDescr }}
+                </li>
             {% endfor %}
-        </tbody>
-    </table>
+        </ul>
+    </div>
 
 {% endblock %}

@@ -2,49 +2,59 @@
 
 {% block title %}Listes des sorts{% endblock %}
 
+{% block stylesheets %}
+    {{ parent () }}
+    <link href="{{ asset('assets/css/spell/all.css') }}" rel="stylesheet"/>
+{% endblock %}
+
 {% block body_id 'spell-list' %}
 
 {% block main %}
 
     <h1>Listes des sorts</h1>
-
-    <table>
-        <thead>
-            <tr>
-                <th>Sort</th>
-                <th>Niv</th>
-                <th>École</th>
-                <th>Incantation</th>
-                <th>Portée</th>
-                <th>V, S, M</th>
-                <th>Concentration</th>
-                <th>Rituel</th>
-                <th>Source</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for sort in sorts|sort((a, b) => a.nameFr <=> b.nameFr) %}
+    <div class="container">
+        <table class="spells-table">
+            <thead>
                 <tr>
-                    <td><a href="{{ path('app_view_spell_show', { 'slug': sort.slug }) }}">{{ sort.nameFr }}</a></td>
-                    <td>{{ sort.level }}</td>
-                    <td>{{ sort.school.name }}</td>
-                    <td>{{ sort.castingTime|length > 10 ? sort.castingTime|slice(0, 10) ~ '...' : sort.castingTime }}</td>
-                    <td>{{ sort.rangeEffect }}</td>
-                    <td>{{ sort.components }}</td>
-                    <td>
-                        {% if sort.concentration == true %}
-                            Concentration
-                        {% endif %}
-                    </td>
-                    <td>
-                        {% if sort.ritual == true %}
-                            Rituel
-                        {% endif %}
-                    </td>
-                    <td>{{ sort.source }}</td>
+                    <th class="spells-table-name">Sort</th>
+                    <th class="spells-table-vo">VO</th>
+                    <th class="spells-table-lvl">Niv</th>
+                    <th class="spells-table-school">École</th>
+                    <th class="spells-table-spelling">Incantation</th>
+                    <th class="spells-table-range">Portée</th>
+                    <th class="spells-table-comp">V, S, M</th>
+                    <th class="spells-table-concentration">C</th>
+                    <th class="spells-table-ritual">R</th>
+                    <th class="spells-table-descr">Description</th>
+                    <th class="spells-table-source">Source</th>
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                {% for sort in sorts|sort((a, b) => a.nameFr <=> b.nameFr) %}
+                    <tr>
+                        <td class="spells-table-name"><a href="{{ path('app_view_spell_show', { 'slug': sort.slug }) }}">{{ sort.nameFr }}</a></td>
+                        <td class="spells-table-vo">{{ sort.nameEng }}</td>
+                        <td class="spells-table-lvl">{{ sort.level }}</td>
+                        <td class="spells-table-school">{{ sort.school.name }}</td>
+                        <td class="spells-table-spelling">{{ sort.castingTime|length > 10 ? sort.castingTime|slice(0, 10) ~ '...' : sort.castingTime }}</td>
+                        <td class="spells-table-range">{{ sort.rangeEffect|length > 11 ? sort.rangeEffect|slice(0, 11) ~ '...' : sort.rangeEffect  }}</td>
+                        <td class="spells-table-comp">{{ sort.components }}</td>
+                        <td class="spells-table-concentration">
+                            {% if sort.concentration == true %}
+                                C
+                            {% endif %}
+                        </td>
+                        <td class="spells-table-ritual">
+                            {% if sort.ritual == true %}
+                                R
+                            {% endif %}
+                        </td>
+                        <td class="spells-table-descr">{{ sort.shortDescr }}</td>
+                        <td class="spells-table-source">{{ sort.source }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 
 {% endblock %}

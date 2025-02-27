@@ -2,12 +2,20 @@
 
 {% block title %}Listes des sorts par classe{% endblock %}
 
+{% block stylesheets %}
+    {{ parent () }}
+    <link href="{{ asset('assets/css/spell/list.css') }}" rel="stylesheet"/>
+{% endblock %}
+
 {% block body_id 'spell-list-classe' %}
 
 {% block main %}
 
     <h1>Listes des sorts par classe</h1>
-
-    {% include 'client/spell/construct/listes/_classes.html.twig' %}
+    <div class="container">
+        <div class="spells-listes">
+            {% include 'client/spell/construct/listes/_classes.html.twig' %}
+        </div>
+    </div>
    
 {% endblock %}
