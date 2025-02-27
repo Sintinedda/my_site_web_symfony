@@ -2,21 +2,28 @@
 
 {% block title %}Listes des sorts{% endblock %}
 
+{% block stylesheets %}
+    {{ parent () }}
+    <link href="{{ asset('assets/css/spell/list.css') }}" rel="stylesheet"/>
+{% endblock %}
+
 {% block body_id 'spell-list' %}
 
 {% block main %}
 
     <h1>Listes des sorts</h1>
+    <div class="container">
+        <h2 class="spells-title"><a href="{{ path('app_view_spell_all') }}">Tous les sorts</a></h2>
+        <div class="spells-listes">
+            <h2 class="spells-title">Liste des sorts par niveau</h2>
+            {% include 'client/spell/construct/listes/_levels.html.twig' %}
 
-    <h2><a href="{{ path('app_view_spell_all') }}">Tous les sorts</a></h2>
+            <h2 class="spells-title">Liste des sorts par classe</h2>
+            {% include 'client/spell/construct/listes/_classes.html.twig' %}
+            
+            <h2 class="spells-title">Liste des sorts par école</h2>
+            {% include 'client/spell/construct/listes/_schools.html.twig' %}
+        </div>
+    </div>
 
-    <h2>Liste des sorts par niveau</h2>
-    {% include 'client/spell/construct/listes/_levels.html.twig' %}
-
-    <h2>Liste des sorts par classe</h2>
-    {% include 'client/spell/construct/listes/_classes.html.twig' %}
-    
-    <h2>Liste des sorts par école</h2>
-    {% include 'client/spell/construct/listes/_schools.html.twig' %}
-   
 {% endblock %}

@@ -2,12 +2,20 @@
 
 {% block title %}Listes des sorts par niveau{% endblock %}
 
+{% block stylesheets %}
+    {{ parent () }}
+    <link href="{{ asset('assets/css/spell/list.css') }}" rel="stylesheet"/>
+{% endblock %}
+
 {% block body_id 'spell-list-level' %}
 
 {% block main %}
 
     <h1>Listes des sorts par niveau</h1>
-    
-    {% include 'client/spell/construct/listes/_levels.html.twig' %}
+    <div class="container">
+        <div class="spells-listes">
+            {% include 'client/spell/construct/listes/_levels.html.twig' %}
+        </div>
+    </div>
 
 {% endblock %}

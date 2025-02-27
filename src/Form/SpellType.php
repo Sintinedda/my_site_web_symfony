@@ -46,6 +46,7 @@ class SpellType extends AbstractType
             ])
             ->add('concentration')
             ->add('duration', TextType::class)
+            ->add('short_descr', TextareaType::class)
             ->add('descr1', TextareaType::class)
             ->add('descr2', TextareaType::class, [
                 'required' => false
