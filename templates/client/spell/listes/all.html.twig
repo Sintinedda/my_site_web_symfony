@@ -5,56 +5,82 @@
 {% block stylesheets %}
     {{ parent () }}
     <link href="{{ asset('assets/css/spell/all.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('assets/css/spell/filters.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('assets/css/spell/search.css') }}" rel="stylesheet"/>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent () }}
+    <script src="{{ asset('assets/js/spells/checkbox.js') }}"></script>
+    <script src="{{ asset('assets/js/spells/sort.js') }}"></script>
+    <script src="{{ asset('assets/js/spells/searchbar.js') }}"></script>
+    <script src="{{ asset('assets/js/spells/resize.js') }}"></script>
 {% endblock %}
 
 {% block body_id 'spell-list' %}
 
 {% block main %}
 
-    <h1>Listes des sorts</h1>
+    <h1 id="top">Listes des sorts</h1>
     <div class="container">
-        <table class="spells-table">
+        <div class="filters-container">
+            <div class="filters">
+                {% include 'client/spell/construct/_form.html.twig' %}
+                {% include 'client/spell/construct/_checkboxs.html.twig' %}
+            </div>
+            <div class="search">
+                {% include 'client/spell/construct/_searchbar.html.twig' %}
+            </div> 
+        </div>
+        <table id="spells-table" class="spells-table">
             <thead>
                 <tr>
                     <th class="spells-table-name">Sort</th>
-                    <th class="spells-table-vo">VO</th>
+                    <th class="spells-table-vo vo show1024">VO</th>
                     <th class="spells-table-lvl">Niv</th>
-                    <th class="spells-table-school">École</th>
-                    <th class="spells-table-spelling">Incantation</th>
-                    <th class="spells-table-range">Portée</th>
-                    <th class="spells-table-comp">V, S, M</th>
-                    <th class="spells-table-concentration">C</th>
-                    <th class="spells-table-ritual">R</th>
-                    <th class="spells-table-descr">Description</th>
-                    <th class="spells-table-source">Source</th>
+                    <th class="spells-table-school school">École</th>
+                    <th class="spells-table-spelling spelling show768">Incantation</th>
+                    <th class="spells-table-range range show992">Portée</th>
+                    <th class="spells-table-comp vsm show768">V, S, M</th>
+                    <th class="spells-table-concentration concentration show768">C</th>
+                    <th class="spells-table-ritual ritual show768">R</th>
+                    <th class="spells-table-descr descr show1024">Description</th>
+                    <th class="spells-table-source source show992">Source</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody id="spells-tbody">
                 {% for sort in sorts|sort((a, b) => a.nameFr <=> b.nameFr) %}
                     <tr>
                         <td class="spells-table-name"><a href="{{ path('app_view_spell_show', { 'slug': sort.slug }) }}">{{ sort.nameFr }}</a></td>
-                        <td class="spells-table-vo">{{ sort.nameEng }}</td>
+                        <td class="spells-table-vo vo show1024">{{ sort.nameEng }}</td>
                         <td class="spells-table-lvl">{{ sort.level }}</td>
-                        <td class="spells-table-school">{{ sort.school.name }}</td>
-                        <td class="spells-table-spelling">{{ sort.castingTime|length > 10 ? sort.castingTime|slice(0, 10) ~ '...' : sort.castingTime }}</td>
-                        <td class="spells-table-range">{{ sort.rangeEffect|length > 11 ? sort.rangeEffect|slice(0, 11) ~ '...' : sort.rangeEffect  }}</td>
-                        <td class="spells-table-comp">{{ sort.components }}</td>
-                        <td class="spells-table-concentration">
+                        <td class="spells-table-school school">{{ sort.school.name }}</td>
+                        <td class="spells-table-spelling spelling show768">{{ sort.castingTime|length > 10 ? sort.castingTime|slice(0, 10) ~ '...' : sort.castingTime }}</td>
+                        <td class="spells-table-range range show992">{{ sort.rangeEffect|length > 11 ? sort.rangeEffect|slice(0, 11) ~ '...' : sort.rangeEffect  }}</td>
+                        <td class="spells-table-comp vsm show768">{{ sort.components }}</td>
+                        <td class="spells-table-concentration concentration show768">
                             {% if sort.concentration == true %}
                                 C
                             {% endif %}
                         </td>
-                        <td class="spells-table-ritual">
+                        <td class="spells-table-ritual ritual show768">
                             {% if sort.ritual == true %}
                                 R
                             {% endif %}
                         </td>
-                        <td class="spells-table-descr">{{ sort.shortDescr }}</td>
-                        <td class="spells-table-source">{{ sort.source }}</td>
+                        <td class="spells-table-descr descr show1024">{{ sort.shortDescr }}</td>
+                        <td class="spells-table-source source show992">{{ sort.source }}</td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
+        <div id="bottom">
+            <a href="#top">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-circle" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8m15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0m-7.5 3.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707z"/>
+                </svg>
+            </a>
+        </div>
     </div>
 
 {% endblock %}

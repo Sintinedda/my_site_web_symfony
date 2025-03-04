@@ -1,0 +1,23 @@
+{{ form_start(form, { 'attr': { 'id': 'form-filters' } }) }}
+    <div class="form-filters-1">
+        <div>
+            <input type="checkbox" id="select-classe" class="check" checked/>
+            <label for="select-classe">Classe</label>
+            {{ form_row(form.classes)}}
+        </div>
+        <div>
+            <input type="checkbox" id="select-school" class="check" checked/>
+            <label for="select-school">École</label>
+            {{ form_row(form.schools)}}
+        </div>
+    </div>
+    <div class="form-filters-2">
+        {{ form_row(form.min) }}
+        {{ form_row(form.max) }}
+    </div>
+    <div class="form-filters-3">
+        <input type="checkbox" id="select-source" class="check" checked/>
+        <label for="select-source">Source</label>
+        {{ form_row(form.sources) }}
+    </div>
+{{ form_end(form) }}
