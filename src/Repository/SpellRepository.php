@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Data\SearchData;
 use App\Entity\Spell;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
@@ -40,4 +41,45 @@ class SpellRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+    public function findSearch(SearchData $search): array
+    {
+        $qb = $this->createQueryBuilder('s')
+            ->select('cl', 'sc', 's')
+            ->join('s.classes', 'cl')
+            ->join('s.school', 'sc');
+
+            if (!empty($search->min)) {
+                $qb = $qb
+                    ->andWhere('s.level >= :min')
+                    ->setParameter('min', $search->min);
+            }
+
+            if (!empty($search->max)) {
+                $qb = $qb
+                    ->andWhere('s.level <= :max')
+                    ->setParameter('max', $search->max);
+            }
+
+            if (!empty($search->classes)) {
+                $qb = $qb
+                    ->andWhere('cl.id IN (:classes)')
+                    ->setParameter('classes', $search->classes);
+            }
+
+            if (!empty($search->schools)) {
+                $qb = $qb
+                    ->andWhere('sc.id IN (:schools)')
+                    ->setParameter('schools', $search->schools);
+            }
+
+            if (!empty($search->sources)) {
+                $qb = $qb
+                    ->andWhere('s.source IN (:sources)')
+                    ->setParameter('sources', $search->sources);
+            }
+
+            $query = $qb->getQuery();
+            return $query->getResult();
+    }
 }

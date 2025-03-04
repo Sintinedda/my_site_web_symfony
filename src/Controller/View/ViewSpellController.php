@@ -2,14 +2,16 @@
 
 namespace App\Controller\View;
 
+use App\Data\SearchData;
 use App\Entity\Classe;
 use App\Entity\Spell;
 use App\Entity\SpellSchool;
+use App\Form\SearchType;
 use App\Repository\ClasseRepository;
-use App\Repository\SpellRepository;
 use App\Repository\SpellSchoolRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
@@ -26,10 +28,18 @@ final class ViewSpellController extends AbstractController
     }
 
     #[Route('/tous', name: 'app_view_spell_all', methods: ['GET'])]
-    public function indexAll(SpellRepository $spellRepository): Response
+    public function indexAll(EntityManagerInterface $em, Request $request): Response
     {
+        $data = new SearchData();
+        $form = $this->createForm(SearchType::class, $data);
+        $form->handleRequest($request);
+        $spells = $em->getRepository(Spell::class)->findSearch($data);
+
         return $this->render('client/spell/listes/all.html.twig', [
-            'sorts' => $spellRepository->findAll()
+            'sorts' => $spells,
+            'classes' => $em->getRepository(Classe::class)->findAll(),
+            'schools' => $em->getRepository(SpellSchool::class)->findAll(),
+            'form' => $form->createView()
         ]);
     }
 
