@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}StatBlock index{% endblock %}
+
+{% block body %}
+    <h1>StatBlock index</h1>
+    <a href="{{ path('app_stat_block_new') }}">Create new</a>
+    <br/><br/><br/>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name_fr</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for stat_block in stat_blocks %}
+            <tr>
+                <td>{{ stat_block.id }}</td>
+                <td>{{ stat_block.nameFr }}</td>
+                <td>
+                    <a href="{{ path('app_stat_block_edit', {'id': stat_block.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="22">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit SkillTable{% endblock %}
+
+{% block body %}
+    <h1>Edit SkillTable</h1>
+
+    {{ include('bo/skills/skill_table/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_skill_table_index') }}">back to list</a>
+
+    {{ include('bo/skills/skill_table/_delete_form.html.twig') }}
+{% endblock %}

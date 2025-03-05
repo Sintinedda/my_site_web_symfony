@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}StatBlockSkill index{% endblock %}
+
+{% block body %}
+    <h1>StatBlockSkill index</h1>
+    <a href="{{ path('app_stat_block_skill_new') }}">Create new</a>
+    <br/><br/><br/>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for stat_block_skill in stat_block_skills %}
+            <tr>
+                <td>{{ stat_block_skill.id }}</td>
+                <td>{{ stat_block_skill.name }}</td>
+                <td>
+                    <a href="{{ path('app_stat_block_skill_edit', {'id': stat_block_skill.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

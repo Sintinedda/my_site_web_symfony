@@ -2,9 +2,9 @@
 
 namespace App\Controller\View;
 
-use App\Entity\Classe;
-use App\Entity\SpecialtyItem;
-use App\Repository\ClasseRepository;
+use App\Entity\Classe\Classe;
+use App\Entity\Specialty\SpecialtyItem;
+use App\Repository\Classe\ClasseRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;

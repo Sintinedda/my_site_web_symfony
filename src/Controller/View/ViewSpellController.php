@@ -3,12 +3,12 @@
 namespace App\Controller\View;
 
 use App\Data\SearchData;
-use App\Entity\Classe;
-use App\Entity\Spell;
-use App\Entity\SpellSchool;
+use App\Entity\Classe\Classe;
+use App\Entity\Spell\Spell;
+use App\Entity\Spell\SpellSchool;
 use App\Form\SearchType;
-use App\Repository\ClasseRepository;
-use App\Repository\SpellSchoolRepository;
+use App\Repository\Classe\ClasseRepository;
+use App\Repository\Spell\SpellSchoolRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;

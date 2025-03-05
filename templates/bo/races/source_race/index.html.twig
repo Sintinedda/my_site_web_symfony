@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}SourceRace index{% endblock %}
+
+{% block body %}
+    <h1>SourceRace index</h1>
+    <a href="{{ path('app_source_race_new') }}">Create new</a>
+    <br/><br/><br/>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Race</th>
+                <th>Name</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for source_race in source_races %}
+            <tr>
+                <td>{{ source_race.id }}</td>
+                <td>{{ source_race.race.name }}</td>
+                <td>{{ source_race.name }}</td>
+                <td>
+                    <a href="{{ path('app_source_race_edit', {'id': source_race.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="16">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

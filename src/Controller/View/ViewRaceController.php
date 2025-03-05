@@ -2,8 +2,8 @@
 
 namespace App\Controller\View;
 
-use App\Entity\Race;
-use App\Repository\RaceRepository;
+use App\Entity\Race\Race;
+use App\Repository\Race\RaceRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;

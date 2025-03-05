@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Talent index{% endblock %}
+
+{% block body %}
+    <h1>Talent index</h1>
+    <a href="{{ path('app_talent_new') }}">Create new</a>
+    <br/><br/><br/>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for talent in talent %}
+            <tr>
+                <td>{{ talent.id }}</td>
+                <td>{{ talent.name }}</td>
+                <td>
+                    <a href="{{ path('app_talent_edit', {'id': talent.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="13">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

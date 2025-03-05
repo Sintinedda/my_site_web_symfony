@@ -2,9 +2,9 @@
 
 namespace App\Controller\View;
 
-use App\Entity\Classe;
-use App\Entity\Race;
-use App\Entity\SpellSchool;
+use App\Entity\Classe\Classe;
+use App\Entity\Race\Race;
+use App\Entity\Spell\SpellSchool;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;

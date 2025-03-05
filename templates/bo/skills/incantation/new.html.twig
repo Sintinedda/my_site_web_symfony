@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New Incantation{% endblock %}
+
+{% block body %}
+    <h1>Create new Incantation</h1>
+
+    {{ include('bo/skills/incantation/_form.html.twig') }}
+
+    <a href="{{ path('app_incantation_index') }}">back to list</a>
+{% endblock %}
