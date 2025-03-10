@@ -91,7 +91,7 @@ class SkillTable
     #[ORM\Column]
     private ?bool $start = null;
 
-    #[ORM\OneToOne(inversedBy: 'skillTable', cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(inversedBy: 'skillTable', cascade: ['persist'])]
     private ?Skill $skill = null;
 
     public function getId(): ?int

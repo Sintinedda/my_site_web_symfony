@@ -1,0 +1,8 @@
+<div>
+    <input type="text" onkeyup="search('search-skill-{{ classe.id }}', 'liste-skill-{{ classe.id }}')"  id="search-skill-{{ classe.id }}" placeholder="chercher"/>
+    <ul id="liste-skill-{{ classe.id }}">
+        {% for s in skills %}
+            <li style="display: none;"><span>{{ s.name }}</span> &nbsp; <a href="{{ path('app_skill_edit', {'id': s.id, 'slug': classe.slug}) }}">Éditer</a></li>
+        {% endfor %}
+    </ul>
+</div>

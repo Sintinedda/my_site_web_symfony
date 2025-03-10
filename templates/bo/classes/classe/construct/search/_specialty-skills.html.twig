@@ -1,0 +1,8 @@
+<div>
+    <input type="text" onkeyup="search('search-spe-skill-{{ classe.id }}-{{ specialty.id }}', 'liste-spe-skill-{{ classe.id }}-{{ specialty.id }}')"  id="search-spe-skill-{{ classe.id }}-{{ specialty.id }}" placeholder="chercher"/>
+    <ul id="liste-spe-skill-{{ classe.id }}-{{ specialty.id }}">
+        {% for s in speSkills %}
+            <li style="display: none;"><span>{{ s.name }} - {{ s.part }}</span> &nbsp; <a href="{{ path('app_specialty_skill_edit', {'id': s.id, 'id2': specialty.id}) }}">edit</a></li>
+        {% endfor %}
+    </ul>
+</div>

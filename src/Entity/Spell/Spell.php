@@ -17,37 +17,37 @@ class Spell
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 100)]
     private ?string $name_fr = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 100)]
     private ?string $name_eng = null;
 
     #[ORM\Column]
     private ?int $level = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 100)]
     private ?string $casting_time = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 100)]
     private ?string $range_effect = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 100)]
     private ?string $components = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 250, nullable: true)]
     private ?string $components_ingredients = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 100)]
     private ?string $duration = null;
 
-    #[ORM\Column(length: 1050)]
+    #[ORM\Column(length: 1000)]
     private ?string $descr1 = null;
 
-    #[ORM\Column(length: 1050, nullable: true)]
+    #[ORM\Column(length: 1000, nullable: true)]
     private ?string $upper_level = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 100)]
     private ?string $source = null;
 
     #[ORM\Column]
@@ -56,7 +56,7 @@ class Spell
     #[ORM\Column]
     private ?bool $concentration = null;
 
-    #[ORM\Column(length: 1050, nullable: true)]
+    #[ORM\Column(length: 1000, nullable: true)]
     private ?string $descr2 = null;
 
     /**
@@ -65,38 +65,47 @@ class Spell
     #[ORM\ManyToMany(targetEntity: Classe::class, inversedBy: 'spells')]
     private Collection $classes;
 
-    #[ORM\Column(length: 1050, nullable: true)]
+    #[ORM\Column(length: 1000, nullable: true)]
     private ?string $descr3 = null;
 
-    #[ORM\Column(length: 1050, nullable: true)]
+    #[ORM\Column(length: 1000, nullable: true)]
     private ?string $descr4 = null;
 
-    #[ORM\Column(length: 1050, nullable: true)]
+    #[ORM\Column(length: 1000, nullable: true)]
     private ?string $descr5 = null;
 
-    #[ORM\Column(length: 1050, nullable: true)]
+    #[ORM\Column(length: 1000, nullable: true)]
     private ?string $descr6 = null;
 
-    #[ORM\Column(length: 1050, nullable: true)]
+    #[ORM\Column(length: 1000, nullable: true)]
     private ?string $descr7 = null;
 
-    #[ORM\Column(length: 1050, nullable: true)]
+    #[ORM\Column(length: 1000, nullable: true)]
     private ?string $descr8 = null;
 
-    #[ORM\Column(length: 1050, nullable: true)]
+    #[ORM\Column(length: 1000, nullable: true)]
     private ?string $descr9 = null;
 
-    #[ORM\Column(length: 1050, nullable: true)]
+    #[ORM\Column(length: 1000, nullable: true)]
     private ?string $descr10 = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 100)]
     private ?string $slug = null;
 
     #[ORM\ManyToOne(inversedBy: 'spells')]
     private ?SpellSchool $school = null;
 
-    #[ORM\Column(length: 500)]
+    #[ORM\Column(length: 250)]
     private ?string $short_descr = null;
+
+    #[ORM\Column(length: 1000, nullable: true)]
+    private ?string $descr11 = null;
+
+    #[ORM\Column(length: 1000, nullable: true)]
+    private ?string $descr12 = null;
+
+    #[ORM\Column(length: 1000, nullable: true)]
+    private ?string $descr13 = null;
 
     public function __construct()
     {
@@ -428,6 +437,42 @@ class Spell
     public function setShortDescr(string $short_descr): static
     {
         $this->short_descr = $short_descr;
+
+        return $this;
+    }
+
+    public function getDescr11(): ?string
+    {
+        return $this->descr11;
+    }
+
+    public function setDescr11(?string $descr11): static
+    {
+        $this->descr11 = $descr11;
+
+        return $this;
+    }
+
+    public function getDescr12(): ?string
+    {
+        return $this->descr12;
+    }
+
+    public function setDescr12(?string $descr12): static
+    {
+        $this->descr12 = $descr12;
+
+        return $this;
+    }
+
+    public function getDescr13(): ?string
+    {
+        return $this->descr13;
+    }
+
+    public function setDescr13(?string $descr13): static
+    {
+        $this->descr13 = $descr13;
 
         return $this;
     }

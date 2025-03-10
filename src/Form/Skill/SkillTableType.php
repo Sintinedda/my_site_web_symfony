@@ -2,9 +2,7 @@
 
 namespace App\Form\Skill;
 
-use App\Entity\Skill\Skill;
 use App\Entity\Skill\SkillTable;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -18,6 +16,7 @@ class SkillTableType extends AbstractType
             ->add('name', TextType::class, [
                 'required' => false
             ])
+            ->add('start')
             ->add('th1', TextType::class)
             ->add('th2', TextType::class)
             ->add('th3', TextType::class, [
@@ -81,11 +80,6 @@ class SkillTableType extends AbstractType
             ])
             ->add('tr5_td4', TextType::class, [
                 'required' => false
-            ])
-            ->add('start')
-            ->add('skill', EntityType::class, [
-                'class' => Skill::class,
-                'choice_label' => 'name'
             ])
         ;
     }

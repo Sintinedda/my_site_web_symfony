@@ -31,7 +31,7 @@
         {% endif %}
 
     </h1>
-    <div class="container">
+    <div class="cont">
         <p class="specialty-descr">{{ specialty.descr1|raw }}</p>
         {% if specialty.descr2 %}
             <p class="specialty-descr">{{ specialty.descr2|raw }}</p>
@@ -47,11 +47,16 @@
         {% endif %}
 
         {% if specialty.specialtyItemTable %}
-            {% include 'client/classe/construct/_specialty-table.html.twig' %}
+            {% include 'client/classe/construct/specialty/_table.html.twig' %}
         {% endif %}
 
         <p class="specialty-source">Source : {{ specialty.source }}</p>
-        {% for skill in specialty.specialtySkills %}
+
+        {% if specialty.spellTable %}
+            {% include 'client/classe/construct/specialty/_domain-spell-table.html.twig' %}
+        {% endif %}
+
+        {% for skill in specialty.specialtySkills|sort((a, b) => a.lvl <=> b.lvl) %}
             <h2 class="specialty-skill-title">{{ skill.name }}</h2>
             <p class="specialty-skill-descr">{{ skill.descr1|raw }}</p>
             {% if skill.descr2 %}
@@ -74,11 +79,11 @@
             {% endif %}
 
             {% if skill.specialtySkillTable %}
-                {% include 'client/classe/construct/_specialty-skill-table.html.twig' %}
+                {% include 'client/classe/construct/specialty/_skill-table.html.twig' %}
             {% endif %}
 
             {% if skill.statBlock %}
-                {% include 'client/classe/construct/_specialty-skill-stat-block.html.twig' %}
+                {% include 'client/classe/construct/specialty/_skill-stat-block.html.twig' %}
             {% endif %}
 
         {% endfor %}

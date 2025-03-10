@@ -75,6 +75,15 @@ class SpellType extends AbstractType
             ->add('descr10', TextareaType::class, [
                 'required' => false
             ])
+            ->add('descr11', TextareaType::class, [
+                'required' => false
+            ])
+            ->add('descr12', TextareaType::class, [
+                'required' => false
+            ])
+            ->add('descr13', TextareaType::class, [
+                'required' => false
+            ])
             ->add('upper_level', TextareaType::class, [
                 'required' =>false
             ])

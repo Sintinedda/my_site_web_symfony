@@ -1,0 +1,8 @@
+<div>
+    <input type="text" onkeyup="search('search-spe-{{ classe.id }}', 'liste-spe-{{ classe.id }}')"  id="search-spe-{{ classe.id }}" placeholder="chercher"/>
+    <ul id="liste-spe-{{ classe.id }}">
+        {% for s in specialties %}
+            <li style="display: none;"><span>{{ s.slug }}</span> &nbsp; <a href="{{ path('app_specialty_item_edit', {'id': s.id, 'id2': classe.specialty.id}) }}">edit</a></li>
+        {% endfor %}
+    </ul>
+</div>

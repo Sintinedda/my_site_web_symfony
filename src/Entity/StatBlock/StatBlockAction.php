@@ -3,6 +3,7 @@
 namespace App\Entity\StatBlock;
 
 use App\Repository\StatBlock\StatBlockActionRepository;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: StatBlockActionRepository::class)]
@@ -16,11 +17,20 @@ class StatBlockAction
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[ORM\Column(length: 1020)]
+    #[ORM\Column(length: 1020, nullable: true)]
     private ?string $descr = null;
 
-    #[ORM\ManyToOne(inversedBy: 'statBlockActions')]
-    private ?StatBlock $StatBlock = null;
+    /**
+     * @var Collection<int, StatBlock>
+     */
+    #[ORM\ManyToMany(targetEntity: StatBlock::class, inversedBy: 'statBlockActions')]
+    private Collection $statblock;
+
+    #[ORM\Column(length: 100, nullable: true)]
+    private ?string $type = null;
+
+    #[ORM\Column(length: 100, nullable: true)]
+    private ?string $target = null;
 
     public function getId(): ?int
     {
@@ -44,21 +54,57 @@ class StatBlockAction
         return $this->descr;
     }
 
-    public function setDescr(string $descr): static
+    public function setDescr(?string $descr): static
     {
         $this->descr = $descr;
 
         return $this;
     }
 
-    public function getStatBlock(): ?StatBlock
+    /**
+     * @return Collection<int, StatBlock>
+     */
+    public function getStatblock(): Collection
     {
-        return $this->StatBlock;
+        return $this->statblock;
     }
 
-    public function setStatBlock(?StatBlock $StatBlock): static
+    public function setStatblock(StatBlock $statblock): static
     {
-        $this->StatBlock = $StatBlock;
+        if (!$this->statblock->contains($statblock)) {
+            $this->statblock->add($statblock);
+        };
+
+        return $this;
+    }
+
+    public function removeStatblock(StatBlock $statblock): static
+    {
+        $this->statblock->removeElement($statblock);
+
+        return $this;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(?string $type): static
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    public function getTarget(): ?string
+    {
+        return $this->target;
+    }
+
+    public function setTarget(?string $target): static
+    {
+        $this->target = $target;
 
         return $this;
     }

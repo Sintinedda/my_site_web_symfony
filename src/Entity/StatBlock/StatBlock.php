@@ -59,9 +59,6 @@ class StatBlock
     private ?string $competence = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $sens = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
     private ?string $language = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -70,25 +67,19 @@ class StatBlock
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $bm = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $immunity_damage = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $immunity_condition = null;
-
     /**
      * @var Collection<int, StatBlockSkill>
      */
-    #[ORM\OneToMany(targetEntity: StatBlockSkill::class, mappedBy: 'statblock')]
+    #[ORM\ManyToMany(targetEntity: StatBlockSkill::class, mappedBy: 'statblock')]
     private Collection $statBlockSkills;
 
     /**
      * @var Collection<int, StatBlockAction>
      */
-    #[ORM\OneToMany(targetEntity: StatBlockAction::class, mappedBy: 'StatBlock')]
+    #[ORM\ManyToMany(targetEntity: StatBlockAction::class, mappedBy: 'statblock')]
     private Collection $statBlockActions;
 
-    #[ORM\OneToOne(inversedBy: 'statBlock', cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(inversedBy: 'statBlock', cascade: ['persist'])]
     private ?SpecialtySkill $specialty_skill = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -97,11 +88,32 @@ class StatBlock
     /**
      * @var Collection<int, StatBlockReaction>
      */
-    #[ORM\OneToMany(targetEntity: StatBlockReaction::class, mappedBy: 'statblock')]
+    #[ORM\ManyToMany(targetEntity: StatBlockReaction::class, mappedBy: 'statblock')]
     private Collection $statBlockReactions;
 
     #[ORM\Column(length: 255)]
     private ?string $slug = null;
+
+    #[ORM\Column(length: 100, nullable: true)]
+    private ?string $touchWeaponCac = null;
+
+    #[ORM\Column(length: 100, nullable: true)]
+    private ?string $rangeWeaponCac = null;
+
+    #[ORM\Column(length: 100, nullable: true)]
+    private ?string $damageWeaponCac = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?array $sens = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?array $imm_damage = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?array $imm_state = null;
+
+    #[ORM\Column(length: 100)]
+    private ?string $pp = null;
 
     public function __construct()
     {
@@ -283,18 +295,6 @@ class StatBlock
         return $this;
     }
 
-    public function getSens(): ?string
-    {
-        return $this->sens;
-    }
-
-    public function setSens(?string $sens): static
-    {
-        $this->sens = $sens;
-
-        return $this;
-    }
-
     public function getLanguage(): ?string
     {
         return $this->language;
@@ -331,30 +331,6 @@ class StatBlock
         return $this;
     }
 
-    public function getImmunityDamage(): ?string
-    {
-        return $this->immunity_damage;
-    }
-
-    public function setImmunityDamage(?string $immunity_damage): static
-    {
-        $this->immunity_damage = $immunity_damage;
-
-        return $this;
-    }
-
-    public function getImmunityCondition(): ?string
-    {
-        return $this->immunity_condition;
-    }
-
-    public function setImmunityCondition(?string $immunity_condition): static
-    {
-        $this->immunity_condition = $immunity_condition;
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, StatBlockSkill>
      */
@@ -376,10 +352,7 @@ class StatBlock
     public function removeStatBlockSkill(StatBlockSkill $statBlockSkill): static
     {
         if ($this->statBlockSkills->removeElement($statBlockSkill)) {
-            // set the owning side to null (unless already changed)
-            if ($statBlockSkill->getStatblock() === $this) {
-                $statBlockSkill->setStatblock(null);
-            }
+            $statBlockSkill->removeStatBlock($this);
         }
 
         return $this;
@@ -406,10 +379,7 @@ class StatBlock
     public function removeStatBlockAction(StatBlockAction $statBlockAction): static
     {
         if ($this->statBlockActions->removeElement($statBlockAction)) {
-            // set the owning side to null (unless already changed)
-            if ($statBlockAction->getStatBlock() === $this) {
-                $statBlockAction->setStatBlock(null);
-            }
+            $statBlockAction->removeStatBlock($this);
         }
 
         return $this;
@@ -460,10 +430,7 @@ class StatBlock
     public function removeStatBlockReaction(StatBlockReaction $statBlockReaction): static
     {
         if ($this->statBlockReactions->removeElement($statBlockReaction)) {
-            // set the owning side to null (unless already changed)
-            if ($statBlockReaction->getStatblock() === $this) {
-                $statBlockReaction->setStatblock(null);
-            }
+            $statBlockReaction->removeStatBlock($this);
         }
 
         return $this;
@@ -477,6 +444,90 @@ class StatBlock
     public function setSlug(string $slug): static
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getTouchWeaponCac(): ?string
+    {
+        return $this->touchWeaponCac;
+    }
+
+    public function setTouchWeaponCac(?string $touchWeaponCac): static
+    {
+        $this->touchWeaponCac = $touchWeaponCac;
+
+        return $this;
+    }
+
+    public function getRangeWeaponCac(): ?string
+    {
+        return $this->rangeWeaponCac;
+    }
+
+    public function setRangeWeaponCac(?string $rangeWeaponCac): static
+    {
+        $this->rangeWeaponCac = $rangeWeaponCac;
+
+        return $this;
+    }
+
+    public function getDamageWeaponCac(): ?string
+    {
+        return $this->damageWeaponCac;
+    }
+
+    public function setDamageWeaponCac(?string $damageWeaponCac): static
+    {
+        $this->damageWeaponCac = $damageWeaponCac;
+
+        return $this;
+    }
+
+    public function getSens(): ?array
+    {
+        return $this->sens;
+    }
+
+    public function setSens(?array $sens): static
+    {
+        $this->sens = $sens;
+
+        return $this;
+    }
+
+    public function getImmDamage(): ?array
+    {
+        return $this->imm_damage;
+    }
+
+    public function setImmDamage(?array $imm_damage): static
+    {
+        $this->imm_damage = $imm_damage;
+
+        return $this;
+    }
+
+    public function getImmState(): ?array
+    {
+        return $this->imm_state;
+    }
+
+    public function setImmState(?array $imm_state): static
+    {
+        $this->imm_state = $imm_state;
+
+        return $this;
+    }
+
+    public function getPp(): ?string
+    {
+        return $this->pp;
+    }
+
+    public function setPp(string $pp): static
+    {
+        $this->pp = $pp;
 
         return $this;
     }

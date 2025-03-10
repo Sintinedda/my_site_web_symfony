@@ -1,0 +1,51 @@
+<div class="accordion-body">
+    <a href="{{ path('app_skill_new', {'slug': classe.slug}) }}">Nouveau talent</a>
+    <br/><br/>
+    {% include 'bo/classes/classe/construct/search/_skills.html.twig' %}  
+    <div class="accordion" id="skills">
+        {% set newArray = [] %}
+        {% for lvl in classe.classeByLevels %}
+            {% for skill in lvl.skills|sort((a, b) => a.level <=> b.level) %}
+                {% if skill.name not in newArray %}
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#skill-{{ skill.id }}" aria-expanded="true" aria-controls="collapseOne">
+                                {{ skill.name }}
+                            </button>
+                        </h2>
+                        <div id="skill-{{ skill.id }}" class="accordion-collapse collapse" data-bs-parent="#skills">
+                            <div class="accordion-body">
+                                <a href="{{ path('app_skill_edit', {'id': skill.id, 'slug': classe.slug}) }}">Éditer</a>
+                                <br/><br/>
+                                {% if skill.name == 'Incantation' %} 
+                                    {% if classe.incantation %}
+                                        <a href="{{ path('app_incantation_edit', {'id': classe.incantation.id}) }}">edit</a>
+                                    {% else %}
+                                        <a href="{{ path('app_incantation_new', {'slug': classe.slug}) }}">new</a>
+                                    {% endif %}
+                                {% else %}  
+                                    <p>Sub Skill
+                                        {% if skill.subSkill %}
+                                            <a href="{{ path('app_sub_skill_edit', {'id': skill.subSkill.id}) }}">edit</a>
+                                        {% else %}
+                                            <a href="{{ path('app_sub_skill_new', {'id2': skill.id}) }}">new</a>
+                                        {% endif %}
+                                    </p>
+                                    <br/>
+                                    <p>Table Skill
+                                        {% if skill.skillTable %}
+                                            <a href="{{ path('app_skill_table_edit', {'id': skill.skillTable.id}) }}">edit</a>
+                                        {% else %}
+                                            <a href="{{ path('app_skill_table_new', {'id2': skill.id}) }}">new</a>
+                                        {% endif %}
+                                    </p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    {% set newArray = newArray|merge([skill.name]) %}
+                {% endif %}
+            {% endfor %}
+        {% endfor %}
+    </div>
+</div>

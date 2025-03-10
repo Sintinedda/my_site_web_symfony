@@ -87,10 +87,6 @@ class SpecialtySkillTableType extends AbstractType
             ->add('tr12_td2', TextareaType::class, [
                 'required' => false
             ])
-            ->add('specialty_skill', EntityType::class, [
-                'class' => SpecialtySkill::class,
-                'choice_label' => 'name',
-            ])
         ;
     }
 

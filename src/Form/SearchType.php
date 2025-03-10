@@ -3,8 +3,8 @@
 namespace App\Form;
 
 use App\Data\SearchData;
-use App\Entity\Classe;
-use App\Entity\SpellSchool;
+use App\Entity\Classe\Classe;
+use App\Entity\Spell\SpellSchool;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -34,7 +34,7 @@ class SearchType extends AbstractType
                         'onClick' => "unselect('select-classe')"
                     ];
                 },
-                'query_builder' => function (EntityRepository $er): QueryBuilder {
+                'query_builder' => function(EntityRepository $er): QueryBuilder {
                     return $er->createQueryBuilder('c')
                         ->having('SIZE(c.spells) >= 1');
                 }

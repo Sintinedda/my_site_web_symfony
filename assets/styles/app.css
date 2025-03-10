@@ -22,7 +22,7 @@ h1 {
     font-weight: 800;
 }
 
-.container {
+.cont {
     padding: 0 20px 20px 20px;
 }
 
@@ -39,6 +39,16 @@ textarea {
     height: 80px;
 }
 
+.table {
+    border-collapse: collapse;
+}
+
+.table td,
+.table th {
+    padding: 5px 20px;
+    border-bottom: 3px solid black;
+}
+
 @media screen and (min-width:768px) {
 
     h1 {
@@ -46,7 +56,7 @@ textarea {
         font-size: 2.2rem;
     }
 
-    .container {
+    .cont {
         padding: 0 30px 30px 30px;
     }
     
@@ -59,7 +69,7 @@ textarea {
         font-size: 3rem;
     }
 
-    .container {
+    .cont {
         padding: 0 50px 50px 50px;
     }
     

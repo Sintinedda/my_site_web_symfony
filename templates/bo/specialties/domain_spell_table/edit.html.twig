@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit DomainSpellTable{% endblock %}
+
+{% block body %}
+    <h1>Edit DomainSpellTable</h1>
+
+    {{ include('bo/specialties/domain_spell_table/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('app_classe_index') }}">back to list</a>
+
+    {{ include('bo/specialties/domain_spell_table/_delete_form.html.twig') }}
+{% endblock %}

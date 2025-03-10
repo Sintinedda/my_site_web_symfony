@@ -3,8 +3,10 @@
 namespace App\Controller\BO\Classe;
 
 use App\Entity\Classe\Classe;
+use App\Entity\Skill\Skill;
+use App\Entity\Specialty\SpecialtyItem;
+use App\Entity\Specialty\SpecialtySkill;
 use App\Form\Classe\ClasseType;
-use App\Repository\Classe\ClasseRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,10 +17,13 @@ use Symfony\Component\Routing\Attribute\Route;
 final class ClasseController extends AbstractController
 {
     #[Route(name: 'app_classe_index', methods: ['GET'])]
-    public function index(ClasseRepository $classeRepository): Response
+    public function index(EntityManagerInterface $em): Response
     {
         return $this->render('bo/classes/classe/index.html.twig', [
-            'classes' => $classeRepository->findAll(),
+            'classes' => $em->getRepository(Classe::class)->findAll(),
+            'skills' => $em->getRepository(Skill::class)->findAll(),
+            'specialties' => $em->getRepository(SpecialtyItem::class)->findAll(),
+            'speSkills' => $em->getRepository(SpecialtySkill::class)->findAll()
         ]);
     }
 

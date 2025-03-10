@@ -13,7 +13,7 @@
 
     <h1 class="classe-show-title">{{ classe.name }}</h1>
 
-    <div class="container">
+    <div class="cont">
         <p class="classe-show-descr">{{ classe.descr }}</p>
 
         <h2 class="classe-show-subtitle">Points de vie</h2>
@@ -50,10 +50,10 @@
         {% include 'client/classe/construct/_tables.html.twig' %}
 
         {# skills #}
-        {% include 'client/classe/construct/_skills.html.twig' %}
+        {% include 'client/classe/construct/skill/_skills.html.twig' %}
 
         {# specialty #}
-        {% include 'client/classe/construct/_specialties.html.twig' %}
+        {% include 'client/classe/construct/specialty/_show.html.twig' %}
 
     </div>
 

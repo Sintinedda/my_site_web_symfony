@@ -1,0 +1,106 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Lvl</th>
+
+            {% if classe.slug == 'barbare' %}
+                <th>Bm</th>
+                <th>Rag</th>
+                <th>Dmg</th>
+            {% endif %}
+
+            {% if classe.slug == 'barde' or classe.slug == 'clerc' or classe.slug == 'druide' or classe.slug == 'ensorceleur' %}                                   
+                <th>Cantrip</th>
+            {% endif %}
+
+            {% if classe.slug == 'barde' or classe.slug == 'ensorceleur' %}                                   
+                <th>Sorts connus</th>
+            {% endif %}
+
+            {% if classe.slug == 'barde' or classe.slug == 'clerc' or classe.slug == 'druide' or classe.slug == 'ensorceleur' %}                                   
+                <th>1</th>
+                <th>2</th>
+                <th>3</th>
+                <th>4</th>
+                <th>5</th>
+                <th>6</th>
+                <th>7</th>
+                <th>8</th>
+                <th>9</th>
+            {% endif %}
+
+            {% if classe.slug == 'ensorceleur' %}
+                <th>sorcery pts</th>
+            {% endif %}
+
+            {% if classe.slug == ' ' %}
+                <th>martial art</th>
+                <th>Ki</th>
+                <th>mvmt ss armure</th>
+                <th>nbr slot</th>
+                <th>lvl slot</th>
+                <th>Invocation</th>
+                <th>Sneak_attack</th>
+            {% endif %}
+
+            <th>actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for lvl in classe.classeByLevels %}
+            <tr>
+                <td>{{ lvl.id }}</td>
+                <td>{{ lvl.level }}</td>
+
+                {% if classe.slug == 'barbare' %}                                        
+                    <td>{{ lvl.bm }}</td>
+                    <td>{{ lvl.rage }}</td>
+                    <td>{{ lvl.damage }}</td>
+                {% endif %}
+
+                {% if classe.slug == 'barde' or classe.slug == 'clerc' or classe.slug == 'druide' or classe.slug == 'ensorceleur' %}                                   
+                    <td>{{ lvl.cantrip }}</td>
+                {% endif %}
+
+                {% if classe.slug == 'barde' or classe.slug == 'ensorceleur' %}
+                    <td>{{ lvl.knowingSpells }}</td>
+                {% endif %}
+
+                {% if classe.slug == 'barde' or classe.slug == 'clerc' or classe.slug == 'druide' or classe.slug == 'ensorceleur' %}                                   
+                    <td>{{ lvl.spellOne }}</td>
+                    <td>{{ lvl.spellTwo }}</td>
+                    <td>{{ lvl.spellThree }}</td>
+                    <td>{{ lvl.spellFour }}</td>
+                    <td>{{ lvl.spellFive }}</td>
+                    <td>{{ lvl.spellSix }}</td>
+                    <td>{{ lvl.spellSeven }}</td>
+                    <td>{{ lvl.spellEight }}</td>
+                    <td>{{ lvl.spellNine }}</td>
+                {% endif %}
+
+                {% if classe.slug == 'ensorceleur' %}
+                    <td>{{ lvl.sorceryPoint }}</td>
+                {% endif %}
+
+                {% if classe.slug == ' ' %}
+                    <td>{{ lvl.martialArt }}</td>
+                    <td>{{ lvl.ki }}</td>
+                    <td>{{ lvl.movementWithoutArmor }}</td>
+                    <td>{{ lvl.slotSpace }}</td>
+                    <td>{{ lvl.slotLevel }}</td>
+                    <td>{{ lvl.invocationKnow }}</td>
+                    <td>{{ lvl.sneakAttack }}</td>
+                {% endif %}
+
+                <td>
+                    <a href="{{ path('app_classe_by_level_edit', {'id': lvl.id}) }}">Éditer</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="25">no records found</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

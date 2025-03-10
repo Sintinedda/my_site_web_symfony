@@ -2,9 +2,9 @@
 
 namespace App\Controller\BO\Classe;
 
+use App\Entity\Classe\Classe;
 use App\Entity\Classe\ClasseByLevel;
 use App\Form\Classe\ClasseByLevelType;
-use App\Repository\Classe\ClasseByLevelRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,26 +14,21 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/admin/classe-by-level')]
 final class ClasseByLevelController extends AbstractController
 {
-    #[Route(name: 'app_classe_by_level_index', methods: ['GET'])]
-    public function index(ClasseByLevelRepository $classeByLevelRepository): Response
-    {
-        return $this->render('bo/classes/classe_by_level/index.html.twig', [
-            'classe_by_levels' => $classeByLevelRepository->findAll(),
-        ]);
-    }
 
-    #[Route('/new', name: 'app_classe_by_level_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    #[Route('/new/{slug}', name: 'app_classe_by_level_new', methods: ['GET', 'POST'])]
+    public function new(string $slug, Request $request, EntityManagerInterface $em): Response
     {
         $classeByLevel = new ClasseByLevel();
+        $classe = $em->getRepository(Classe::class)->findOneBy(['slug' => $slug]);
         $form = $this->createForm(ClasseByLevelType::class, $classeByLevel);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($classeByLevel);
-            $entityManager->flush();
+            $classeByLevel->setClasse($classe);
+            $em->persist($classeByLevel);
+            $em->flush();
 
-            return $this->redirectToRoute('app_classe_by_level_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_classe_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('bo/classes/classe_by_level/new.html.twig', [
@@ -51,7 +46,7 @@ final class ClasseByLevelController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_classe_by_level_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_classe_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('bo/classes/classe_by_level/edit.html.twig', [
@@ -68,6 +63,6 @@ final class ClasseByLevelController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_classe_by_level_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_classe_index', [], Response::HTTP_SEE_OTHER);
     }
 }

@@ -42,7 +42,7 @@
                     {% endif %}
 
                     {# spelling #}
-                    {% include 'client/classe/construct/_spelling.html.twig' %}
+                    {% include 'client/classe/construct/skill/_spelling.html.twig' %}
     
                     {% if skill.subSkill %}
                         <h4 class="classe-skill-subtitle">{{ skill.subSkill.title1 }}</h4>
@@ -53,7 +53,7 @@
                     {% endif %}
 
                     {% if skill.skillTable %}
-                        {% include 'client/classe/construct/_skills-table.html.twig' %}
+                        {% include 'client/classe/construct/skill/_table.html.twig' %}
                     {% endif %}
 
                 </div>

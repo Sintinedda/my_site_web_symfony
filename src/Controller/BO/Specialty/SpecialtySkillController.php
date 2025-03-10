@@ -2,9 +2,9 @@
 
 namespace App\Controller\BO\Specialty;
 
+use App\Entity\Specialty\SpecialtyItem;
 use App\Entity\Specialty\SpecialtySkill;
 use App\Form\Specialty\SpecialtySkillType;
-use App\Repository\Specialty\SpecialtySkillRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,26 +14,20 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/admin/specialty-skill')]
 final class SpecialtySkillController extends AbstractController
 {
-    #[Route(name: 'app_specialty_skill_index', methods: ['GET'])]
-    public function index(SpecialtySkillRepository $specialtySkillRepository): Response
+    #[Route('/new/{id2}', name: 'app_specialty_skill_new', methods: ['GET', 'POST'])]
+    public function new(int $id2, Request $request, EntityManagerInterface $em): Response
     {
-        return $this->render('bo/specialties/specialty_skill/index.html.twig', [
-            'specialty_skills' => $specialtySkillRepository->findAll(),
-        ]);
-    }
-
-    #[Route('/new', name: 'app_specialty_skill_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
-    {
+        $specialty = $em->getRepository(SpecialtyItem::class)->findOneBy(['id' => $id2]);
         $specialtySkill = new SpecialtySkill();
         $form = $this->createForm(SpecialtySkillType::class, $specialtySkill);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($specialtySkill);
-            $entityManager->flush();
+            $specialtySkill->setSpecialty($specialty);
+            $em->persist($specialtySkill);
+            $em->flush();
 
-            return $this->redirectToRoute('app_specialty_skill_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_classe_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('bo/specialties/specialty_skill/new.html.twig', [
@@ -42,32 +36,40 @@ final class SpecialtySkillController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_specialty_skill_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, SpecialtySkill $specialtySkill, EntityManagerInterface $entityManager): Response
+    #[Route('/{id}/edit/{id2}', name: 'app_specialty_skill_edit', methods: ['GET', 'POST'])]
+    public function edit(int $id2, Request $request, SpecialtySkill $specialtySkill, EntityManagerInterface $em): Response
     {
+        $specialty = $em->getRepository(SpecialtyItem::class)->findOneBy(['id' => $id2]);
         $form = $this->createForm(SpecialtySkillType::class, $specialtySkill);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
+            $specialtySkill->setSpecialty($specialty);
+            $em->flush();
 
-            return $this->redirectToRoute('app_specialty_skill_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_classe_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('bo/specialties/specialty_skill/edit.html.twig', [
             'specialty_skill' => $specialtySkill,
+            'specialty' => $specialty,
             'form' => $form,
         ]);
     }
 
-    #[Route('/{id}', name: 'app_specialty_skill_delete', methods: ['POST'])]
-    public function delete(Request $request, SpecialtySkill $specialtySkill, EntityManagerInterface $entityManager): Response
+    #[Route('/{id}/{id2}', name: 'app_specialty_skill_delete', methods: ['POST'])]
+    public function delete(int $id2, Request $request, SpecialtySkill $specialtySkill, EntityManagerInterface $em): Response
     {
+        $specialty = $em->getRepository(SpecialtyItem::class)->findOneBy(['id' => $id2]);
+
         if ($this->isCsrfTokenValid('delete'.$specialtySkill->getId(), $request->getPayload()->getString('_token'))) {
-            $entityManager->remove($specialtySkill);
-            $entityManager->flush();
+            $specialtySkill->removeSpecialty($specialty);
+            if ($specialtySkill->getSpecialty()->count() == 0) {
+                $em->remove($specialtySkill);
+            }
+            $em->flush();
         }
 
-        return $this->redirectToRoute('app_specialty_skill_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_classe_index', [], Response::HTTP_SEE_OTHER);
     }
 }

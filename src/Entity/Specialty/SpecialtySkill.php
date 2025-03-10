@@ -4,6 +4,8 @@ namespace App\Entity\Specialty;
 
 use App\Entity\StatBlock\StatBlock;
 use App\Repository\Specialty\SpecialtySkillRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: SpecialtySkillRepository::class)]
@@ -20,8 +22,11 @@ class SpecialtySkill
     #[ORM\Column(length: 1020)]
     private ?string $descr1 = null;
 
-    #[ORM\ManyToOne(inversedBy: 'specialtySkills')]
-    private ?SpecialtyItem $specialty = null;
+    /**
+     * @var Collection<int, SpecialtyItem>
+     */
+    #[ORM\ManyToMany(targetEntity: SpecialtyItem::class, inversedBy: 'specialtySkills')]
+    private Collection $specialty;
 
     #[ORM\Column(length: 1020, nullable: true)]
     private ?string $descr2 = null;
@@ -46,6 +51,17 @@ class SpecialtySkill
 
     #[ORM\OneToOne(mappedBy: 'specialty_skill', cascade: ['persist', 'remove'])]
     private ?StatBlock $statBlock = null;
+
+    #[ORM\Column]
+    private ?int $lvl = null;
+
+    #[ORM\Column(length: 50, nullable: true)]
+    private ?string $part = null;
+
+    public function __construct()
+    {
+        $this->specialty = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -76,14 +92,26 @@ class SpecialtySkill
         return $this;
     }
 
-    public function getSpecialty(): ?SpecialtyItem
+    /**
+     * @return Collection<int, SpecialtyItem>
+     */
+    public function getSpecialty(): Collection
     {
         return $this->specialty;
     }
 
     public function setSpecialty(?SpecialtyItem $specialty): static
     {
-        $this->specialty = $specialty;
+        if (!$this->specialty->contains($specialty)) {
+            $this->specialty->add($specialty);
+        }
+
+        return $this;
+    }
+
+    public function removeSpecialty(SpecialtyItem $specialty): static
+    {
+        $this->specialty->removeElement($specialty);
 
         return $this;
     }
@@ -195,6 +223,30 @@ class SpecialtySkill
         }
 
         $this->statBlock = $statBlock;
+
+        return $this;
+    }
+
+    public function getLvl(): ?int
+    {
+        return $this->lvl;
+    }
+
+    public function setLvl(int $lvl): static
+    {
+        $this->lvl = $lvl;
+
+        return $this;
+    }
+
+    public function getPart(): ?string
+    {
+        return $this->part;
+    }
+
+    public function setPart(?string $part): static
+    {
+        $this->part = $part;
 
         return $this;
     }
