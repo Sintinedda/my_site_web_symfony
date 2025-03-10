@@ -181,23 +181,46 @@
             {% endif %}
         </td>
     </tr>
+    {% if skill.statBlock.save %}
+        <tr>
+            <td colspan="6"><b>Jets de sauvegarde : </b>{{ skill.statBlock.save }}</td>
+        </tr>
+    {% endif %}
     {% if skill.statBlock.competence %}
         <tr>
             <td colspan="6"><b>Compétences : </b>{{ skill.statBlock.competence }}</td>
         </tr>
     {% endif %}
-    {% if skill.statBlock.immunityDamage %}
+    {% if skill.statBlock.immDamage %}
         <tr>
-            <td colspan="6"><b>Immunités aux dégâts : </b>{{ skill.statBlock.immunityDamage }}</td>
+            <td colspan="6"><b>Immunités aux dégâts : </b>
+                {% for imm in skill.statBlock.immDamage %}
+                    {{ imm }}
+                    {{ not loop.last ? ',' }}
+                {% endfor %}
+            </td>
         </tr>
     {% endif %}
-    {% if skill.statBlock.immunityCondition %}
+    {% if skill.statBlock.immState %}
         <tr>
-            <td colspan="6"><b>Immunités aux états : </b>{{ skill.statBlock.immunityCondition }}</td>
+            <td colspan="6"><b>Immunités aux états : </b>
+                {% for imm in skill.statBlock.immState %}
+                    {{ imm }}
+                    {{ not loop.last ? ',' }}
+                {% endfor %}
+            </td>
         </tr>
     {% endif %}
     <tr>
-        <td colspan="6"><b>Sens : </b>{{ skill.statBlock.sens }}</td>
+        <td colspan="6"><b>Sens : </b>Perception passive {{ skill.statBlock.pp }}
+            {% if skill.statBlock.sens %}
+                ,
+                {% for sens in skill.statBlock.sens %}
+                    {{ sens }}
+                    {{ not loop.last ? ',' }}
+                {% endfor %}
+            {% endif %}
+        </td>
     </tr>
     <tr>
         <td colspan="6"><b>Langues : </b>{{ skill.statBlock.language }}</td>
@@ -221,7 +244,17 @@
     </tr>
     {% for action in skill.statBlock.statBlockActions %}
         <tr>
-            <td colspan="6"><b>{{ action.name }}</b> {{ action.descr|raw }}</td>
+            <td colspan="6"><b>{{ action.name }}. </b> 
+                {% if action.type == 'w-cac' %}
+                    <i>Attaque au corps à corps avec une arme</i> : {{ skill.statBlock.touchWeaponCac }} pour toucher, 
+                    allonge {{ skill.statBlock.rangeWeaponCac }}, 
+                    {{ action.target }}.
+                    <br/>
+                    <i>Touché</i> : {{ skill.statBlock.damageWeaponCac }}.
+                    {% else %}
+                        {{ action.descr }}
+                {% endif %}
+            </td>
         </tr>
     {% endfor %}  
     {% if skill.statBlock.statBlockReactions|length >= 1 %}

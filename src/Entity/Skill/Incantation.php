@@ -14,7 +14,7 @@ class Incantation
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\OneToOne(inversedBy: 'incantation', cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(inversedBy: 'incantation', cascade: ['persist'])]
     #[ORM\JoinColumn(nullable: false)]
     private ?Classe $classe = null;
 

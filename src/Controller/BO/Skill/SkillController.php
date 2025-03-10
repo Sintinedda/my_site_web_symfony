@@ -2,9 +2,11 @@
 
 namespace App\Controller\BO\Skill;
 
+use App\Entity\Classe\Classe;
+use App\Entity\Classe\ClasseByLevel;
+use App\Entity\Skill\Incantation;
 use App\Entity\Skill\Skill;
 use App\Form\Skill\SkillType;
-use App\Repository\Skill\SkillRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,26 +16,26 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/admin/skill')]
 final class SkillController extends AbstractController
 {
-    #[Route(name: 'app_skill_index', methods: ['GET'])]
-    public function index(SkillRepository $skillRepository): Response
-    {
-        return $this->render('bo/skills/skill/index.html.twig', [
-            'skills' => $skillRepository->findAll(),
-        ]);
-    }
 
-    #[Route('/new', name: 'app_skill_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    #[Route('/new/{slug}', name: 'app_skill_new', methods: ['GET', 'POST'])]
+    public function new(string $slug, Request $request, EntityManagerInterface $em): Response
     {
+        $classe = $em->getRepository(Classe::class)->findOneBy(['slug' => $slug]);
         $skill = new Skill();
         $form = $this->createForm(SkillType::class, $skill);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($skill);
-            $entityManager->flush();
 
-            return $this->redirectToRoute('app_skill_index', [], Response::HTTP_SEE_OTHER);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $lvls = $form->get('lvl')->getData();
+            foreach ($lvls as $lvl) {
+                $classeLvl = $em->getRepository(ClasseByLevel::class)->findOneBy(['classe' => $classe, 'level' => $lvl]);
+                $skill->addClasse($classeLvl);
+            }
+            $em->persist($skill);
+            $em->flush();
+
+            return $this->redirectToRoute('app_classe_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('bo/skills/skill/new.html.twig', [
@@ -42,32 +44,57 @@ final class SkillController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_skill_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Skill $skill, EntityManagerInterface $entityManager): Response
+    #[Route('/{id}/edit/{slug}', name: 'app_skill_edit', methods: ['GET', 'POST'])]
+    public function edit(string $slug, Request $request, Skill $skill, EntityManagerInterface $em): Response
     {
+        $classe = $em->getRepository(Classe::class)->findOneBy(['slug' => $slug]);
         $form = $this->createForm(SkillType::class, $skill);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
+            $delLvls = $em->getRepository(ClasseByLevel::class)->findBy(['classe' => $classe]);
+            foreach ($delLvls as $delLvl) {
+                $skill->removeClasse($delLvl);
+            }
+            $lvls = $form->get('lvl')->getData();
+            foreach ($lvls as $lvl) {
+                $classeLvl = $em->getRepository(ClasseByLevel::class)->findOneBy(['classe' => $classe, 'level' => $lvl]);
+                $skill->addClasse($classeLvl);
+            }
+            $em->flush();
 
-            return $this->redirectToRoute('app_skill_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_classe_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('bo/skills/skill/edit.html.twig', [
             'skill' => $skill,
+            'classe' => $classe,
             'form' => $form,
         ]);
     }
 
-    #[Route('/{id}', name: 'app_skill_delete', methods: ['POST'])]
-    public function delete(Request $request, Skill $skill, EntityManagerInterface $entityManager): Response
+    #[Route('/{id}/{slug}', name: 'app_skill_delete', methods: ['POST'])]
+    public function delete(string $slug, Request $request, Skill $skill, EntityManagerInterface $em): Response
     {
+        $classe = $em->getRepository(Classe::class)->findOneBy(['slug' => $slug]);
+
         if ($this->isCsrfTokenValid('delete'.$skill->getId(), $request->getPayload()->getString('_token'))) {
-            $entityManager->remove($skill);
-            $entityManager->flush();
+            $delLvls = $em->getRepository(ClasseByLevel::class)->findBy(['classe' => $classe]);
+            foreach ($delLvls as $delLvl) {
+                $skill->removeClasse($delLvl);
+                if ($skill->getName() == 'Incantation') {
+                    $incantation = $em->getRepository(Incantation::class)->findOneBy(['classe' => $classe]);
+                    if ($incantation) {
+                        $em->remove($incantation);
+                    }
+                }
+            }
+            if ($skill->getClasse()->count() == 0) {
+                $em->remove($skill);
+            }
+            $em->flush();
         }
 
-        return $this->redirectToRoute('app_skill_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_classe_index', [], Response::HTTP_SEE_OTHER);
     }
 }

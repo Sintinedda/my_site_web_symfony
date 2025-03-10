@@ -46,7 +46,7 @@ class SpecialtyItemTable
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $tr4_td2 = null;
 
-    #[ORM\OneToOne(inversedBy: 'specialtyItemTable', cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(inversedBy: 'specialtyItemTable', cascade: ['persist'])]
     #[ORM\JoinColumn(nullable: false)]
     private ?SpecialtyItem $specialtyItem = null;
 

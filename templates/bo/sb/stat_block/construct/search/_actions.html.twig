@@ -1,0 +1,8 @@
+<div>
+    <input type="text" onkeyup="search('search-action-{{ sb.id }}', 'liste-action-{{ sb.id }}')"  id="search-action-{{ sb.id }}" placeholder="chercher"/>
+    <ul id="liste-action-{{ sb.id }}">
+        {% for a in actions %}
+            <li style="display: none;"><span>{{ a.name }}</span> &nbsp; <a href="{{ path('app_stat_block_action_edit', {'id': a.id, 'slug': sb.slug}) }}">edit</a></li>
+        {% endfor %}
+    </ul>
+</div>

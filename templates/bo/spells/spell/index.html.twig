@@ -2,32 +2,23 @@
 
 {% block title %}Spell index{% endblock %}
 
+{% block javascripts %}
+    {{ parent () }}
+    <script src="{{ asset('assets/js/bo/search.js') }}"></script>
+{% endblock %}
+
 {% block body %}
     <h1>Spell index</h1>
     <a href="{{ path('app_spell_new') }}">Create new</a>
     <br/><br/><br/>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Name_fr</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for spell in spells|sort((a, b) => a.slug <=> b.slug) %}
-            <tr>
-                <td>{{ spell.nameFr }}</td>
-                <td>
-                    <a href="{{ path('app_spell_edit', {'id': spell.id}) }}">edit</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="17">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+    <div>
+        <input type="text" onkeyup="search('search-spell', 'liste-spell')"  id="search-spell" placeholder="chercher"/>
+        <ul id="liste-spell">
+            {% for s in spells|sort((a, b) => a.slug <=> b.slug) %}
+                <li style="display: none;"><span>{{ s.nameFr }}</span> &nbsp; <a href="{{ path('app_spell_edit', {'id': s.id}) }}">Éditer</a><br/></li>
+            {% endfor %}
+        </ul>
+    </div>
 
 {% endblock %}

@@ -22,7 +22,7 @@ class SubSkill
     #[ORM\Column(length: 1020, nullable: true)]
     private ?string $descr_one2 = null;
 
-    #[ORM\OneToOne(inversedBy: 'subSkill', cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(inversedBy: 'subSkill', cascade: ['persist'])]
     #[ORM\JoinColumn(nullable: false)]
     private ?Skill $skill = null;
 

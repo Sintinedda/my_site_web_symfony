@@ -30,7 +30,7 @@ class SpecialtyItem
     /**
      * @var Collection<int, SpecialtySkill>
      */
-    #[ORM\OneToMany(targetEntity: SpecialtySkill::class, mappedBy: 'specialty')]
+    #[ORM\ManyToMany(targetEntity: SpecialtySkill::class, mappedBy: 'specialty')]
     private Collection $specialtySkills;
 
     #[ORM\Column(length: 255)]
@@ -62,6 +62,9 @@ class SpecialtyItem
 
     #[ORM\Column(length: 1020, nullable: true)]
     private ?string $descr5 = null;
+
+    #[ORM\OneToOne(mappedBy: 'domain', cascade: ['persist', 'remove'])]
+    private ?DomainSpellTable $spellTable = null;
 
     public function __construct()
     {
@@ -143,10 +146,7 @@ class SpecialtyItem
     public function removeSpecialtySkill(SpecialtySkill $specialtySkill): static
     {
         if ($this->specialtySkills->removeElement($specialtySkill)) {
-            // set the owning side to null (unless already changed)
-            if ($specialtySkill->getSpecialty() === $this) {
-                $specialtySkill->setSpecialty(null);
-            }
+            $specialtySkill->removeSpecialty($this);
         }
 
         return $this;
@@ -273,6 +273,28 @@ class SpecialtyItem
     public function setDescr5(?string $descr5): static
     {
         $this->descr5 = $descr5;
+
+        return $this;
+    }
+
+    public function getSpellTable(): ?DomainSpellTable
+    {
+        return $this->spellTable;
+    }
+
+    public function setSpellTable(?DomainSpellTable $spellTable): static
+    {
+        // unset the owning side of the relation if necessary
+        if ($spellTable === null && $this->spellTable !== null) {
+            $this->spellTable->setDomain(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($spellTable !== null && $spellTable->getDomain() !== $this) {
+            $spellTable->setDomain($this);
+        }
+
+        $this->spellTable = $spellTable;
 
         return $this;
     }

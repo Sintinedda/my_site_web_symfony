@@ -2,9 +2,7 @@
 
 namespace App\Form\Skill;
 
-use App\Entity\Classe\Classe;
 use App\Entity\Skill\Incantation;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -53,10 +51,6 @@ class IncantationType extends AbstractType
             ])
             ->add('descr_six1', TextareaType::class, [
                 'required' =>false
-            ])
-            ->add('classe', EntityType::class, [
-                'class' => Classe::class,
-                'choice_label' => 'name',
             ])
         ;
     }

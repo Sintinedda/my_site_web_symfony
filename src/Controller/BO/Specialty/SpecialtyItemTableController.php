@@ -2,9 +2,9 @@
 
 namespace App\Controller\BO\Specialty;
 
+use App\Entity\Specialty\SpecialtyItem;
 use App\Entity\Specialty\SpecialtyItemTable;
 use App\Form\Specialty\SpecialtyItemTableType;
-use App\Repository\Specialty\SpecialtyItemTableRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,26 +14,20 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/admin/specialty-item-table')]
 final class SpecialtyItemTableController extends AbstractController
 {
-    #[Route(name: 'app_specialty_item_table_index', methods: ['GET'])]
-    public function index(SpecialtyItemTableRepository $specialtyItemTableRepository): Response
+    #[Route('/new/{id2}', name: 'app_specialty_item_table_new', methods: ['GET', 'POST'])]
+    public function new(int $id2, Request $request, EntityManagerInterface $em): Response
     {
-        return $this->render('bo/specialties/specialty_item_table/index.html.twig', [
-            'specialty_item_tables' => $specialtyItemTableRepository->findAll(),
-        ]);
-    }
-
-    #[Route('/new', name: 'app_specialty_item_table_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
-    {
+        $specialty = $em->getRepository(SpecialtyItem::class)->findOneBy(['id' => $id2]);
         $specialtyItemTable = new SpecialtyItemTable();
         $form = $this->createForm(SpecialtyItemTableType::class, $specialtyItemTable);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($specialtyItemTable);
-            $entityManager->flush();
+            $specialtyItemTable->setSpecialtyItem($specialty);
+            $em->persist($specialtyItemTable);
+            $em->flush();
 
-            return $this->redirectToRoute('app_specialty_item_table_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_classe_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('bo/specialties/specialty_item_table/new.html.twig', [
@@ -51,7 +45,7 @@ final class SpecialtyItemTableController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            return $this->redirectToRoute('app_specialty_item_table_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_classe_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('bo/specialties/specialty_item_table/edit.html.twig', [
@@ -68,6 +62,6 @@ final class SpecialtyItemTableController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('app_specialty_item_table_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_classe_index', [], Response::HTTP_SEE_OTHER);
     }
 }

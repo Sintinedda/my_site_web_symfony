@@ -18,12 +18,48 @@ doctrine:
             Doctrine\DBAL\Platforms\PostgreSQLPlatform: identity
         auto_mapping: true
         mappings:
-            App:
+            App\Classe:
                 type: attribute
                 is_bundle: false
-                dir: '%kernel.project_dir%/src/Entity'
-                prefix: 'App\Entity'
-                alias: App
+                dir: '%kernel.project_dir%/src/Entity/Classe'
+                prefix: 'App\Entity\Classe'
+                alias: AppClasse
+            App\Race:
+                type: attribute
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/Entity/Race'
+                prefix: 'App\Entity\Race'
+                alias: AppRace
+            App\Skill:
+                type: attribute
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/Entity/Skill'
+                prefix: 'App\Entity\Skill'
+                alias: AppSkill
+            App\Specialty:
+                type: attribute
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/Entity/Specialty'
+                prefix: 'App\Entity\Specialty'
+                alias: AppSpecialty
+            App\Spell:
+                type: attribute
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/Entity/Spell'
+                prefix: 'App\Entity\Spell'
+                alias: AppSpell
+            App\StatBlock:
+                type: attribute
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/Entity/StatBlock'
+                prefix: 'App\Entity\StatBlock'
+                alias: AppStatBlock
+            App\Talent:
+                type: attribute
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/Entity/Talent'
+                prefix: 'App\Entity\Talent'
+                alias: AppTalent
         controller_resolver:
             auto_mapping: false
 

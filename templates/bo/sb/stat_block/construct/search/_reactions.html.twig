@@ -1,0 +1,8 @@
+<div>
+    <input type="text" onkeyup="search('search-reaction-{{ sb.id }}', 'liste-reaction-{{ sb.id }}')"  id="search-reaction-{{ sb.id }}" placeholder="chercher"/>
+    <ul id="liste-reaction-{{ sb.id }}">
+        {% for r in reactions %}
+            <li style="display: none;"><span>{{ r.name }}</span> &nbsp; <a href="{{ path('app_stat_block_reaction_edit', {'id': r.id, 'slug': sb.slug}) }}">edit</a></li>
+        {% endfor %}
+    </ul>
+</div>

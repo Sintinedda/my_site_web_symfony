@@ -2,9 +2,9 @@
 
 namespace App\Controller\BO\StatBlock;
 
+use App\Entity\StatBlock\StatBlock;
 use App\Entity\StatBlock\StatBlockSkill;
 use App\Form\StatBlock\StatBlockSkillType;
-use App\Repository\StatBlock\StatBlockSkillRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,26 +14,20 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/admin/stat-block-skill')]
 final class StatBlockSkillController extends AbstractController
 {
-    #[Route(name: 'app_stat_block_skill_index', methods: ['GET'])]
-    public function index(StatBlockSkillRepository $statBlockSkillRepository): Response
+    #[Route('/new/{slug}', name: 'app_stat_block_skill_new', methods: ['GET', 'POST'])]
+    public function new(string $slug, Request $request, EntityManagerInterface $em): Response
     {
-        return $this->render('bo/sb/stat_block_skill/index.html.twig', [
-            'stat_block_skills' => $statBlockSkillRepository->findAll(),
-        ]);
-    }
-
-    #[Route('/new', name: 'app_stat_block_skill_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
-    {
+        $sb = $em->getRepository(StatBlock::class)->findOneBy(['slug' => $slug]);
         $statBlockSkill = new StatBlockSkill();
         $form = $this->createForm(StatBlockSkillType::class, $statBlockSkill);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($statBlockSkill);
-            $entityManager->flush();
+            $statBlockSkill->setStatblock($sb);
+            $em->persist($statBlockSkill);
+            $em->flush();
 
-            return $this->redirectToRoute('app_stat_block_skill_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_stat_block_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('bo/sb/stat_block_skill/new.html.twig', [
@@ -42,32 +36,40 @@ final class StatBlockSkillController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_stat_block_skill_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, StatBlockSkill $statBlockSkill, EntityManagerInterface $entityManager): Response
+    #[Route('/{id}/edit/{slug}', name: 'app_stat_block_skill_edit', methods: ['GET', 'POST'])]
+    public function edit(string $slug, Request $request, StatBlockSkill $statBlockSkill, EntityManagerInterface $em): Response
     {
+        $sb = $em->getRepository(StatBlock::class)->findOneBy(['slug' => $slug]);
         $form = $this->createForm(StatBlockSkillType::class, $statBlockSkill);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
+            $statBlockSkill->setStatblock($sb);
+            $em->flush();
 
-            return $this->redirectToRoute('app_stat_block_skill_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_stat_block_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('bo/sb/stat_block_skill/edit.html.twig', [
             'stat_block_skill' => $statBlockSkill,
             'form' => $form,
+            'sb' => $sb
         ]);
     }
 
-    #[Route('/{id}', name: 'app_stat_block_skill_delete', methods: ['POST'])]
-    public function delete(Request $request, StatBlockSkill $statBlockSkill, EntityManagerInterface $entityManager): Response
+    #[Route('/{id}/{slug}', name: 'app_stat_block_skill_delete', methods: ['POST'])]
+    public function delete(string $slug, Request $request, StatBlockSkill $statBlockSkill, EntityManagerInterface $em): Response
     {
+        $sb = $em->getRepository(StatBlock::class)->findOneBy(['slug' => $slug]);
+
         if ($this->isCsrfTokenValid('delete'.$statBlockSkill->getId(), $request->getPayload()->getString('_token'))) {
-            $entityManager->remove($statBlockSkill);
-            $entityManager->flush();
+            $statBlockSkill->removeStatblock($sb);
+            if ($statBlockSkill->getStatblock()->count() == 0) {
+                $em->remove($statBlockSkill);
+            }
+            $em->flush();
         }
 
-        return $this->redirectToRoute('app_stat_block_skill_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_stat_block_index', [], Response::HTTP_SEE_OTHER);
     }
 }

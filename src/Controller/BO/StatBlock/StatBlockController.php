@@ -3,8 +3,10 @@
 namespace App\Controller\BO\StatBlock;
 
 use App\Entity\StatBlock\StatBlock;
+use App\Entity\StatBlock\StatBlockAction;
+use App\Entity\StatBlock\StatBlockReaction;
+use App\Entity\StatBlock\StatBlockSkill;
 use App\Form\StatBlock\StatBlockType;
-use App\Repository\StatBlock\StatBlockRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,10 +17,13 @@ use Symfony\Component\Routing\Attribute\Route;
 final class StatBlockController extends AbstractController
 {
     #[Route(name: 'app_stat_block_index', methods: ['GET'])]
-    public function index(StatBlockRepository $statBlockRepository): Response
+    public function index(EntityManagerInterface $em): Response
     {
         return $this->render('bo/sb/stat_block/index.html.twig', [
-            'stat_blocks' => $statBlockRepository->findAll(),
+            'stat_blocks' => $em->getRepository(StatBlock::class)->findAll(),
+            'skills' => $em->getRepository(StatBlockSkill::class)->findAll(),
+            'actions' => $em->getRepository(StatBlockAction::class)->findAll(),
+            'reactions' => $em->getRepository(StatBlockReaction::class)->findAll()
         ]);
     }
 

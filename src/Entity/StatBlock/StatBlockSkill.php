@@ -3,6 +3,7 @@
 namespace App\Entity\StatBlock;
 
 use App\Repository\StatBlock\StatBlockSkillRepository;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: StatBlockSkillRepository::class)]
@@ -19,8 +20,11 @@ class StatBlockSkill
     #[ORM\Column(length: 1020)]
     private ?string $descr = null;
 
-    #[ORM\ManyToOne(inversedBy: 'statBlockSkills')]
-    private ?StatBlock $statblock = null;
+    /**
+     * @var Collection<int, StatBlock>
+     */
+    #[ORM\ManyToMany(targetEntity: StatBlock::class, inversedBy: 'statBlockSkills')]
+    private Collection $statblock;
 
     public function getId(): ?int
     {
@@ -51,14 +55,26 @@ class StatBlockSkill
         return $this;
     }
 
-    public function getStatblock(): ?StatBlock
+    /**
+     * @return Collection<int, StatBlock>
+     */
+    public function getStatblock(): Collection
     {
         return $this->statblock;
     }
 
-    public function setStatblock(?StatBlock $statblock): static
+    public function setStatblock(StatBlock $statblock): static
     {
-        $this->statblock = $statblock;
+        if (!$this->statblock->contains($statblock)) {
+            $this->statblock->add($statblock);
+        }
+
+        return $this;
+    }
+
+    public function removeStatblock(StatBlock $statblock): static
+    {
+        $this->statblock->removeElement($statblock);
 
         return $this;
     }

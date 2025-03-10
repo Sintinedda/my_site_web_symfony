@@ -70,7 +70,7 @@ class SpecialtySkillTable
     #[ORM\Column(length: 500, nullable: true)]
     private ?string $tr8_td2 = null;
 
-    #[ORM\OneToOne(inversedBy: 'specialtySkillTable', cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(inversedBy: 'specialtySkillTable', cascade: ['persist'])]
     #[ORM\JoinColumn(nullable: false)]
     private ?SpecialtySkill $specialty_skill = null;
 

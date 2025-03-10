@@ -2,9 +2,7 @@
 
 namespace App\Form\Specialty;
 
-use App\Entity\Specialty\Specialty;
 use App\Entity\Specialty\SpecialtyItem;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -39,11 +37,6 @@ class SpecialtyItemType extends AbstractType
                 'required' => false
             ])
             ->add('ua')
-            ->add('specialty', EntityType::class, [
-                'class' => Specialty::class,
-                'choice_label' => 'name',
-                'multiple' => true
-            ])
         ;
     }
 

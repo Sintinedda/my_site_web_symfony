@@ -1,0 +1,24 @@
+<div class="accordion" id="spe-skills">
+    {% for skill in specialty.specialtySkills|sort((a, b) => a.lvl <=> b.lvl) %}
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#spe-skill-{{ skill.id }}" aria-expanded="true" aria-controls="collapseOne">
+                    {{ skill.name }} 
+                </button>
+            </h2>
+            <div id="spe-skill-{{ skill.id }}" class="accordion-collapse collapse" data-bs-parent="#spe-skills">
+                <div class="accordion-body">
+                    <a href="{{ path('app_specialty_skill_edit', {'id': skill.id, 'id2': specialty.id}) }}">edit</a>
+                    <br/><br/>
+                    <p>Table skill
+                        {% if skill.specialtySkillTable %}
+                            <a href="{{ path('app_specialty_skill_table_edit', {'id': skill.specialtySkillTable.id}) }}">edit</a>
+                        {% else %}
+                            <a href="{{ path('app_specialty_skill_table_new', {'id2': skill.id}) }}">new</a>
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>

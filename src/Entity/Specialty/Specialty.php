@@ -22,7 +22,7 @@ class Specialty
     #[ORM\Column(length: 1020)]
     private ?string $descr1 = null;
 
-    #[ORM\OneToOne(inversedBy: 'specialty', cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(inversedBy: 'specialty', cascade: ['persist'])]
     private ?Classe $classe = null;
 
     /**

@@ -1,0 +1,47 @@
+<div class="accordion" id="{{ classe.name }}">
+
+    {# classe levels #}
+    <div class="accordion-item">
+        <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#levels{{ classe.id }}" aria-expanded="true" aria-controls="collapseOne">
+                Niveaux
+            </button>
+        </h2>
+        <div id="levels{{ classe.id }}" class="accordion-collapse collapse" data-bs-parent="#{{ classe.name }}">
+            <div class="accordion-body">
+                <a href="{{ path('app_classe_by_level_new', {'slug': classe.slug}) }}">Nouveau niveau</a>
+                <br/><br/>
+                {% include 'bo/classes/classe/construct/_levels.html.twig' %}
+            </div>
+        </div>
+    </div>
+
+    {# classe skills #}
+    <div class="accordion-item">
+        <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#skills{{ classe.id }}" aria-expanded="true" aria-controls="collapseOne">
+                Talents
+            </button>
+        </h2>
+        <div id="skills{{ classe.id }}" class="accordion-collapse collapse" data-bs-parent="#{{ classe.name }}">
+            {% include 'bo/classes/classe/construct/_skills.html.twig' %}  
+        </div>
+    </div>
+
+    {# classe specialties #}
+    <div class="accordion-item">
+        <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#specialties{{ classe.id }}" aria-expanded="true" aria-controls="collapseOne">
+                {% if classe.specialty %}
+                    {{ classe.specialty.name }}
+                {% else %}
+                    Pas de spécialité
+                {% endif %}
+            </button>
+        </h2>
+        <div id="specialties{{ classe.id }}" class="accordion-collapse collapse" data-bs-parent="#{{ classe.name }}"> 
+            {% include 'bo/classes/classe/construct/_specialties.html.twig' %}
+        </div>
+    </div>
+
+</div>

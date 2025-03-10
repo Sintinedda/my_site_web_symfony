@@ -2,9 +2,7 @@
 
 namespace App\Form\Classe;
 
-use App\Entity\Classe\Classe;
 use App\Entity\Classe\ClasseByLevel;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -80,10 +78,6 @@ class ClasseByLevelType extends AbstractType
             ])
             ->add('sneak_attack', TextType::class, [
                 'required' => false
-            ])
-            ->add('classe', EntityType::class, [
-                'class' => Classe::class,
-                'choice_label' => 'name',
             ])
         ;
     }
