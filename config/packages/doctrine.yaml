@@ -18,6 +18,12 @@ doctrine:
             Doctrine\DBAL\Platforms\PostgreSQLPlatform: identity
         auto_mapping: true
         mappings:
+            App\User:
+                type: attribute
+                is_bundle: false
+                dir: '%kernel.project_dir%/src/Entity/User'
+                prefix: 'App\Entity\User'
+                alias: AppUser
             App\Classe:
                 type: attribute
                 is_bundle: false
