@@ -3,6 +3,8 @@
 namespace App\Entity\Specialty;
 
 use App\Repository\Specialty\SpecialtySkillTableRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: SpecialtySkillTableRepository::class)]
@@ -13,7 +15,7 @@ class SpecialtySkillTable
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 100)]
+    #[ORM\Column(length: 100, nullable: true)]
     private ?string $name = null;
 
     #[ORM\Column(length: 100)]
@@ -70,10 +72,6 @@ class SpecialtySkillTable
     #[ORM\Column(length: 500, nullable: true)]
     private ?string $tr8_td2 = null;
 
-    #[ORM\OneToOne(inversedBy: 'specialtySkillTable', cascade: ['persist'])]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?SpecialtySkill $specialty_skill = null;
-
     #[ORM\Column(length: 100, nullable: true)]
     private ?string $tr9_td1 = null;
 
@@ -98,6 +96,23 @@ class SpecialtySkillTable
     #[ORM\Column(length: 500, nullable: true)]
     private ?string $tr12_td2 = null;
 
+    #[ORM\Column(length: 50)]
+    private ?int $place = null;
+
+    /**
+     * @var Collection<int, SpecialtySkill>
+     */
+    #[ORM\ManyToMany(targetEntity: SpecialtySkill::class, inversedBy: 'tables')]
+    private Collection $skills;
+
+    #[ORM\Column]
+    private ?int $number = null;
+
+    public function __construct()
+    {
+        $this->skills = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -108,7 +123,7 @@ class SpecialtySkillTable
         return $this->name;
     }
 
-    public function setName(string $name): static
+    public function setName(?string $name): static
     {
         $this->name = $name;
 
@@ -331,18 +346,6 @@ class SpecialtySkillTable
         return $this;
     }
 
-    public function getSpecialtySkill(): ?SpecialtySkill
-    {
-        return $this->specialty_skill;
-    }
-
-    public function setSpecialtySkill(SpecialtySkill $specialty_skill): static
-    {
-        $this->specialty_skill = $specialty_skill;
-
-        return $this;
-    }
-
     public function getTr9Td1(): ?string
     {
         return $this->tr9_td1;
@@ -435,6 +438,54 @@ class SpecialtySkillTable
     public function setTr12Td2(?string $tr12_td2): static
     {
         $this->tr12_td2 = $tr12_td2;
+
+        return $this;
+    }
+
+    public function getPlace(): ?int
+    {
+        return $this->place;
+    }
+
+    public function setPlace(int $place): static
+    {
+        $this->place = $place;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, SpecialtySkill>
+     */
+    public function getSkills(): Collection
+    {
+        return $this->skills;
+    }
+
+    public function addSkill(SpecialtySkill $skill): static
+    {
+        if (!$this->skills->contains($skill)) {
+            $this->skills->add($skill);
+        }
+
+        return $this;
+    }
+
+    public function removeSkill(SpecialtySkill $skill): static
+    {
+        $this->skills->removeElement($skill);
+
+        return $this;
+    }
+
+    public function getNumber(): ?int
+    {
+        return $this->number;
+    }
+
+    public function setNumber(int $number): static
+    {
+        $this->number = $number;
 
         return $this;
     }

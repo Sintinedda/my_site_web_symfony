@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New SpellTable{% endblock %}
+
+{% block body %}
+    <h1>Create new SpellTable</h1>
+
+    {{ include('bo/spells/spell_table/_form.html.twig') }}
+
+    <a href="{{ path('app_spell_index') }}">back to list</a>
+{% endblock %}

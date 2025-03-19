@@ -60,13 +60,14 @@ class SearchType extends AbstractType
                 'multiple' => true,
                 'choices' => [
                     'Manuel du joueur' => 'Manuel du joueur',
-                    'Le guide de Xanathar' => 'Le guide de Xanathar'
+                    'Le guide de Xanathar' => 'Le guide de Xanathar',
+                    'Arcanes Déterrés' => 'Arcanes Déterrés'
                 ],
-                'choice_attr' => function () {
+                'choice_attr' => function () { 
                     return [
-                        'selected' => 'selected',
                         'class' => 'select-source',
-                        'onClick' => "unselect('select-source')"
+                        'onClick' => "unselect('select-source')",
+                        'selected' => 'selected'
                     ];
                 }
             ])

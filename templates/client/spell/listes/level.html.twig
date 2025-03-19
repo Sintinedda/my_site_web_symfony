@@ -22,7 +22,11 @@
         <ul class="spells-liste">
             {% for sort in sorts|sort((a, b) => a.nameFr <=> b.nameFr) %}
                 <li>
-                    <a href="{{ path('app_view_spell_show', { 'slug': sort.slug }) }}">{{ sort.nameFr }}</a>
+                    <a {% if sort.ua == true %}class="spell-ua"{% endif %} href="{{ path('app_view_spell_show', { 'slug': sort.slug }) }}">{{ sort.nameFr }}
+                        {% if sort.ua == true %}
+                            (AD)
+                        {% endif %}
+                    </a>
                     : {{ sort.shortDescr }}
                 </li>
             {% endfor %}

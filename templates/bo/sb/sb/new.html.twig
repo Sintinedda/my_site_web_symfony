@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent () }}
+    <link href="{{ asset('assets/css/bo/monstre/form.css') }}" rel="stylesheet"/>
+{% endblock %}
+
+{% block title %}New StatBlock{% endblock %}
+
+{% block body %}
+    <h1>Create new StatBlock</h1>
+
+    {{ include('bo/sb/sb/_form.html.twig') }}
+
+    <a href="{{ path('app_sb') }}">back to list</a>
+{% endblock %}

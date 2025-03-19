@@ -25,11 +25,11 @@
     <div class="container">
         <div class="filters-container">
             <div class="filters">
-                {% include 'client/spell/construct/_form.html.twig' %}
-                {% include 'client/spell/construct/_checkboxs.html.twig' %}
+                {% include 'client/spell/construct/filters/_form.html.twig' %}
+                {% include 'client/spell/construct/filters/_checkboxs.html.twig' %}
             </div>
             <div class="search">
-                {% include 'client/spell/construct/_searchbar.html.twig' %}
+                {% include 'client/spell/construct/filters/_searchbar.html.twig' %}
             </div> 
         </div>
         <table id="spells-table" class="spells-table">
@@ -49,9 +49,13 @@
                 </tr>
             </thead>
             <tbody id="spells-tbody">
-                {% for sort in sorts|sort((a, b) => a.nameFr <=> b.nameFr) %}
+                {% for sort in sorts|sort((a, b) => a.slug <=> b.slug) %}
                     <tr>
-                        <td class="spells-table-name"><a href="{{ path('app_view_spell_show', { 'slug': sort.slug }) }}">{{ sort.nameFr }}</a></td>
+                        <td class="spells-table-name">
+                            <a {% if sort.ua == true %}class="spell-ua"{% endif %} href="{{ path('app_view_spell_show', { 'slug': sort.slug }) }}" target="_blank">
+                                {{ sort.nameFr }} {% if sort.ua == true %}(AD){% endif %}
+                            </a>
+                        </td>
                         <td class="spells-table-vo vo show1024">{{ sort.nameEng }}</td>
                         <td class="spells-table-lvl">{{ sort.level }}</td>
                         <td class="spells-table-school school">{{ sort.school.name }}</td>

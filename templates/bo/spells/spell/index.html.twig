@@ -13,12 +13,23 @@
     <br/><br/><br/>
 
     <div>
-        <input type="text" onkeyup="search('search-spell', 'liste-spell')"  id="search-spell" placeholder="chercher"/>
-        <ul id="liste-spell">
+        <input type="text" onkeyup="searchTable('search-spell', 'table-spell')"  id="search-spell" placeholder="chercher"/>
+        <table id="table-spell">
+            <tr>
+                <th>Nom</th>
+                <th colspan="2">Tableau</th>
+                <th colspan="2">Liste</th>
+            </tr>
             {% for s in spells|sort((a, b) => a.slug <=> b.slug) %}
-                <li style="display: none;"><span>{{ s.nameFr }}</span> &nbsp; <a href="{{ path('app_spell_edit', {'id': s.id}) }}">Éditer</a><br/></li>
+                <tr style="display: none;">
+                    <td style="padding: 5px 10px;"><a href="{{ path('app_spell_edit', {'id': s.id}) }}">{{ s.nameFr }}</a></td>
+                    <td style="padding: 5px 10px;"><a href="{{ path('app_spell_table_new', {'slug': s.slug}) }}">Nv Tableau</a></td>
+                    <td style="padding: 5px 10px;">Tableau &nbsp;{% for t in s.tables %}<a href="{{ path('app_spell_table_edit', {'id': t.id}) }}">{{ t.number }}</a>&nbsp; - &nbsp;{% endfor %}</td>
+                    <td style="padding: 5px 10px;"><a href="{{ path('app_spell_list_new', {'slug': s.slug}) }}">Nvlle Liste</a></td>
+                    <td style="padding: 5px 10px;">Liste : &nbsp;{% for l in s.lists %}<a href="{{ path('app_spell_list_edit', {'id': l.id}) }}">{{ l.number }}</a>&nbsp; - &nbsp;{% endfor %}</td>
+                </tr>
             {% endfor %}
-        </ul>
+        </table>
     </div>
 
 {% endblock %}

@@ -4,6 +4,7 @@ namespace App\Form\Specialty;
 
 use App\Entity\Specialty\SpecialtyItemTable;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -36,6 +37,12 @@ class SpecialtyItemTableType extends AbstractType
             ])
             ->add('tr4_td2', TextareaType::class, [
                 'required' => false
+            ])
+            ->add('place', ChoiceType::class, [
+                'choices' => [
+                    'top' => 'top',
+                    'bottom' => 'bottom'
+                ]
             ])
         ;
     }

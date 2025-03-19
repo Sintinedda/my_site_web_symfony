@@ -35,7 +35,7 @@ final class SpellController extends AbstractController
 
             return $this->redirectToRoute('app_spell_index', [], Response::HTTP_SEE_OTHER);
         }
-
+        
         return $this->render('bo/spells/spell/new.html.twig', [
             'spell' => $spell,
             'form' => $form,

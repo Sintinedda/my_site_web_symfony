@@ -1,22 +1,27 @@
-<div class="accordion" id="spe-skills">
+<div class="accordion" id="speSkills-{{ classe.id }}-{{ specialty.id }}">
     {% for skill in specialty.specialtySkills|sort((a, b) => a.lvl <=> b.lvl) %}
         <div class="accordion-item">
             <h2 class="accordion-header">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#spe-skill-{{ skill.id }}" aria-expanded="true" aria-controls="collapseOne">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#speSkill-{{ classe.id }}-{{ specialty.id }}-{{ skill.id }}" aria-expanded="true" aria-controls="collapseOne">
                     {{ skill.name }} 
                 </button>
             </h2>
-            <div id="spe-skill-{{ skill.id }}" class="accordion-collapse collapse" data-bs-parent="#spe-skills">
+            <div id="speSkill-{{ classe.id }}-{{ specialty.id }}-{{ skill.id }}" class="accordion-collapse collapse" data-bs-parent="#speSkills-{{ classe.id }}-{{ specialty.id }}">
                 <div class="accordion-body">
-                    <a href="{{ path('app_specialty_skill_edit', {'id': skill.id, 'id2': specialty.id}) }}">edit</a>
+                    <a href="{{ path('app_specialty_skill_edit', {'id': skill.id, 'slug': specialty.slug}) }}">edit</a>
                     <br/><br/>
-                    <p>Table skill
-                        {% if skill.specialtySkillTable %}
-                            <a href="{{ path('app_specialty_skill_table_edit', {'id': skill.specialtySkillTable.id}) }}">edit</a>
-                        {% else %}
-                            <a href="{{ path('app_specialty_skill_table_new', {'id2': skill.id}) }}">new</a>
-                        {% endif %}
-                    </p>
+                    {% include 'bo/classes/classe/construct/search/_spe-skill-tables.html.twig' %} 
+                    <br/><br/>
+                    <h5>Table skill</h5>
+                    {% for table in skill.tables %}
+                        <p>{{ table.name }} - <a href="{{ path('app_specialty_skill_table_edit', {'id': table.id, 'id2': skill.id}) }}">edit</a></p>
+                    {% endfor %}
+                    <p><a href="{{ path('app_specialty_skill_table_new', {'id2': skill.id}) }}">new</a></p>
+                    <h5>Liste skill</h5>
+                    {% for l in skill.lists %}
+                        <p>Liste {{ l.number }} - <a href="{{ path('app_specialty_skill_list_edit', {'id': l.id}) }}">edit</a></p>
+                    {% endfor %}
+                    <p><a href="{{ path('app_specialty_skill_list_new', {'id': skill.id}) }}">new</a></p>
                 </div>
             </div>
         </div>

@@ -5,7 +5,7 @@
 {% block stylesheets %}
     {{ parent () }}
     <link href="{{ asset('assets/css/classe/specialty.css') }}" rel="stylesheet"/>
-    <link href="{{ asset('assets/css/statblock/table.css') }}" rel="stylesheet"/>
+    <link href="{{ asset('assets/css/classe/statblock/table.css') }}" rel="stylesheet"/>
 {% endblock %}
 
 {% block body_id 'specialty-item' %}
@@ -46,9 +46,9 @@
             <p class="specialty-descr">{{ specialty.descr5|raw }}</p>
         {% endif %}
 
-        {% if specialty.specialtyItemTable %}
+        {% for table in specialty.tables %}
             {% include 'client/classe/construct/specialty/_table.html.twig' %}
-        {% endif %}
+        {% endfor %}
 
         <p class="specialty-source">Source : {{ specialty.source }}</p>
 
@@ -56,37 +56,7 @@
             {% include 'client/classe/construct/specialty/_domain-spell-table.html.twig' %}
         {% endif %}
 
-        {% for skill in specialty.specialtySkills|sort((a, b) => a.lvl <=> b.lvl) %}
-            <h2 class="specialty-skill-title">{{ skill.name }}</h2>
-            <p class="specialty-skill-descr">{{ skill.descr1|raw }}</p>
-            {% if skill.descr2 %}
-                <p class="specialty-skill-descr">{{ skill.descr2|raw }}</p>
-            {% endif %}
-            {% if skill.descr3 %}
-                <p class="specialty-skill-descr">{{ skill.descr3|raw }}</p>
-            {% endif %}
-            {% if skill.descr4 %}
-                <p class="specialty-skill-descr">{{ skill.descr4|raw }}</p>
-            {% endif %}
-            {% if skill.descr5 %}
-                <p class="specialty-skill-descr">{{ skill.descr5|raw }}</p>
-            {% endif %}
-            {% if skill.descr6 %}
-                <p class="specialty-skill-descr">{{ skill.descr6|raw }}</p>
-            {% endif %}
-            {% if skill.descr7 %}
-                <p class="specialty-skill-descr">{{ skill.descr7|raw }}</p>
-            {% endif %}
-
-            {% if skill.specialtySkillTable %}
-                {% include 'client/classe/construct/specialty/_skill-table.html.twig' %}
-            {% endif %}
-
-            {% if skill.statBlock %}
-                {% include 'client/classe/construct/specialty/_skill-stat-block.html.twig' %}
-            {% endif %}
-
-        {% endfor %}
+        {% include "client/classe/construct/specialty/_skill.html.twig" %}
     </div>
 
 {% endblock %}

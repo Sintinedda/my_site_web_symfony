@@ -9,37 +9,39 @@
     <br/><br/>
     {% include 'bo/classes/classe/construct/search/_specialties.html.twig' %}   
     
-    <div class="accordion" id="specialty">
+    <div class="accordion" id="specialty-{{ classe.id }}">
         {% for specialty in classe.specialty.specialtyItems|sort((a, b) => a.slug <=> b.slug) %}
             {% if specialty.ua == false %}
                 <div class="accordion-item">
                     <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#spe-{{ specialty.id }}" aria-expanded="true" aria-controls="collapseOne">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#spe-{{ classe.id }}-{{ specialty.id }}" aria-expanded="true" aria-controls="collapseOne">
                             {{ specialty.name }}
                         </button>
                     </h2>
-                    <div id="spe-{{ specialty.id }}" class="accordion-collapse collapse" data-bs-parent="#specialty">
+                    <div id="spe-{{ classe.id }}-{{ specialty.id }}" class="accordion-collapse collapse" data-bs-parent="#specialty-{{ classe.id }}">
                         <div class="accordion-body">
                             <a href="{{ path('app_specialty_item_edit', {'id': specialty.id, 'id2': classe.specialty.id}) }}">edit</a>
                             <br/><br/>
                             {% if specialty.part == 'Domaine' %}
-                                <p>Sorts de Domaine
+                                <h5>Sorts de Domaine</h5>
+                                <p>
                                     {% if specialty.spellTable %}
                                         <a href="{{ path('app_specialty_domain_spell_table_edit', {'id': specialty.spellTable.id}) }}">edit</a>
                                     {% else %}
-                                        <a href="{{ path('app_specialty_domain_spell_table_new', {'id2': specialty.id}) }}">new</a>
+                                        <a href="{{ path('app_specialty_domain_spell_table_new', {'slug': specialty.id}) }}">new</a>
                                     {% endif %}
                                 </p>
                             {% endif %}
-                            <p>Table Spe
-                                {% if specialty.specialtyItemTable %}
-                                    <a href="{{ path('app_specialty_item_table_edit', {'id': specialty.specialtyItemTable.id}) }}">edit</a>
-                                {% else %}
-                                    <a href="{{ path('app_specialty_item_table_new', {'id2': specialty.id}) }}">new</a>
-                                {% endif %}
+                            <h5>Table Spe</h5>
+                            {% include "bo/classes/classe/construct/search/_spe-tables.html.twig" %}
+                            <p>
+                                {% for table in specialty.tables %}
+                                    <a href="{{ path('app_specialty_item_table_edit', {'id': table.id, 'slug': specialty.slug}) }}">edit</a>
+                                {% endfor %}
+                                <a href="{{ path('app_specialty_item_table_new', {'slug': specialty.slug}) }}">new</a>
                             </p> 
                             <p>
-                                <a href="{{ path('app_specialty_skill_new', {'id2': specialty.id}) }}">Nouveau talent</a>
+                                <a href="{{ path('app_specialty_skill_new', {'slug': specialty.slug}) }}">Nouveau talent</a>
                             </p>
                             {% include 'bo/classes/classe/construct/search/_specialty-skills.html.twig' %}
                             {% include 'bo/classes/classe/construct/_spe-skills.html.twig' %}
@@ -57,32 +59,34 @@
             {% if specialty.ua == true %}
                 <div class="accordion-item">
                     <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#spe-{{ specialty.id }}" aria-expanded="true" aria-controls="collapseOne">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#spe-{{ classe.id }}-{{ specialty.id }}" aria-expanded="true" aria-controls="collapseOne">
                             {{ specialty.name }}
                         </button>
                     </h2>
-                    <div id="spe-{{ specialty.id }}" class="accordion-collapse collapse" data-bs-parent="#specialty">
+                    <div id="spe-{{ classe.id }}-{{ specialty.id }}" class="accordion-collapse collapse" data-bs-parent="#specialty-{{ classe.id }}">
                         <div class="accordion-body">
                             <a href="{{ path('app_specialty_item_edit', {'id': specialty.id, 'id2': classe.specialty.id}) }}">edit</a>
                             <br/><br/>
                             {% if specialty.part == 'Domaine' %}
-                                <p>Sorts de Domaine
+                                <h5>Sorts de Domaine</h5>
+                                <p>
                                     {% if specialty.spellTable %}
                                         <a href="{{ path('app_specialty_domain_spell_table_edit', {'id': specialty.spellTable.id}) }}">edit</a>
                                     {% else %}
-                                        <a href="{{ path('app_specialty_domain_spell_table_new', {'id2': specialty.id}) }}">new</a>
+                                        <a href="{{ path('app_specialty_domain_spell_table_new', {'slug': specialty.id}) }}">new</a>
                                     {% endif %}
                                 </p>
                             {% endif %}
-                            <p>Table Spe
-                                {% if specialty.specialtyItemTable %}
-                                    <a href="{{ path('app_specialty_item_table_edit', {'id': specialty.specialtyItemTable.id}) }}">edit</a>
-                                {% else %}
-                                    <a href="{{ path('app_specialty_item_table_new', {'id2': specialty.id}) }}">new</a>
-                                {% endif %}
+                            <h5>Table Spe</h5>
+                            {% include "bo/classes/classe/construct/search/_spe-tables.html.twig" %}
+                            <p>
+                                {% for table in specialty.tables %}
+                                    <a href="{{ path('app_specialty_item_table_edit', {'id': table.id, 'slug': specialty.slug}) }}">edit</a>
+                                {% endfor %}
+                                <a href="{{ path('app_specialty_item_table_new', {'slug': specialty.slug}) }}">new</a>
                             </p> 
                             <p>
-                                <a href="{{ path('app_specialty_skill_new', {'id2': specialty.id}) }}">Nouveau talent</a>
+                                <a href="{{ path('app_specialty_skill_new', {'slug': specialty.slug}) }}">Nouveau talent</a>
                             </p>
                             {% include 'bo/classes/classe/construct/search/_specialty-skills.html.twig' %}
                             {% include 'bo/classes/classe/construct/_spe-skills.html.twig' %}

@@ -15,8 +15,13 @@
     <h1 class="classe-title">Liste des classes</h1>
     <div class="classe-container">
         <ul class="classe-liste">
-            {% for classe in classes %}
-                <li class="classe-item">
+            <li class="classe-item all-items">
+                {% for classe in classes|sort((a, b) => a.slug <=> b.slug) %}
+                    <a href="#{{ classe.slug }}">{{ classe.name }}</a>
+                {% endfor %}
+            </li>
+            {% for classe in classes|sort((a, b) => a.slug <=> b.slug) %}
+                <li class="classe-item" id="{{ classe.slug }}">
                     <div class="classe-icon-container">
                         <img class="classe-icon" src="{{ asset('assets/img/classe-icons/' ~ classe.icon) }}" alt="{{ classe.name }}"/>
                     </div>

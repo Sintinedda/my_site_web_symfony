@@ -1,0 +1,102 @@
+{{ form_start(form) }}
+    <h2>Noms</h2>
+    <div>
+        {{ form_row(form.nom) }}
+        {{ form_row(form.slug) }}
+        {{ form_row(form.name) }}
+        {{ form_row(form.ua) }}
+    </div>
+    <br/>
+
+    <h2>Types</h2>
+    <div>
+        {{ form_row(form.category) }}
+        {{ form_row(form.type) }}
+        {{ form_row(form.type2) }}
+    </div>
+    <br/>
+
+    <h2>Tailles et alignement</h2>
+    <div>
+        {{ form_row(form.sizes) }}
+        {{ form_row(form.size_inf) }}
+        {{ form_row(form.size_sup) }}
+        {{ form_row(form.align) }}
+    </div>
+    <br/>
+
+    <h2>CA, DV, Vitesse</h2>
+    <div>
+        {{ form_row(form.ca) }}
+        {{ form_row(form.armor) }}
+        {{ form_row(form.pv) }}
+        {{ form_row(form.dv) }}
+        {{ form_row(form.speed) }}
+    </div>
+    <br/>
+
+    <h2>Capacités</h2>
+    <div>
+        {{ form_row(form.str) }}
+        {{ form_row(form.dex) }}
+        {{ form_row(form.con) }}
+        {{ form_row(form.intell) }}
+        {{ form_row(form.wis) }}
+        {{ form_row(form.cha) }}
+    </div>
+    <br/>
+
+    <h2>JdS et comp</h2>
+    <div>
+        {{ form_row(form.save) }}
+        {{ form_row(form.comp) }}
+    </div>
+    <br/>
+
+    <h2>Rés et Imm</h2>
+    <div>
+        {{ form_row(form.res_damage) }}
+        {{ form_row(form.res_state) }}
+        {{ form_row(form.imm_damage) }}
+        {{ form_row(form.imm_state) }}
+    </div>
+    <br/>
+
+    <h2>Sens et PP</h2>
+    <div>
+        {{ form_row(form.sens) }}
+        {{ form_row(form.pp) }}
+        {{ form_row(form.pp2) }}
+    </div>
+    <br/>
+
+    <h2>Langue, FP, BM</h2>
+    <div>
+        {{ form_row(form.language) }}
+        {{ form_row(form.fp) }}
+        {{ form_row(form.xp) }}
+        {{ form_row(form.bm) }}
+    </div>
+    <br/>
+
+    <h2>CAC</h2>
+    <div>
+        {{ form_row(form.touch_cac) }}
+        {{ form_row(form.range_cac) }}
+        {{ form_row(form.damage_cac) }}
+    </div>
+    <br/>
+
+    <h2>Range</h2>
+    <div>
+        {{ form_row(form.touch_range) }}
+        {{ form_row(form.range_range) }}
+        {{ form_row(form.damage_range) }}
+    </div>
+    <br/>
+
+    {{ form_row(form.source) }}
+    {{ form_row(form.descr) }}
+    {{ form_row(form.skill) }}
+    <button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

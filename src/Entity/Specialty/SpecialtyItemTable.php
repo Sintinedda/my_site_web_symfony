@@ -3,6 +3,8 @@
 namespace App\Entity\Specialty;
 
 use App\Repository\Specialty\SpecialtyItemTableRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: SpecialtyItemTableRepository::class)]
@@ -13,42 +15,52 @@ class SpecialtyItemTable
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 100, nullable: true)]
     private ?string $name = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 100)]
     private ?string $th1 = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 100)]
     private ?string $th2 = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 100)]
     private ?string $tr1_td1 = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 500)]
     private ?string $tr1_td2 = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 100, nullable: true)]
     private ?string $tr2_td1 = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 500, nullable: true)]
     private ?string $tr2_td2 = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 100, nullable: true)]
     private ?string $tr3_td1 = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 500, nullable: true)]
     private ?string $tr3_td2 = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 100, nullable: true)]
     private ?string $tr4_td1 = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 500, nullable: true)]
     private ?string $tr4_td2 = null;
 
-    #[ORM\OneToOne(inversedBy: 'specialtyItemTable', cascade: ['persist'])]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?SpecialtyItem $specialtyItem = null;
+    #[ORM\Column(length: 50)]
+    private ?string $place = null;
+
+    /**
+     * @var Collection<int, SpecialtyItem>
+     */
+    #[ORM\ManyToMany(targetEntity: SpecialtyItem::class, inversedBy: 'tables')]
+    private Collection $specialties;
+
+    public function __construct()
+    {
+        $this->specialties = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -60,7 +72,7 @@ class SpecialtyItemTable
         return $this->name;
     }
 
-    public function setName(string $name): static
+    public function setName(?string $name): static
     {
         $this->name = $name;
 
@@ -187,14 +199,38 @@ class SpecialtyItemTable
         return $this;
     }
 
-    public function getSpecialtyItem(): ?SpecialtyItem
+    public function getPlace(): ?string
     {
-        return $this->specialtyItem;
+        return $this->place;
     }
 
-    public function setSpecialtyItem(SpecialtyItem $specialtyItem): static
+    public function setPlace(string $place): static
     {
-        $this->specialtyItem = $specialtyItem;
+        $this->place = $place;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, SpecialtyItem>
+     */
+    public function getSpecialties(): Collection
+    {
+        return $this->specialties;
+    }
+
+    public function addSpecialty(SpecialtyItem $specialty): static
+    {
+        if (!$this->specialties->contains($specialty)) {
+            $this->specialties->add($specialty);
+        }
+
+        return $this;
+    }
+
+    public function removeSpecialty(SpecialtyItem $specialty): static
+    {
+        $this->specialties->removeElement($specialty);
 
         return $this;
     }

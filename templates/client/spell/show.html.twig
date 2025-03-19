@@ -12,7 +12,7 @@
 {% block main %}
 
     <div class="cont spell-container">
-        <h1 class="spell-name">{{ sort.nameFr }}</h1>
+        <h1 class="spell-name">{{ sort.nameFr }} {% if sort.ua == true %} (AD) {% endif %}</h1>
         <p>[ {{ sort.nameEng }} ]</p>
         <p><i>niveau {{ sort.level }} - {{ sort.school.name }} 
             {% if sort.ritual == true %}
@@ -34,51 +34,15 @@
                 {{ sort.duration }}
             </p>
         </div>
-            <p>{{ sort.descr1|raw }}</p>
-            {% if sort.descr2 %}
-                <p>{{ sort.descr2|raw }}</p>
-            {% endif %}
-            {% if sort.descr3 %}
-                <p>{{ sort.descr3|raw }}</p>
-            {% endif %}
-            {% if sort.descr4 %}
-                <p>{{ sort.descr4|raw }}</p>
-            {% endif %}
-            {% if sort.descr5 %}
-                <p>{{ sort.descr5|raw }}</p>
-            {% endif %}
-            {% if sort.descr6 %}
-                <p>{{ sort.descr6|raw }}</p>
-            {% endif %}
-            {% if sort.descr7 %}
-                <p>{{ sort.descr7|raw }}</p>
-            {% endif %}
-            {% if sort.descr8 %}
-                <p>{{ sort.descr8|raw }}</p>
-            {% endif %}
-            {% if sort.descr9 %}
-                <p>{{ sort.descr9|raw }}</p>
-            {% endif %}
-            {% if sort.descr10 %}
-                <p>{{ sort.descr10|raw }}</p>
-            {% endif %}
-            {% if sort.descr11 %}
-                <p>{{ sort.descr11|raw }}</p>
-            {% endif %}
-            {% if sort.descr12 %}
-                <p>{{ sort.descr12|raw }}</p>
-            {% endif %}
-            {% if sort.descr13 %}
-                <p>{{ sort.descr13|raw }}</p>
-            {% endif %}
+            {% include "client/spell/construct/show/_descrs.html.twig" %}
             {% if sort.upperLevel %}
                 <p><b><i>Aux niveaux supérieurs. </i></b>{{ sort.upperLevel|raw }}</p>
             {% endif %}
         <div class="spell-spans">
             {% for classe in sort.classes %}
-                <p class="spell-classe"> {{ classe.name }} </p>
+                <p class="spell-classe">{{ classe.name }}</p>
             {% endfor %}
-            <p class="spell-source"> {{ sort.source }} </p>
+            <p class="spell-source">{{ sort.source }} {% if sort.uaPart %}{{ sort.uaPart }}{% endif %}</p>
         </div>
     </div>
 

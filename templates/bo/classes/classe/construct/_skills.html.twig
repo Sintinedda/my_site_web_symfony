@@ -2,18 +2,18 @@
     <a href="{{ path('app_skill_new', {'slug': classe.slug}) }}">Nouveau talent</a>
     <br/><br/>
     {% include 'bo/classes/classe/construct/search/_skills.html.twig' %}  
-    <div class="accordion" id="skills">
+    <div class="accordion" id="skills-{{ classe.id }}">
         {% set newArray = [] %}
         {% for lvl in classe.classeByLevels %}
             {% for skill in lvl.skills|sort((a, b) => a.level <=> b.level) %}
                 {% if skill.name not in newArray %}
                     <div class="accordion-item">
                         <h2 class="accordion-header">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#skill-{{ skill.id }}" aria-expanded="true" aria-controls="collapseOne">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#skill-{{ classe.id }}-{{ skill.id }}" aria-expanded="true" aria-controls="collapseOne">
                                 {{ skill.name }}
                             </button>
                         </h2>
-                        <div id="skill-{{ skill.id }}" class="accordion-collapse collapse" data-bs-parent="#skills">
+                        <div id="skill-{{ classe.id }}-{{ skill.id }}" class="accordion-collapse collapse" data-bs-parent="#skills-{{ classe.id }}">
                             <div class="accordion-body">
                                 <a href="{{ path('app_skill_edit', {'id': skill.id, 'slug': classe.slug}) }}">Éditer</a>
                                 <br/><br/>

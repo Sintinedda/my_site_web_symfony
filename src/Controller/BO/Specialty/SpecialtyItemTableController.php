@@ -14,16 +14,16 @@ use Symfony\Component\Routing\Attribute\Route;
 #[Route('/admin/specialty-item-table')]
 final class SpecialtyItemTableController extends AbstractController
 {
-    #[Route('/new/{id2}', name: 'app_specialty_item_table_new', methods: ['GET', 'POST'])]
-    public function new(int $id2, Request $request, EntityManagerInterface $em): Response
+    #[Route('/new/{slug}', name: 'app_specialty_item_table_new', methods: ['GET', 'POST'])]
+    public function new(string $slug, Request $request, EntityManagerInterface $em): Response
     {
-        $specialty = $em->getRepository(SpecialtyItem::class)->findOneBy(['id' => $id2]);
+        $specialty = $em->getRepository(SpecialtyItem::class)->findOneBy(['slug' => $slug]);
         $specialtyItemTable = new SpecialtyItemTable();
         $form = $this->createForm(SpecialtyItemTableType::class, $specialtyItemTable);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $specialtyItemTable->setSpecialtyItem($specialty);
+            $specialtyItemTable->addSpecialty($specialty);
             $em->persist($specialtyItemTable);
             $em->flush();
 
@@ -36,14 +36,16 @@ final class SpecialtyItemTableController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_specialty_item_table_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, SpecialtyItemTable $specialtyItemTable, EntityManagerInterface $entityManager): Response
+    #[Route('/{id}/edit/{slug}', name: 'app_specialty_item_table_edit', methods: ['GET', 'POST'])]
+    public function edit(Request $request, SpecialtyItemTable $specialtyItemTable, string $slug, EntityManagerInterface $em): Response
     {
+        $specialty = $em->getRepository(SpecialtyItem::class)->findOneBy(['slug' => $slug]);
         $form = $this->createForm(SpecialtyItemTableType::class, $specialtyItemTable);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
+            $specialtyItemTable->addSpecialty($specialty);
+            $em->flush();
 
             return $this->redirectToRoute('app_classe_index', [], Response::HTTP_SEE_OTHER);
         }
@@ -51,15 +53,21 @@ final class SpecialtyItemTableController extends AbstractController
         return $this->render('bo/specialties/specialty_item_table/edit.html.twig', [
             'specialty_item_table' => $specialtyItemTable,
             'form' => $form,
+            'specialty' => $specialty
         ]);
     }
 
-    #[Route('/{id}', name: 'app_specialty_item_table_delete', methods: ['POST'])]
-    public function delete(Request $request, SpecialtyItemTable $specialtyItemTable, EntityManagerInterface $entityManager): Response
+    #[Route('/{id}/{slug}', name: 'app_specialty_item_table_delete', methods: ['POST'])]
+    public function delete(Request $request, SpecialtyItemTable $specialtyItemTable, string $slug, EntityManagerInterface $em): Response
     {
+        $specialty = $em->getRepository(SpecialtyItem::class)->findOneBy(['slug' => $slug]);
+
         if ($this->isCsrfTokenValid('delete'.$specialtyItemTable->getId(), $request->getPayload()->getString('_token'))) {
-            $entityManager->remove($specialtyItemTable);
-            $entityManager->flush();
+            $specialtyItemTable->removeSpecialty($specialty);
+            if ($specialtyItemTable->getSpecialties($specialty)->count() == 0) {
+                $em->remove($specialtyItemTable);
+            }
+            $em->flush();
         }
 
         return $this->redirectToRoute('app_classe_index', [], Response::HTTP_SEE_OTHER);

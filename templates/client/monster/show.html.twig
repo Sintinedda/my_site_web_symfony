@@ -1,0 +1,126 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ monster.nom }}{% endblock %}
+
+{% block stylesheets %}
+    {{ parent () }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent () }}
+{% endblock %}
+
+{% block body_id 'monster-item' %}
+
+{% block main %}
+
+    <div class="cont monster-container">
+        <div>
+            <div>
+                <h1><span id="monster-name">{{ monster.nom }}</span> {% if monster.ua %}(AD){% endif %}</h1>
+                <p>[ {{ monster.name }} ]</p>
+                <p><i>{{ monster.type }}{% if monster.type2 %}{{ monster.type2 }}{% endif %} de taille
+                    {% for size in monster.sizes %}{{ size }}{{ not loop.last ? ',' }}{% endfor %}
+                    {% if monster.sizeInf %}ou inférieure{% endif %}{% if monster.sizeSup %}ou supérieure{% endif %}
+                    {% if monster.align %}, {{ monster.align }}{% endif %}
+                </i></p>
+            </div>
+            <div>
+                <p><b>Classe d'armure : </b>{{ monster.ca }} {% if monster.armor %}({{ monster.armor }}){% endif %}</p>
+                <p><b>Points de vie : </b>{% if monster.pv %}{{ monster.pv }}{% endif %} {% if monster.dv %}{{ monster.dv }}{% endif %}</p>
+                <p><b>Vitesse : </b>{{ monster.speed }}</p>
+            <div>
+            <div>
+                <table>
+                    <tr>
+                        <th>FOR</th>
+                        <th>DEX</th>
+                        <th>CON</th>
+                        <th>INT</th>
+                        <th>SAG</th>
+                        <th>CHA</th>
+                    </tr>
+                    <tr>
+                        <td>{{ monster.str}} ({{ (monster.str // 2) - 5 }})</td>
+                        <td>{{ monster.dex}} ({{ (monster.dex // 2) - 5 }})</td>
+                        <td>{{ monster.con}} ({{ (monster.con // 2) - 5 }})</td>
+                        <td>{{ monster.intell}} ({{ (monster.intell // 2) - 5 }})</td>
+                        <td>{{ monster.wis}} ({{ (monster.wis // 2) - 5 }})</td>
+                        <td>{{ monster.cha}} ({{ (monster.cha // 2) - 5 }})</td>
+                    </tr>
+                </table>
+            </div>
+            <div>
+                {% if monster.save %}<p><b>Jets de sauvegarde : </b>{{ monster.save }}</p>{% endif %}
+                {% if monster.comp %}<p><b>Compétences : </b>{{ monster.comp }}</p>{% endif %}
+                {% if monster.resDamage %}<p><b>Résistance aux dégâts : </b>{% for res in monster.resDamage %}{{ res }}{{ not loop.last ? ',' }}{% endfor %}</p>{% endif %}
+                {% if monster.resState %}<p><b>Résistance aux états : </b>{% for res in monster.resState %}{{ res }}{{ not loop.last ? ',' }}{% endfor %}</p>{% endif %}
+                {% if monster.immDamage %}<p><b>Immunité aux dégâts : </b>{% for imm in monster.immDamage %}{{ imm }}{{ not loop.last ? ',' }}{% endfor %}</p>{% endif %}
+                {% if monster.immState %}<p><b>Immunité aux états : </b>{% for imm in monster.immState %}{{ imm }}{{ not loop.last ? ',' }}{% endfor %}</p>{% endif %}
+                <p><b>Sens : </b>{% if monster.sens %}{% for sens in monster.sens %}{{ sens }},{% endfor %}{% endif %}
+                    perception passive {{ monster.pp }} {% if monster.pp2 %}{{ monster.pp2 }}{% endif %}
+                </p>
+                <p><b>Langues : </b>{% if monster.language %}{{ monster.language }}{% else %}-{% endif %}</p>
+                <p><b>Puissance : </b>{% if monster.fp >= 0 %}{{ monster.fp }} {% if monster.xp %}({{ monster.xp }}PX){% endif %}{% else %}-{% endif %}</p>
+                <p><b>Bonus de maîtrise (BM) : </b>{% if monster.bm %}{{ monster.bm }}{% else %}-{% endif %}</p>
+            </div>
+            <div>
+                {% for skill in monster.skills %}<p><b>{{ skill.name }} </b>{{ skill.descr|raw }}</p>{% endfor %}
+            </div>
+            {% if monster.actions|length >= 1 %}
+                <div>
+                    <h2>Actions</h2>
+                    {% for action in monster.actions %}
+                        <p><b>{{ action.name }} </b>
+                            {% if action.type == 'w-cac' %}
+                                <i>Attaque au corps à corps avec une arme : </i> {{ monster.touchCac }} pour toucher, allonge {{ monster.rangeCac }}, {{ action.target }}.
+                                <br/>
+                                <i>Touché : </i>{{ monster.damageCac }} dégâts
+                                {% if action.damage in ['feu', 'force', 'foudre', 'froid', 'poison', 'tonnerre'] %}de{% elseif action.damage == 'acide' %}d'{% endif %}
+                                {{ action.damage}}
+                                {% for speA in action.spes %}
+                                    {% for speM in monster.spes %}
+                                        {% if speA == speM %}{{ speA.descr }}{% endif %}
+                                    {% endfor %}
+                                {% endfor %}
+                            {% elseif action.type == 'w-range' %}
+                                <i>Attaque à distance avec une arme : </i> {{ monster.touchRange }} pour toucher, allonge {{ monster.rangeRange }}, {{ action.target }}.
+                                <br/>
+                                <i>Touché : </i>{{ monster.damageRange }} dégâts
+                                {% if action.damage in ['feu', 'force', 'foudre', 'froid', 'poison', 'tonnerre'] %}de{% elseif action.damage == 'acide' %}d'{% endif %}
+                                {{ action.damage}}
+                                {% for speA in action.spes %}
+                                    {% for speM in monster.spes %}
+                                        {% if speA == speM %}{{ speA.descr }}{% endif %}
+                                    {% endfor %}
+                                {% endfor %}
+                            {% else %}
+                                {{ action.descr|raw }}
+                            {% endif %}
+                        </p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+            {% if monster.reactions|length >= 1 %}
+                <div>
+                    <h2>Réactions</h2>
+                    {% for reaction in monster.reactions %}<p><b>{{ reactions.name }} </b>{{ reactions.descr|raw }}</p>{% endfor %}
+                </div>
+            {% endif %}
+        </div>
+        {% if monster.descr %}
+            <p>{{ monster.descr }}</p>
+        {% endif %}
+        <p id="monster-source">{{ monster.source }}</p>
+    </div>
+
+    <script>
+        var nom = this.document.getElementById('monster-name').textContent.toLowerCase();
+        var span = this.document.getElementsByClassName('replace-name');
+
+        for (let i = 0; i < span.length; i++) {
+            span[i].textContent = nom;
+        } 
+    </script>   
+
+{% endblock %}

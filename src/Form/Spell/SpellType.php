@@ -88,6 +88,10 @@ class SpellType extends AbstractType
                 'required' =>false
             ])
             ->add('source', TextType::class)
+            ->add('ua_part', TextType::class, [
+                'required' => false
+            ])
+            ->add('ua')
             ->add('classes', EntityType::class, [
                 'class' => Classe::class,
                 'choice_label' => 'name',
