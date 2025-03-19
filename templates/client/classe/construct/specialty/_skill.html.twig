@@ -1,0 +1,115 @@
+{% for skill in specialty.specialtySkills|sort((a, b) => a.lvl <=> b.lvl) %}
+
+    <h2 class="specialty-skill-title">{{ skill.name }}</h2>
+    {% for l in skill.lists|sort((a, b) => a.number <=> b.number) %}
+        {% if l.place == 0 %}
+            {% include "client/classe/construct/specialty/_skill-list.html.twig" %}
+        {% endif %}
+    {% endfor %}
+    {% for t in skill.tables|sort((a, b) => a.number <=> b.number) %}
+        {% if t.place == 0 %}
+            {% include "client/classe/construct/specialty/_skill-table.html.twig" %}
+        {% endif %}
+    {% endfor %}
+
+
+    <p class="specialty-skill-descr">{{ skill.descr1|raw }}</p>
+    {% for l in skill.lists|sort((a, b) => a.number <=> b.number) %}
+        {% if l.place == 1 %}
+            {% include "client/classe/construct/specialty/_skill-list.html.twig" %}
+        {% endif %}
+    {% endfor %}
+    {% for t in skill.tables|sort((a, b) => a.number <=> b.number) %}
+        {% if t.place == 1 %}
+            {% include "client/classe/construct/specialty/_skill-table.html.twig" %}
+        {% endif %}
+    {% endfor %}
+
+    {% if skill.descr2 %}
+        <p class="specialty-skill-descr">{{ skill.descr2|raw }}</p>
+    {% endif %}
+    {% for l in skill.lists|sort((a, b) => a.number <=> b.number) %}
+        {% if l.place == 2 %}
+            {% include "client/classe/construct/specialty/_skill-list.html.twig" %}
+        {% endif %}
+    {% endfor %}
+    {% for t in skill.tables|sort((a, b) => a.number <=> b.number) %}
+        {% if t.place == 2 %}
+            {% include "client/classe/construct/specialty/_skill-table.html.twig" %}
+        {% endif %}
+    {% endfor %}
+
+    {% if skill.descr3 %}
+        <p class="specialty-skill-descr">{{ skill.descr3|raw }}</p>
+    {% endif %}
+    {% for l in skill.lists|sort((a, b) => a.number <=> b.number) %}
+        {% if l.place == 3 %}
+            {% include "client/classe/construct/specialty/_skill-list.html.twig" %}
+        {% endif %}
+    {% endfor %}
+    {% for t in skill.tables|sort((a, b) => a.number <=> b.number) %}
+        {% if t.place == 3 %}
+            {% include "client/classe/construct/specialty/_skill-table.html.twig" %}
+        {% endif %}
+    {% endfor %}
+
+    {% if skill.descr4 %}
+        <p class="specialty-skill-descr">{{ skill.descr4|raw }}</p>
+    {% endif %}
+    {% for l in skill.lists|sort((a, b) => a.number <=> b.number) %}
+        {% if l.place == 4 %}
+            {% include "client/classe/construct/specialty/_skill-list.html.twig" %}
+        {% endif %}
+    {% endfor %}
+    {% for t in skill.tables|sort((a, b) => a.number <=> b.number) %}
+        {% if t.place == 4 %}
+            {% include "client/classe/construct/specialty/_skill-table.html.twig" %}
+        {% endif %}
+    {% endfor %}
+
+    {% if skill.descr5 %}
+        <p class="specialty-skill-descr">{{ skill.descr5|raw }}</p>
+    {% endif %}
+    {% for l in skill.lists|sort((a, b) => a.number <=> b.number) %}
+        {% if l.place == 5 %}
+            {% include "client/classe/construct/specialty/_skill-list.html.twig" %}
+        {% endif %}
+    {% endfor %}
+    {% for t in skill.tables|sort((a, b) => a.number <=> b.number) %}
+        {% if t.place == 5 %}
+            {% include "client/classe/construct/specialty/_skill-table.html.twig" %}
+        {% endif %}
+    {% endfor %}
+
+    {% if skill.descr6 %}
+        <p class="specialty-skill-descr">{{ skill.descr6|raw }}</p>
+    {% endif %}
+    {% for l in skill.lists|sort((a, b) => a.number <=> b.number) %}
+        {% if l.place == 6 %}
+            {% include "client/classe/construct/specialty/_skill-list.html.twig" %}
+        {% endif %}
+    {% endfor %}
+    {% for t in skill.tables|sort((a, b) => a.number <=> b.number) %}
+        {% if t.place == 6 %}
+            {% include "client/classe/construct/specialty/_skill-table.html.twig" %}
+        {% endif %}
+    {% endfor %}
+
+    {% if skill.descr7 %}
+        <p class="specialty-skill-descr">{{ skill.descr7|raw }}</p>
+    {% endif %}{% for l in skill.lists|sort((a, b) => a.number <=> b.number) %}
+        {% if l.place == 7 %}
+            {% include "client/classe/construct/specialty/_skill-list.html.twig" %}
+        {% endif %}
+    {% endfor %}
+    {% for t in skill.tables|sort((a, b) => a.number <=> b.number) %}
+        {% if t.place == 7 %}
+            {% include "client/classe/construct/specialty/_skill-table.html.twig" %}
+        {% endif %}
+    {% endfor %}
+
+    {% if skill.monster %}
+        {% include 'client/classe/construct/specialty/_sb.html.twig' %}
+    {% endif %}
+
+{% endfor %}

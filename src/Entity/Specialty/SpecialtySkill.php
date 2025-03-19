@@ -2,7 +2,7 @@
 
 namespace App\Entity\Specialty;
 
-use App\Entity\StatBlock\StatBlock;
+use App\Entity\Monster\SB;
 use App\Repository\Specialty\SpecialtySkillRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -46,21 +46,32 @@ class SpecialtySkill
     #[ORM\Column(length: 1020, nullable: true)]
     private ?string $descr7 = null;
 
-    #[ORM\OneToOne(mappedBy: 'specialty_skill', cascade: ['persist', 'remove'])]
-    private ?SpecialtySkillTable $specialtySkillTable = null;
-
-    #[ORM\OneToOne(mappedBy: 'specialty_skill', cascade: ['persist', 'remove'])]
-    private ?StatBlock $statBlock = null;
-
     #[ORM\Column]
     private ?int $lvl = null;
 
     #[ORM\Column(length: 50, nullable: true)]
     private ?string $part = null;
 
+    #[ORM\OneToOne(mappedBy: 'skill', cascade: ['persist'])]
+    private ?SB $monster = null;
+
+    /**
+     * @var Collection<int, SpecialtySkillTable>
+     */
+    #[ORM\ManyToMany(targetEntity: SpecialtySkillTable::class, mappedBy: 'skills')]
+    private Collection $tables;
+
+    /**
+     * @var Collection<int, SpecialtySkillList>
+     */
+    #[ORM\OneToMany(targetEntity: SpecialtySkillList::class, mappedBy: 'skill', orphanRemoval: true)]
+    private Collection $lists;
+
     public function __construct()
     {
         $this->specialty = new ArrayCollection();
+        $this->tables = new ArrayCollection();
+        $this->lists = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -188,45 +199,6 @@ class SpecialtySkill
         return $this;
     }
 
-    public function getSpecialtySkillTable(): ?SpecialtySkillTable
-    {
-        return $this->specialtySkillTable;
-    }
-
-    public function setSpecialtySkillTable(SpecialtySkillTable $specialtySkillTable): static
-    {
-        // set the owning side of the relation if necessary
-        if ($specialtySkillTable->getSpecialtySkill() !== $this) {
-            $specialtySkillTable->setSpecialtySkill($this);
-        }
-
-        $this->specialtySkillTable = $specialtySkillTable;
-
-        return $this;
-    }
-
-    public function getStatBlock(): ?StatBlock
-    {
-        return $this->statBlock;
-    }
-
-    public function setStatBlock(?StatBlock $statBlock): static
-    {
-        // unset the owning side of the relation if necessary
-        if ($statBlock === null && $this->statBlock !== null) {
-            $this->statBlock->setSpecialtySkill(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($statBlock !== null && $statBlock->getSpecialtySkill() !== $this) {
-            $statBlock->setSpecialtySkill($this);
-        }
-
-        $this->statBlock = $statBlock;
-
-        return $this;
-    }
-
     public function getLvl(): ?int
     {
         return $this->lvl;
@@ -247,6 +219,85 @@ class SpecialtySkill
     public function setPart(?string $part): static
     {
         $this->part = $part;
+
+        return $this;
+    }
+
+    public function getMonster(): ?SB
+    {
+        return $this->monster;
+    }
+
+    public function setMonster(?SB $monster): static
+    {
+        // unset the owning side of the relation if necessary
+        if ($monster === null && $this->monster !== null) {
+            $this->monster->setSkill(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($monster !== null && $monster->getSkill() !== $this) {
+            $monster->setSkill($this);
+        }
+
+        $this->monster = $monster;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, SpecialtySkillTable>
+     */
+    public function getTables(): Collection
+    {
+        return $this->tables;
+    }
+
+    public function addTable(SpecialtySkillTable $table): static
+    {
+        if (!$this->tables->contains($table)) {
+            $this->tables->add($table);
+            $table->addSkill($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTable(SpecialtySkillTable $table): static
+    {
+        if ($this->tables->removeElement($table)) {
+            $table->removeSkill($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, SpecialtySkillList>
+     */
+    public function getLists(): Collection
+    {
+        return $this->lists;
+    }
+
+    public function addList(SpecialtySkillList $list): static
+    {
+        if (!$this->lists->contains($list)) {
+            $this->lists->add($list);
+            $list->setSkill($this);
+        }
+
+        return $this;
+    }
+
+    public function removeList(SpecialtySkillList $list): static
+    {
+        if ($this->lists->removeElement($list)) {
+            // set the owning side to null (unless already changed)
+            if ($list->getSkill() === $this) {
+                $list->setSkill(null);
+            }
+        }
 
         return $this;
     }

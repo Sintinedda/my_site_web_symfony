@@ -5,7 +5,9 @@ namespace App\Controller\BO\Classe;
 use App\Entity\Classe\Classe;
 use App\Entity\Skill\Skill;
 use App\Entity\Specialty\SpecialtyItem;
+use App\Entity\Specialty\SpecialtyItemTable;
 use App\Entity\Specialty\SpecialtySkill;
+use App\Entity\Specialty\SpecialtySkillTable;
 use App\Form\Classe\ClasseType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -23,7 +25,9 @@ final class ClasseController extends AbstractController
             'classes' => $em->getRepository(Classe::class)->findAll(),
             'skills' => $em->getRepository(Skill::class)->findAll(),
             'specialties' => $em->getRepository(SpecialtyItem::class)->findAll(),
-            'speSkills' => $em->getRepository(SpecialtySkill::class)->findAll()
+            'speTables' => $em->getRepository(SpecialtyItemTable::class)->findAll(),
+            'speSkills' => $em->getRepository(SpecialtySkill::class)->findAll(),
+            'speSkillTables' => $em->getRepository(SpecialtySkillTable::class)->findAll(),
         ]);
     }
 

@@ -39,9 +39,6 @@ class SpecialtyItem
     #[ORM\Column(length: 1020, nullable: true)]
     private ?string $descr2 = null;
 
-    #[ORM\OneToOne(mappedBy: 'specialtyItem', cascade: ['persist', 'remove'])]
-    private ?SpecialtyItemTable $specialtyItemTable = null;
-
     #[ORM\Column]
     private ?bool $ua = null;
 
@@ -66,10 +63,17 @@ class SpecialtyItem
     #[ORM\OneToOne(mappedBy: 'domain', cascade: ['persist', 'remove'])]
     private ?DomainSpellTable $spellTable = null;
 
+    /**
+     * @var Collection<int, SpecialtyItemTable>
+     */
+    #[ORM\ManyToMany(targetEntity: SpecialtyItemTable::class, mappedBy: 'specialties')]
+    private Collection $tables;
+
     public function __construct()
     {
         $this->specialty = new ArrayCollection();
         $this->specialtySkills = new ArrayCollection();
+        $this->tables = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -176,23 +180,6 @@ class SpecialtyItem
         return $this;
     }
 
-    public function getSpecialtyItemTable(): ?SpecialtyItemTable
-    {
-        return $this->specialtyItemTable;
-    }
-
-    public function setSpecialtyItemTable(SpecialtyItemTable $specialtyItemTable): static
-    {
-        // set the owning side of the relation if necessary
-        if ($specialtyItemTable->getSpecialtyItem() !== $this) {
-            $specialtyItemTable->setSpecialtyItem($this);
-        }
-
-        $this->specialtyItemTable = $specialtyItemTable;
-
-        return $this;
-    }
-
     public function isUa(): ?bool
     {
         return $this->ua;
@@ -295,6 +282,33 @@ class SpecialtyItem
         }
 
         $this->spellTable = $spellTable;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, SpecialtyItemTable>
+     */
+    public function getTables(): Collection
+    {
+        return $this->tables;
+    }
+
+    public function addTable(SpecialtyItemTable $table): static
+    {
+        if (!$this->tables->contains($table)) {
+            $this->tables->add($table);
+            $table->addSpecialty($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTable(SpecialtyItemTable $table): static
+    {
+        if ($this->tables->removeElement($table)) {
+            $table->removeSpecialty($this);
+        }
 
         return $this;
     }

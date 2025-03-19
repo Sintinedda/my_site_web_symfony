@@ -1,0 +1,16 @@
+<div class="accordion" id="skills-{{ sb.id }}">
+    {% for skill in sb.skills|sort((a, b) => a.name <=> b.name) %}
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#skill-{{ skill.id }}" aria-expanded="true" aria-controls="collapseOne">
+                    {{ skill.name }}
+                </button>
+            </h2>
+            <div id="skill-{{ skill.id }}" class="accordion-collapse collapse" data-bs-parent="#skills-{{ sb.id }}">
+                <div class="accordion-body">
+                    <a href="{{ path('app_sb_skill_edit', {'id': skill.id, 'slug': sb.slug}) }}">edit</a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>

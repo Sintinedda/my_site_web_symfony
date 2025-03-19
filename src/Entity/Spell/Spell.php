@@ -107,9 +107,29 @@ class Spell
     #[ORM\Column(length: 1000, nullable: true)]
     private ?string $descr13 = null;
 
+    #[ORM\Column]
+    private ?bool $ua = null;
+
+    /**
+     * @var Collection<int, SpellTable>
+     */
+    #[ORM\OneToMany(targetEntity: SpellTable::class, mappedBy: 'spell', orphanRemoval: true)]
+    private Collection $tables;
+
+    /**
+     * @var Collection<int, SpellList>
+     */
+    #[ORM\OneToMany(targetEntity: SpellList::class, mappedBy: 'spell', orphanRemoval: true)]
+    private Collection $lists;
+
+    #[ORM\Column(length: 50, nullable: true)]
+    private ?string $ua_part = null;
+
     public function __construct()
     {
         $this->classes = new ArrayCollection();
+        $this->tables = new ArrayCollection();
+        $this->lists = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -473,6 +493,90 @@ class Spell
     public function setDescr13(?string $descr13): static
     {
         $this->descr13 = $descr13;
+
+        return $this;
+    }
+
+    public function isUa(): ?bool
+    {
+        return $this->ua;
+    }
+
+    public function setUa(bool $ua): static
+    {
+        $this->ua = $ua;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, SpellTable>
+     */
+    public function getTables(): Collection
+    {
+        return $this->tables;
+    }
+
+    public function addTable(SpellTable $table): static
+    {
+        if (!$this->tables->contains($table)) {
+            $this->tables->add($table);
+            $table->setSpell($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTable(SpellTable $table): static
+    {
+        if ($this->tables->removeElement($table)) {
+            // set the owning side to null (unless already changed)
+            if ($table->getSpell() === $this) {
+                $table->setSpell(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, SpellList>
+     */
+    public function getLists(): Collection
+    {
+        return $this->lists;
+    }
+
+    public function addList(SpellList $list): static
+    {
+        if (!$this->lists->contains($list)) {
+            $this->lists->add($list);
+            $list->setSpell($this);
+        }
+
+        return $this;
+    }
+
+    public function removeList(SpellList $list): static
+    {
+        if ($this->lists->removeElement($list)) {
+            // set the owning side to null (unless already changed)
+            if ($list->getSpell() === $this) {
+                $list->setSpell(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getUaPart(): ?string
+    {
+        return $this->ua_part;
+    }
+
+    public function setUaPart(?string $ua_part): static
+    {
+        $this->ua_part = $ua_part;
 
         return $this;
     }

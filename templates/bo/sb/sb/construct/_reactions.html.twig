@@ -1,0 +1,16 @@
+<div class="accordion" id="reactions-{{ sb.id }}">
+    {% for reaction in sb.reactions|sort((a, b) => a.name <=> b.name) %}
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#reaction-{{ reaction.id }}" aria-expanded="true" aria-controls="collapseOne">
+                    {{ reaction.name }}
+                </button>
+            </h2>
+            <div id="reaction-{{ reaction.id }}" class="accordion-collapse collapse" data-bs-parent="#reactions-{{ sb.id }}">
+                <div class="accordion-body">
+                    <a href="{{ path('app_sb_reaction_edit', {'id': reaction.id, 'slug': sb.slug}) }}">edit</a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>

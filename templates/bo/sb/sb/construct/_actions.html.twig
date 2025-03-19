@@ -1,0 +1,30 @@
+<div class="accordion" id="actions-{{ sb.id }}">
+    {% for action in sb.actions|sort((a, b) => a.name <=> b.name) %}
+        <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#action-{{ action.id }}" aria-expanded="true" aria-controls="collapseOne">
+                    {{ action.name }}
+                </button>
+            </h2>
+            <div id="action-{{ action.id }}" class="accordion-collapse collapse" data-bs-parent="#actions-{{ sb.id }}">
+                <div class="accordion-body">
+                    <a href="{{ path('app_sb_action_edit', {'id': action.id, 'slug': sb.slug}) }}">edit</a>
+                    <br/><br/>
+                    {% for speA in action.spes %}
+                        {% for speM in sb.spes %}
+                            {% if speA and speA == speM %}
+                                <a href="{{ path('app_sb_action_part_edit', {'id': speA.id}) }}">edit specificity</a> 
+                            {% else %}
+                                <a href="{{ path('app_sb_action_part_new', {'slug': sb.slug, 'id': action.id}) }}">new specificity</a> 
+                            {% endif %}
+                        {% else %}
+                            <a href="{{ path('app_sb_action_part_new', {'slug': sb.slug, 'id': action.id}) }}">new specificity</a> 
+                        {% endfor %}
+                    {% else %}
+                        <a href="{{ path('app_sb_action_part_new', {'slug': sb.slug, 'id': action.id}) }}">new specificity</a> 
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>

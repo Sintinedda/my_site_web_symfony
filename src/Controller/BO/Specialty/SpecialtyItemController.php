@@ -38,7 +38,7 @@ final class SpecialtyItemController extends AbstractController
     }
 
     #[Route('/{id}/edit/{id2}', name: 'app_specialty_item_edit', methods: ['GET', 'POST'])]
-    public function edit(int $id2, Request $request, SpecialtyItem $specialtyItem, EntityManagerInterface $em): Response
+    public function edit(Request $request, SpecialtyItem $specialtyItem, int $id2, EntityManagerInterface $em): Response
     {
         $form = $this->createForm(SpecialtyItemType::class, $specialtyItem);
         $form->handleRequest($request);
@@ -57,7 +57,7 @@ final class SpecialtyItemController extends AbstractController
     }
 
     #[Route('/{id}/{id2}', name: 'app_specialty_item_delete', methods: ['POST'])]
-    public function delete(int $id2, Request $request, SpecialtyItem $specialtyItem, EntityManagerInterface $em): Response
+    public function delete(Request $request, SpecialtyItem $specialtyItem, int $id2, EntityManagerInterface $em): Response
     {
         $specialty = $em->getRepository(Specialty::class)->findOneBy(['id' => $id2]);
 

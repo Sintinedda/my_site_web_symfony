@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New ActionPartMonster{% endblock %}
+
+{% block body %}
+    <h1>Create new ActionPartMonster</h1>
+
+    {{ include('bo/sb/sb_action_part/_form.html.twig') }}
+
+    <a href="{{ path('app_sb') }}">back to list</a>
+{% endblock %}

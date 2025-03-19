@@ -23,11 +23,11 @@ final class SpecialtySkillTableController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $specialtySkillTable->setSpecialtySkill($skill);
+            $specialtySkillTable->addSkill($skill);
             $em->persist($specialtySkillTable);
             $em->flush();
 
-            return $this->redirectToRoute('app_specialty_skill_table_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_classe_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('bo/specialties/specialty_skill_table/new.html.twig', [
@@ -36,30 +36,38 @@ final class SpecialtySkillTableController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_specialty_skill_table_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, SpecialtySkillTable $specialtySkillTable, EntityManagerInterface $entityManager): Response
+    #[Route('/{id}/edit/{id2}', name: 'app_specialty_skill_table_edit', methods: ['GET', 'POST'])]
+    public function edit(Request $request, SpecialtySkillTable $specialtySkillTable, int $id2, EntityManagerInterface $em): Response
     {
+        $skill = $em->getRepository(SpecialtySkill::class)->findOneBy(['id' =>$id2]);
         $form = $this->createForm(SpecialtySkillTableType::class, $specialtySkillTable);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
+            $specialtySkillTable->addSkill($skill);
+            $em->flush();
 
-            return $this->redirectToRoute('app_specialty_skill_table_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_classe_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('bo/specialties/specialty_skill_table/edit.html.twig', [
             'specialty_skill_table' => $specialtySkillTable,
+            'skill' => $skill,
             'form' => $form,
         ]);
     }
 
-    #[Route('/{id}', name: 'app_specialty_skill_table_delete', methods: ['POST'])]
-    public function delete(Request $request, SpecialtySkillTable $specialtySkillTable, EntityManagerInterface $entityManager): Response
+    #[Route('/{id}/{id2}', name: 'app_specialty_skill_table_delete', methods: ['POST'])]
+    public function delete(Request $request, SpecialtySkillTable $specialtySkillTable, int $id2, EntityManagerInterface $em): Response
     {
+        $skill = $em->getRepository(SpecialtySkill::class)->findOneBy(['id' =>$id2]);
+
         if ($this->isCsrfTokenValid('delete'.$specialtySkillTable->getId(), $request->getPayload()->getString('_token'))) {
-            $entityManager->remove($specialtySkillTable);
-            $entityManager->flush();
+            $specialtySkillTable->removeSkill($skill);
+            if ($specialtySkillTable->getSkills()->count() == 0) {
+                $em->remove($specialtySkillTable);
+            }
+            $em->flush();
         }
 
         return $this->redirectToRoute('app_classe_index', [], Response::HTTP_SEE_OTHER);

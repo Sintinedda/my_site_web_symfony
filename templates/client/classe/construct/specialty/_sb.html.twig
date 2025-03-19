@@ -1,0 +1,222 @@
+<table class="stat-block-table">
+    <tr>
+        <th colspan="6">{{ skill.monster.nom }}</th>
+    </tr>
+    <tr>
+        <td class="stat-block-name" colspan="6">[ {{ skill.monster.name }} ]</td>
+    </tr>
+    <tr>
+        <td colspan="6"><i>{{ skill.monster.type }}
+            {% if skill.monster.type2 %}
+                ({{ skill.monster.part2 }})
+            {% endif %}
+            de taille
+            {% for size in skill.monster.sizes %}
+                {{ size }}
+                {{ not loop.last ? ',' }}
+            {% endfor %}
+            {% if skill.monster.sizeInf %}
+                ou inférieure
+            {% endif %}
+            {% if skill.monster.sizeSup %}
+                ou supérieure
+            {% endif %}
+            {% if skill.monster.align %}
+                , {{ skill.monster.align }}
+            {% endif %}
+        </i></td>
+    </tr>
+    <tr>
+        <td colspan="6"><b>Classe d'armure : </b>{{ skill.monster.ca }}
+            {% if skill.monster.armor %}
+                ({{ skill.monster.armor }})
+            {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <td colspan="6"><b>Points de vie : </b>
+            {% if skill.monster.pv %}
+                {{ skill.monster.pv }}
+            {% endif %}
+            {% if skill.monster.dv %}
+                {{ skill.monster.dv }}
+            {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <td colspan="6"><b>Vitesse : </b>{{ skill.monster.speed }}</td>
+    </tr>
+    <tr>
+        <th>FOR</th>
+        <th>DEX</th>
+        <th>CON</th>
+        <th>INT</th>
+        <th>SAG</th>
+        <th>CHA</th>
+    </tr>
+    <tr>
+        <td>{{ skill.monster.str}} ({{ (skill.monster.str // 2) - 5 }})</td>
+        <td>{{ skill.monster.dex}} ({{ (skill.monster.dex // 2) - 5 }})</td>
+        <td>{{ skill.monster.con}} ({{ (skill.monster.con // 2) - 5 }})</td>
+        <td>{{ skill.monster.intell}} ({{ (skill.monster.intell // 2) - 5 }})</td>
+        <td>{{ skill.monster.wis}} ({{ (skill.monster.wis // 2) - 5 }})</td>
+        <td>{{ skill.monster.cha}} ({{ (skill.monster.cha // 2) - 5 }})</td>
+    </tr>
+    {% if skill.monster.save %}
+        <tr>
+            <td colspan="6"><b>Jets de sauvegarde : </b>{{ skill.monster.save }}</td>
+        </tr>
+    {% endif %}
+    {% if skill.monster.comp %}
+        <tr>
+            <td colspan="6"><b>Compétences : </b>{{ skill.monster.comp }}</td>
+        </tr>
+    {% endif %}
+    {% if skill.monster.resDamage %}
+        <tr>
+            <td colspan="6"><b>Résistance aux dégâts : </b>
+                {% for res in skill.monster.resDamage %}
+                    {{ res }}
+                    {{ not loop.last ? ',' }}
+                {% endfor %}
+            </td>
+        </tr>
+    {% endif %}
+    {% if skill.monster.resState %}
+        <tr>
+            <td colspan="6"><b>Résistance aux états : </b>
+                {% for res in skill.monster.resState %}
+                    {{ res }}
+                    {{ not loop.last ? ',' }}
+                {% endfor %}
+            </td>
+        </tr>
+    {% endif %}
+    {% if skill.monster.immDamage %}
+        <tr>
+            <td colspan="6"><b>Immunités aux dégâts : </b>
+                {% for imm in skill.monster.immDamage %}
+                    {{ imm }}
+                    {{ not loop.last ? ',' }}
+                {% endfor %}
+            </td>
+        </tr>
+    {% endif %}
+    {% if skill.monster.immState %}
+        <tr>
+            <td colspan="6"><b>Immunités aux états : </b>
+                {% for imm in skill.monster.immState %}
+                    {{ imm }}
+                    {{ not loop.last ? ',' }}
+                {% endfor %}
+            </td>
+        </tr>
+    {% endif %}
+    <tr>
+        <td colspan="6"><b>Sens : </b>
+            {% if skill.monster.sens %}
+                {% for sens in skill.monster.sens %}
+                    {{ sens }},
+                {% endfor %}
+            {% endif %}
+            perception passive {{ skill.monster.pp }}
+            {% if skill.monster.pp2 %}
+                {{ skill.monster.pp2 }}
+            {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <td colspan="6"><b>Langues : </b>{{ skill.monster.language }}</td>
+    </tr>
+    <tr>
+        <td colspan="6"><b>Puissance : </b>
+            {% if skill.monster.fp %}
+                {{ skill.monster.fp }}
+                {% if skill.monster.xp %}
+                    ({{ skill.monster.xp }}PX)
+                {% endif %}
+            {% else %}
+                -
+            {% endif %}
+        </td>
+    </tr>
+    <tr>
+        <td colspan="6"><b>Bonus de maîtrise (BM) : </b>
+            {% if skill.monster.bm %}
+                {{ skill.monster.bm }}
+            {% else %}
+                -
+            {% endif %}
+        </td>
+    </tr>
+    {% if skill.monster.skills|length >= 1 %}
+        <tr>
+            <th colspan="6">Capacités</th>
+        </tr>
+        {% for sk in skill.monster.skills %}
+            <tr >
+                <td colspan="6"><b>{{ sk.name }}</b> {{ sk.descr|raw }}</td>
+            </tr>
+        {% endfor %}
+    {% endif %}
+    {% if skill.monster.actions|length >= 1 %}
+        <tr>
+            <th colspan="6">Actions</th>
+        </tr>
+        {% for action in skill.monster.actions %}
+            <tr>
+                <td colspan="6"><b>{{ action.name }} </b> 
+                    {% if action.type == 'w-cac' %}
+                        <i>Attaque au corps à corps avec une arme</i> : {{ skill.monster.touchCac }} pour toucher, 
+                        allonge {{ skill.monster.rangeCac }}
+                        , {{ action.target }}.
+                        <br/>
+                        <i>Touché</i> : {{ skill.monster.damageCac }}
+                        dégâts 
+                        {% if action.damage in ['feu', 'force', 'foudre', 'froid', 'poison', 'tonnerre'] %}
+                            de
+                        {% elseif action.damage == 'acide' %}
+                            d'
+                        {% endif %}
+                        {{ action.damage }}
+                        {% for speA in action.spes %}
+                            {% for speM in monster.spes %}
+                                {% if speA == speM %}{{ speA.descr }}{% endif %}
+                            {% endfor %}
+                        {% endfor %}.
+                    {% elseif action.type == 'w-range' %}
+                        <i>Attaque à distance avec une arme</i> : {{ skill.monster.touchRange }} pour toucher, 
+                        allonge {{ skill.monster.rangeRange }}
+                        , {{ action.target }}.
+                        <br/>
+                        <i>Touché</i> : {{ skill.monster.damageRange }}
+                        dégâts 
+                        {% if action.damage in ['feu', 'force', 'foudre', 'froid', 'poison', 'tonnerre'] %}
+                            de
+                        {% elseif action.damage == 'acide' %}
+                            d'
+                        {% endif %}
+                        {{ action.damage }}
+                        {% for speA in action.spes %}
+                            {% for speM in monster.spes %}
+                                {% if speA == speM %}{{ speA.descr }}{% endif %}
+                            {% endfor %}
+                        {% endfor %}.
+                    {% else %}
+                        {{ action.descr|raw }}
+                    {% endif %}
+                </td>
+            </tr>
+        {% endfor %}  
+    {% endif %}
+    {% if skill.monster.reactions|length >= 1 %}
+        <tr>
+            <th colspan="6">Réactions</th>
+        </tr>
+        {% for reaction in skill.monster.reactions %}
+            <tr>
+                <td colspan="6"><b>{{ reaction.name }}</b> {{ reaction.descr|raw }}</td>
+            </tr>
+        {% endfor %}  
+    {% endif %}
+</table>

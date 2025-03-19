@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Listes des monstres{% endblock %}
+
+{% block stylesheets %}
+    {{ parent () }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent () }}
+{% endblock %}
+
+{% block body_id 'monster-list' %}
+
+{% block main %}
+
+    <h1 id="top">Listes des monstres</h1>
+    <div class="container">
+        <table id="monsters-table" class="monsters-table">
+            <thead>
+                <tr>
+                    <th>name</th>
+                </tr>
+            </thead>
+            <tbody id="spells-tbody">
+                {% for monster in monsters|sort((a, b) => a.slug <=> b.slug) %}
+                    <tr>
+                        <td><a {% if monster.ua == true %}class="monster-ua"{% endif %} href="{{ path('app_view_monster_show', {'slug': monster.slug}) }}">{{ monster.nom }}
+                            {% if monster.ua == true %}
+                                (AD)
+                            {% endif %}
+                        </a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

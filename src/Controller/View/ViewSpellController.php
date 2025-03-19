@@ -27,7 +27,7 @@ final class ViewSpellController extends AbstractController
         ]);
     }
 
-    #[Route('/tous', name: 'app_view_spell_all', methods: ['GET'])]
+    #[Route('s', name: 'app_view_spell_all', methods: ['GET'])]
     public function indexAll(EntityManagerInterface $em, Request $request): Response
     {
         $data = new SearchData();

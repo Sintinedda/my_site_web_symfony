@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New StatBlockSkill{% endblock %}
+
+{% block body %}
+    <h1>Create new StatBlockSkill</h1>
+
+    {{ include('bo/sb/sb_skill/_form.html.twig') }}
+
+    <a href="{{ path('app_sb') }}">back to list</a>
+{% endblock %}
