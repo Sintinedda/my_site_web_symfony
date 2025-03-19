@@ -7,20 +7,14 @@
     <div class="classe-skill-subdiv">
         <h4 class="classe-skill-subtitle">{{ classe.incantation.title2 }}</h4>
         <p class="classe-skill-descr">{{ classe.incantation.descrTwo1|raw }}</p>
-        {% if classe.incantation.descrTwo2 %}
-            <p class="classe-skill-descr">{{ classe.incantation.descrTwo2|raw }}</p>
-        {% endif %}
-        {% if classe.incantation.descrTwo3 %}
-            <p class="classe-skill-descr">{{ classe.incantation.descrTwo3|raw }}</p>
-        {% endif %}
+        {% if classe.incantation.descrTwo2 %}<p class="classe-skill-descr">{{ classe.incantation.descrTwo2|raw }}</p>{% endif %}
+        {% if classe.incantation.descrTwo3 %}<p class="classe-skill-descr">{{ classe.incantation.descrTwo3|raw }}</p>{% endif %}
     </div>
     {% if classe.incantation.title3 %}
         <div class="classe-skill-subdiv">
             <h4 class="classe-skill-subtitle">{{ classe.incantation.title3 }}</h4>
             <p class="classe-skill-descr">{{ classe.incantation.descrThree1|raw }}</p>
-            {% if classe.incantation.descrThree2 %}
-                <p class="classe-skill-descr">{{ classe.incantation.descrThree2|raw }}</p>
-            {% endif %}
+            {% if classe.incantation.descrThree2 %}<p class="classe-skill-descr">{{ classe.incantation.descrThree2|raw }}</p>{% endif %}
         </div>
     {% endif %}
     <div class="classe-skill-subdiv">

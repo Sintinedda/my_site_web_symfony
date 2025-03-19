@@ -4,6 +4,8 @@ namespace App\Form\Race;
 
 use App\Entity\Race\Race;
 use App\Entity\Race\SourceRace;
+use App\Entity\Source\Part;
+use App\Entity\Source\Source;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -18,7 +20,13 @@ class SourceRaceType extends AbstractType
         $builder
             ->add('name', TextType::class)
             ->add('slug', TextType::class)
-            ->add('source', TextType::class, [
+            ->add('source', EntityType::class, [
+                'class' => Source::class,
+                'choice_label' => 'name'
+            ])
+            ->add('sourcePart', EntityType::class, [
+                'class' => Part::class,
+                'choice_label' => 'number',
                 'required' => false
             ])
             ->add('descr1', TextAreaType::class, [

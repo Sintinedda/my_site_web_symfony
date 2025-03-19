@@ -45,9 +45,10 @@ class SpellRepository extends ServiceEntityRepository
     public function findSearch(SearchData $search): array
     {
         $qb = $this->createQueryBuilder('s')
-            ->select('cl', 'sc', 's')
+            ->select('cl', 'sc', 's', 'so')
             ->join('s.classes', 'cl')
-            ->join('s.school', 'sc');
+            ->join('s.school', 'sc')
+            ->join('s.source', 'so');
 
             if (!empty($search->min)) {
                 $qb = $qb
@@ -75,7 +76,7 @@ class SpellRepository extends ServiceEntityRepository
 
             if (!empty($search->sources)) {
                 $qb = $qb
-                    ->andWhere('s.source IN (:sources)')
+                    ->andWhere('so.name IN (:sources)')
                     ->setParameter('sources', $search->sources);
             }
 

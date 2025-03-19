@@ -13,49 +13,41 @@
 
 {% block main %}
 
-    <h1 class="specialty-title">
-        
+    <h1 class="specialty-title">    
         {% if specialty.part %}
             {{ specialty.part }}
-            {% if specialty.part2 == "de l'" %}
-                {{ specialty.part2 }}{{ specialty.name }}
-            {% else %}
-                {{ specialty.part2 }} {{ specialty.name }}
-            {% endif %}
+            {% if specialty.part2 == "de l'" %}{{ specialty.part2 }}{{ specialty.name }}{% else %}{{ specialty.part2 }} {{ specialty.name }}{% endif %}
         {% else %}
             {{ specialty.name }}
         {% endif %}
-        
-        {% if specialty.ua == true %}
-            (AD)
-        {% endif %}
-
+        {% if specialty.ua == true %}(AD){% endif %}
     </h1>
     <div class="cont">
         <p class="specialty-descr">{{ specialty.descr1|raw }}</p>
-        {% if specialty.descr2 %}
-            <p class="specialty-descr">{{ specialty.descr2|raw }}</p>
-        {% endif %}
-        {% if specialty.descr3 %}
-            <p class="specialty-descr">{{ specialty.descr3|raw }}</p>
-        {% endif %}
-        {% if specialty.descr4 %}
-            <p class="specialty-descr">{{ specialty.descr4|raw }}</p>
-        {% endif %}
-        {% if specialty.descr5 %}
-            <p class="specialty-descr">{{ specialty.descr5|raw }}</p>
-        {% endif %}
+        {% if specialty.descr2 %}<p class="specialty-descr">{{ specialty.descr2|raw }}</p>{% endif %}
+        {% if specialty.descr3 %}<p class="specialty-descr">{{ specialty.descr3|raw }}</p>{% endif %}
+        {% if specialty.descr4 %}<p class="specialty-descr">{{ specialty.descr4|raw }}</p>{% endif %}
+        {% if specialty.descr5 %}<p class="specialty-descr">{{ specialty.descr5|raw }}</p>{% endif %}
 
-        {% for table in specialty.tables %}
-            {% include 'client/classe/construct/specialty/_table.html.twig' %}
-        {% endfor %}
+        {# specialty table #}
+        {% include 'client/classe/construct/specialty/_table.html.twig' %}
 
-        <p class="specialty-source">Source : {{ specialty.source }}</p>
+        <p class="specialty-source">Source : 
+            {% for s in specialty.sources %}
+                {{ s.name }}
+                {% for p in specialty.sourceParts %}
+                    {% for ps in s.parts %}
+                        {% if p == ps %} {{ p.number}} - {{ p.name }}{% endif %}
+                    {% endfor %}
+                {% endfor %} 
+                {{ not loop.last ? ',' }}
+            {% endfor %}
+        </p>
 
-        {% if specialty.spellTable %}
-            {% include 'client/classe/construct/specialty/_domain-spell-table.html.twig' %}
-        {% endif %}
+        {# specialty domain table #}
+        {% include 'client/classe/construct/specialty/_domain-spell-table.html.twig' %}
 
+        {# specialty skill #}
         {% include "client/classe/construct/specialty/_skill.html.twig" %}
     </div>
 

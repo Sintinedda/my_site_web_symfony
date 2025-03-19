@@ -3,6 +3,8 @@
 namespace App\Form\Monster;
 
 use App\Entity\Monster\SB;
+use App\Entity\Source\Part;
+use App\Entity\Source\Source;
 use App\Entity\Specialty\SpecialtySkill;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -221,7 +223,15 @@ class SBType extends AbstractType
             ->add('damage_range', TextType::class, [
                 'required' => false
             ])
-            ->add('source', TextType::class)
+            ->add('source', EntityType::class, [
+                'class' => Source::class,
+                'choice_label' => 'name'
+            ])
+            ->add('sourcePart', EntityType::class, [
+                'class' => Part::class,
+                'choice_label' => 'number',
+                'required' => false
+            ])
             ->add('descr', TextareaType::class, [
                 'required' => false
             ])

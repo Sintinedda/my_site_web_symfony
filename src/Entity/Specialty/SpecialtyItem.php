@@ -2,6 +2,8 @@
 
 namespace App\Entity\Specialty;
 
+use App\Entity\Source\Part;
+use App\Entity\Source\Source;
 use App\Repository\Specialty\SpecialtyItemRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -32,9 +34,6 @@ class SpecialtyItem
      */
     #[ORM\ManyToMany(targetEntity: SpecialtySkill::class, mappedBy: 'specialty')]
     private Collection $specialtySkills;
-
-    #[ORM\Column(length: 255)]
-    private ?string $source = null;
 
     #[ORM\Column(length: 1020, nullable: true)]
     private ?string $descr2 = null;
@@ -69,11 +68,25 @@ class SpecialtyItem
     #[ORM\ManyToMany(targetEntity: SpecialtyItemTable::class, mappedBy: 'specialties')]
     private Collection $tables;
 
+    /**
+     * @var Collection<int, Source>
+     */
+    #[ORM\ManyToMany(targetEntity: Source::class, mappedBy: 'specialties')]
+    private Collection $sources;
+
+    /**
+     * @var Collection<int, Part>
+     */
+    #[ORM\ManyToMany(targetEntity: Part::class, mappedBy: 'specialties')]
+    private Collection $sourceParts;
+
     public function __construct()
     {
         $this->specialty = new ArrayCollection();
         $this->specialtySkills = new ArrayCollection();
         $this->tables = new ArrayCollection();
+        $this->sources = new ArrayCollection();
+        $this->sourceParts = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -152,18 +165,6 @@ class SpecialtyItem
         if ($this->specialtySkills->removeElement($specialtySkill)) {
             $specialtySkill->removeSpecialty($this);
         }
-
-        return $this;
-    }
-
-    public function getSource(): ?string
-    {
-        return $this->source;
-    }
-
-    public function setSource(string $source): static
-    {
-        $this->source = $source;
 
         return $this;
     }
@@ -308,6 +309,60 @@ class SpecialtyItem
     {
         if ($this->tables->removeElement($table)) {
             $table->removeSpecialty($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Source>
+     */
+    public function getSources(): Collection
+    {
+        return $this->sources;
+    }
+
+    public function addSource(Source $source): static
+    {
+        if (!$this->sources->contains($source)) {
+            $this->sources->add($source);
+            $source->addSpecialty($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSource(Source $source): static
+    {
+        if ($this->sources->removeElement($source)) {
+            $source->removeSpecialty($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Part>
+     */
+    public function getSourceParts(): Collection
+    {
+        return $this->sourceParts;
+    }
+
+    public function addSourcePart(Part $sourcePart): static
+    {
+        if (!$this->sourceParts->contains($sourcePart)) {
+            $this->sourceParts->add($sourcePart);
+            $sourcePart->addSpecialty($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSourcePart(Part $sourcePart): static
+    {
+        if ($this->sourceParts->removeElement($sourcePart)) {
+            $sourcePart->removeSpecialty($this);
         }
 
         return $this;

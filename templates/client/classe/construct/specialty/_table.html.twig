@@ -1,35 +1,37 @@
-<table class="specialty-table">
-    <thead class="specialty-thead">
-        <tr class="specialty-tr">
-            <th class="specialty-th" colspan="2">{{ table.name }}</th>
-        </tr>
-        <tr class="specialty-tr">
-            <th class="specialty-th">{{ table.th1 }}</th>
-            <th class="specialty-th">{{ table.th2 }}</th>
-        </tr>
-    </thead>
-    <tbody class="specialty-tbody">
-        <tr class="specialty-tr">
-            <td class="specialty-td">{{ table.tr1Td1 }}</td>
-            <td class="specialty-td">{{ table.tr1Td2|raw }}</td>
-        </tr>
-        {% if table.tr2Td1 %}
+{% for table in specialty.tables %}
+    <table class="specialty-table">
+        <thead class="specialty-thead">
             <tr class="specialty-tr">
-                <td class="specialty-td">{{ table.tr2Td1 }}</td>
-                <td class="specialty-td">{{ table.tr2Td2|raw }}</td>
+                <th class="specialty-th" colspan="2">{{ table.name }}</th>
             </tr>
-        {% endif %}
-        {% if table.tr3Td1 %}
             <tr class="specialty-tr">
-                <td class="specialty-td">{{ table.tr3Td1 }}</td>
-                <td class="specialty-td">{{ table.tr3Td2|raw }}</td>
+                <th class="specialty-th">{{ table.th1 }}</th>
+                <th class="specialty-th">{{ table.th2 }}</th>
             </tr>
-        {% endif %}
-        {% if table.tr4Td1 %}
+        </thead>
+        <tbody class="specialty-tbody">
             <tr class="specialty-tr">
-                <td class="specialty-td">{{ table.tr4Td1 }}</td>
-                <td class="specialty-td">{{ table.tr4Td2|raw }}</td>
+                <td class="specialty-td">{{ table.tr1Td1 }}</td>
+                <td class="specialty-td">{{ table.tr1Td2|raw }}</td>
             </tr>
-        {% endif %}
-    </tbody>
-</table>
+            {% if table.tr2Td1 %}
+                <tr class="specialty-tr">
+                    <td class="specialty-td">{{ table.tr2Td1 }}</td>
+                    <td class="specialty-td">{{ table.tr2Td2|raw }}</td>
+                </tr>
+            {% endif %}
+            {% if table.tr3Td1 %}
+                <tr class="specialty-tr">
+                    <td class="specialty-td">{{ table.tr3Td1 }}</td>
+                    <td class="specialty-td">{{ table.tr3Td2|raw }}</td>
+                </tr>
+            {% endif %}
+            {% if table.tr4Td1 %}
+                <tr class="specialty-tr">
+                    <td class="specialty-td">{{ table.tr4Td1 }}</td>
+                    <td class="specialty-td">{{ table.tr4Td2|raw }}</td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+{% endfor %}
