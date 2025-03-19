@@ -1,74 +1,52 @@
-<table class="classe-skill-table">
-    <thead class="classe-skill-thead">
-        <tr class="classe-skill-tr">
-            <th class="classe-skill-th">{{ skill.skillTable.th1 }}</th>
-            <th class="classe-skill-th">{{ skill.skillTable.th2 }}</th>
-            {% if skill.skillTable.th3 %}
-                <th class="classe-skill-th">{{ skill.skillTable.th3 }}</th>
-            {% endif %}
-            {% if skill.skillTable.th4 %}
-                <th class="classe-skill-th">{{ skill.skillTable.th4 }}</th>
-            {% endif %}
-        </tr>
-    </thead>
-    <tbody class="classe-skill-tbody">
-        <tr class="classe-skill-tr">
-            <td class="classe-skill-td">{{ skill.skillTable.tr1Td1 }}</td>
-            <td class="classe-skill-td">{{ skill.skillTable.tr1Td2 }}</td>
-            {% if skill.skillTable.tr1Td3 %}
-                <td class="classe-skill-td">{{ skill.skillTable.tr1Td3 }}</td>
-            {% endif %}
-            {% if skill.skillTable.tr1Td4 %}
-                <td class="classe-skill-td">{{ skill.skillTable.tr1Td4 }}</td>
-            {% endif %}
-        </tr>
-        {% if skill.skillTable.tr2Td1 %}
+{% if skill.skillTable %}
+    <table class="classe-skill-table">
+        <thead class="classe-skill-thead">
             <tr class="classe-skill-tr">
-                <td class="classe-skill-td">{{ skill.skillTable.tr2Td1 }}</td>
-                <td class="classe-skill-td">{{ skill.skillTable.tr2Td2 }}</td>
-                {% if skill.skillTable.tr2Td3 %}
-                    <td class="classe-skill-td">{{ skill.skillTable.tr2Td3 }}</td>
-                {% endif %}
-                {% if skill.skillTable.tr2Td4 %}
-                    <td class="classe-skill-td">{{ skill.skillTable.tr2Td4 }}</td>
-                {% endif %}
+                <th class="classe-skill-th">{{ skill.skillTable.th1 }}</th>
+                <th class="classe-skill-th">{{ skill.skillTable.th2 }}</th>
+                {% if skill.skillTable.th3 %}<th class="classe-skill-th">{{ skill.skillTable.th3 }}</th>{% endif %}
+                {% if skill.skillTable.th4 %}<th class="classe-skill-th">{{ skill.skillTable.th4 }}</th>{% endif %}
             </tr>
-        {% endif %}
-        {% if skill.skillTable.tr3Td1 %}
+        </thead>
+        <tbody class="classe-skill-tbody">
             <tr class="classe-skill-tr">
-                <td class="classe-skill-td">{{ skill.skillTable.tr3Td1 }}</td>
-                <td class="classe-skill-td">{{ skill.skillTable.tr3Td2 }}</td>
-                {% if skill.skillTable.tr3Td3 %}
-                    <td class="classe-skill-td">{{ skill.skillTable.tr3Td3 }}</td>
-                {% endif %}
-                {% if skill.skillTable.tr3Td4 %}
-                    <td class="classe-skill-td">{{ skill.skillTable.tr3Td4 }}</td>
-                {% endif %}
+                <td class="classe-skill-td">{{ skill.skillTable.tr1Td1 }}</td>
+                <td class="classe-skill-td">{{ skill.skillTable.tr1Td2 }}</td>
+                {% if skill.skillTable.tr1Td3 %}<td class="classe-skill-td">{{ skill.skillTable.tr1Td3 }}</td>{% endif %}
+                {% if skill.skillTable.tr1Td4 %}<td class="classe-skill-td">{{ skill.skillTable.tr1Td4 }}</td>{% endif %}
             </tr>
-        {% endif %}
-        {% if skill.skillTable.tr4Td1 %}
-            <tr class="classe-skill-tr">
-                <td class="classe-skill-td">{{ skill.skillTable.tr4Td1 }}</td>
-                <td class="classe-skill-td">{{ skill.skillTable.tr4Td2 }}</td>
-                {% if skill.skillTable.tr4Td3 %}
-                    <td class="classe-skill-td">{{ skill.skillTable.tr4Td3 }}</td>
-                {% endif %}
-                {% if skill.skillTable.tr4Td4 %}
-                    <td class="classe-skill-td">{{ skill.skillTable.tr4Td4 }}</td>
-                {% endif %}
-            </tr>
-        {% endif %}
-        {% if skill.skillTable.tr5Td1 %}
-            <tr class="classe-skill-tr">
-                <td class="classe-skill-td">{{ skill.skillTable.tr5Td1 }}</td>
-                <td class="classe-skill-td">{{ skill.skillTable.tr5Td2 }}</td>
-                {% if skill.skillTable.tr5Td3 %}
-                    <td class="classe-skill-td">{{ skill.skillTable.tr5Td3 }}</td>
-                {% endif %}
-                {% if skill.skillTable.tr5Td4 %}
-                    <td class="classe-skill-td">{{ skill.skillTable.tr5Td4 }}</td>
-                {% endif %}
-            </tr>
-        {% endif %}
-    </tbody>
-</table>
+            {% if skill.skillTable.tr2Td1 %}
+                <tr class="classe-skill-tr">
+                    <td class="classe-skill-td">{{ skill.skillTable.tr2Td1 }}</td>
+                    <td class="classe-skill-td">{{ skill.skillTable.tr2Td2 }}</td>
+                    {% if skill.skillTable.tr2Td3 %}<td class="classe-skill-td">{{ skill.skillTable.tr2Td3 }}</td>{% endif %}
+                    {% if skill.skillTable.tr2Td4 %}<td class="classe-skill-td">{{ skill.skillTable.tr2Td4 }}</td>{% endif %}
+                </tr>
+            {% endif %}
+            {% if skill.skillTable.tr3Td1 %}
+                <tr class="classe-skill-tr">
+                    <td class="classe-skill-td">{{ skill.skillTable.tr3Td1 }}</td>
+                    <td class="classe-skill-td">{{ skill.skillTable.tr3Td2 }}</td>
+                    {% if skill.skillTable.tr3Td3 %}<td class="classe-skill-td">{{ skill.skillTable.tr3Td3 }}</td>{% endif %}
+                    {% if skill.skillTable.tr3Td4 %}<td class="classe-skill-td">{{ skill.skillTable.tr3Td4 }}</td>{% endif %}
+                </tr>
+            {% endif %}
+            {% if skill.skillTable.tr4Td1 %}
+                <tr class="classe-skill-tr">
+                    <td class="classe-skill-td">{{ skill.skillTable.tr4Td1 }}</td>
+                    <td class="classe-skill-td">{{ skill.skillTable.tr4Td2 }}</td>
+                    {% if skill.skillTable.tr4Td3 %}<td class="classe-skill-td">{{ skill.skillTable.tr4Td3 }}</td>{% endif %}
+                    {% if skill.skillTable.tr4Td4 %}<td class="classe-skill-td">{{ skill.skillTable.tr4Td4 }}</td>{% endif %}
+                </tr>
+            {% endif %}
+            {% if skill.skillTable.tr5Td1 %}
+                <tr class="classe-skill-tr">
+                    <td class="classe-skill-td">{{ skill.skillTable.tr5Td1 }}</td>
+                    <td class="classe-skill-td">{{ skill.skillTable.tr5Td2 }}</td>
+                    {% if skill.skillTable.tr5Td3 %}<td class="classe-skill-td">{{ skill.skillTable.tr5Td3 }}</td>{% endif %}
+                    {% if skill.skillTable.tr5Td4 %}<td class="classe-skill-td">{{ skill.skillTable.tr5Td4 }}</td>{% endif %}
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+{% endif %}

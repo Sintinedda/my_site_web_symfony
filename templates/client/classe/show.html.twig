@@ -15,35 +15,24 @@
 
     <div class="cont">
         <p class="classe-show-descr">{{ classe.descr }}</p>
-
         <h2 class="classe-show-subtitle">Points de vie</h2>
         <p class="classe-show-item"><b>DV : </b>1d{{ classe.dv }} par niveau de {{ classe.name }}</p>
         <p class="classe-show-item"><b>Pv au niveau 1 : </b>{{ classe.dv }} + votre modificateur de Constitution</p>
         <p class="classe-show-item"><b>Pv aux niveaux suivants : </b>1d{{ classe.dv }} + votre modificateur de Constitution</p>
-
         <h2 class="classe-show-subtitle">Maîtrises</h2>
         <p class="classe-show-item"><b>Armures : </b>{{ classe.armor }}</p>
         <p class="classe-show-item"><b>Armes : </b>{{ classe.weapon }}</p>
         <p class="classe-show-item"><b>Outils : </b>{{ classe.tool }}</p>
         <p class="classe-show-item"><b>Jets de sauvegarde : </b>{{ classe.save }}</p>
         <p class="classe-show-item"><b>Comnpétences : </b>{{ classe.competence }}</p>
-
         <h2 class="classe-show-subtitle">Équipement</h2>
         <p class="classe-show-item">Vous commencez avec l'équipement suivant, en plus de l'équipement accordé par votre historique :</p>
         <ul class="classe-show-equipment-list">
             <li class="classe-show-equipment-item">{{ classe.equipment1 }}</li>
-            {% if classe.equipment2 %}
-                <li class="classe-show-equipment-item">{{ classe. equipment2 }}</li>
-            {% endif %}
-            {% if classe.equipment3 %}
-                <li class="classe-show-equipment-item">{{ classe. equipment3 }}</li>
-            {% endif %}
-            {% if classe.equipment4 %}
-                <li class="classe-show-equipment-item">{{ classe. equipment4 }}</li>
-            {% endif %}
-            {% if classe.equipment5 %}
-                <li class="classe-show-equipment-item">{{ classe. equipment5 }}</li>
-            {% endif %}
+            {% if classe.equipment2 %}<li class="classe-show-equipment-item">{{ classe. equipment2 }}</li>{% endif %}
+            {% if classe.equipment3 %}<li class="classe-show-equipment-item">{{ classe. equipment3 }}</li>{% endif %}
+            {% if classe.equipment4 %}<li class="classe-show-equipment-item">{{ classe. equipment4 }}</li>{% endif %}
+            {% if classe.equipment5 %}<li class="classe-show-equipment-item">{{ classe. equipment5 }}</li>{% endif %}
         </ul>
 
         {# tables #}

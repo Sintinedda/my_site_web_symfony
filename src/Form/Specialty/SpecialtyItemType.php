@@ -2,7 +2,10 @@
 
 namespace App\Form\Specialty;
 
+use App\Entity\Source\Part;
+use App\Entity\Source\Source;
 use App\Entity\Specialty\SpecialtyItem;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -22,7 +25,17 @@ class SpecialtyItemType extends AbstractType
             ])
             ->add('name', TextType::class)
             ->add('slug',TextType::class)
-            ->add('source', TextType::class)
+            ->add('sources', EntityType::class, [
+                'class' => Source::class,
+                'multiple' => true,
+                'choice_label' => 'name'
+            ])
+            ->add('sourceParts', EntityType::class, [
+                'class' => Part::class,
+                'choice_label' => 'number',
+                'multiple' => true,
+                'required' => false
+            ])
             ->add('descr1', TextareaType::class)
             ->add('descr2', TextareaType::class, [
                 'required' => false

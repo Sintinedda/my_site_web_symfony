@@ -2,6 +2,8 @@
 
 namespace App\Entity\Race;
 
+use App\Entity\Source\Part;
+use App\Entity\Source\Source;
 use App\Entity\Talent\Talent;
 use App\Repository\Race\SourceRaceRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -22,9 +24,6 @@ class SourceRace
     
     #[ORM\Column(length: 255)]
     private ?string $name = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $source = null;
 
     #[ORM\Column(length: 1050, nullable: true)]
     private ?string $descr1 = null;
@@ -77,6 +76,12 @@ class SourceRace
     #[ORM\Column(length: 255)]
     private ?string $slug = null;
 
+    #[ORM\ManyToOne(inversedBy: 'races')]
+    private ?Source $source = null;
+
+    #[ORM\ManyToOne(inversedBy: 'races')]
+    private ?Part $sourcePart = null;
+
     public function __construct()
     {
         $this->subraces = new ArrayCollection();
@@ -108,18 +113,6 @@ class SourceRace
     public function setName(string $name): static
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    public function getSource(): ?string
-    {
-        return $this->source;
-    }
-
-    public function setSource(?string $source): static
-    {
-        $this->source = $source;
 
         return $this;
     }
@@ -333,6 +326,30 @@ class SourceRace
     public function setSlug(string $slug): static
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getSource(): ?Source
+    {
+        return $this->source;
+    }
+
+    public function setSource(?Source $source): static
+    {
+        $this->source = $source;
+
+        return $this;
+    }
+
+    public function getSourcePart(): ?Part
+    {
+        return $this->sourcePart;
+    }
+
+    public function setSourcePart(?Part $sourcePart): static
+    {
+        $this->sourcePart = $sourcePart;
 
         return $this;
     }

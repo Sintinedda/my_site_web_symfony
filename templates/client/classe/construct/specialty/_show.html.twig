@@ -15,7 +15,7 @@
                         <td class="classe-specialty-td">
                             <a class="classe-specialty-link" href="{{ path('app_view_specialty_show', { 'slug': classe.slug, 'slug2': specialty.slug }) }}">{{ specialty.name }}</a>
                         </td>
-                        <td class="classe-specialty-td">{{ specialty.source }}</td>
+                        <td class="classe-specialty-td">{% for s in specialty.sources %}{{ s.name }}{{ not loop.last ? ', ' }}{% endfor %}</td>
                     </tr>
                 {% endif %}
             {% endfor %}
@@ -28,7 +28,17 @@
                         <td class="classe-specialty-td">
                             <a class="classe-specialty-link" href="{{ path('app_view_specialty_show', { 'slug': classe.slug, 'slug2': specialty.slug }) }}">{{ specialty.name }}</a>
                         </td>
-                        <td class="classe-specialty-td">{{ specialty.source }}</td>
+                        <td class="classe-specialty-td">
+                            {% for s in specialty.sources %}
+                                {{ s.name }}
+                                {% for p in specialty.sourceParts %}
+                                    {% for ps in s.parts %}
+                                        {% if p == ps %} {{ p.number}} - {{ p.name }}{% endif %}
+                                    {% endfor %}
+                                {% endfor %} 
+                                {{ not loop.last ? ',' }}
+                            {% endfor %}
+                        </td>
                     </tr>
                 {% endif %}
             {% endfor %}

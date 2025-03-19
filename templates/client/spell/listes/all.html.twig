@@ -73,7 +73,10 @@
                             {% endif %}
                         </td>
                         <td class="spells-table-descr descr show1024">{{ sort.shortDescr }}</td>
-                        <td class="spells-table-source source show992">{{ sort.source }}</td>
+                        <td class="spells-table-source source show992">
+                            {{ sort.source.name }}
+                            {% if sort.sourcePart %}{{ sort.sourcePart.number }} - {{ sort.sourcePart.name}}{% endif %}
+                        </td>
                     </tr>
                 {% endfor %}
             </tbody>

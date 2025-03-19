@@ -1,15 +1,7 @@
 <ul class="specialty-skill-liste">
     <li class="specialty-skill-liste-item">{{ l.l1|raw }}</li>
-    {% if l.l2 %}
-        <li class="specialty-skill-liste-item">{{ l.l2|raw }}</li>
-    {% endif %}
-    {% if l.l3 %}
-        <li class="specialty-skill-liste-item">{{ l.l3|raw }}</li>
-    {% endif %}
-    {% if l.l4 %}
-        <li class="specialty-skill-liste-item">{{ l.l4|raw }}</li>
-    {% endif %}
-    {% if l.l5 %}
-        <li class="specialty-skill-liste-item">{{ l.l5|raw }}</li>
-    {% endif %}
+    {% if l.l2 %}<li class="specialty-skill-liste-item">{{ l.l2|raw }}</li>{% endif %}
+    {% if l.l3 %}<li class="specialty-skill-liste-item">{{ l.l3|raw }}</li>{% endif %}
+    {% if l.l4 %}<li class="specialty-skill-liste-item">{{ l.l4|raw }}</li>{% endif %}
+    {% if l.l5 %}<li class="specialty-skill-liste-item">{{ l.l5|raw }}</li>{% endif %}
 </ul>

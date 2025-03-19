@@ -42,7 +42,9 @@
             {% for classe in sort.classes %}
                 <p class="spell-classe">{{ classe.name }}</p>
             {% endfor %}
-            <p class="spell-source">{{ sort.source }} {% if sort.uaPart %}{{ sort.uaPart }}{% endif %}</p>
+            <p class="spell-source">
+                {{ sort.source.name }} {% if sort.sourcePart %}{{ sort.sourcePart.number }} - {{ sort.sourcePart.name}}{% endif %}
+            </p>
         </div>
     </div>
 

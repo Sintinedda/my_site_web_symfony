@@ -2,6 +2,8 @@
 
 namespace App\Entity\Monster;
 
+use App\Entity\Source\Part;
+use App\Entity\Source\Source;
 use App\Entity\Specialty\SpecialtySkill;
 use App\Repository\Monster\SBRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -154,9 +156,6 @@ class SB
     #[ORM\Column(length: 100, nullable: true)]
     private ?string $language = null;
 
-    #[ORM\Column(length: 100)]
-    private ?string $source = null;
-
     #[ORM\Column(length: 100, nullable: true)]
     private ?string $pp2 = null;
 
@@ -171,6 +170,12 @@ class SB
      */
     #[ORM\OneToMany(targetEntity: ActionPartMonster::class, mappedBy: 'monster', orphanRemoval: true)]
     private Collection $spes;
+
+    #[ORM\ManyToOne(inversedBy: 'monsters')]
+    private ?Source $source = null;
+
+    #[ORM\ManyToOne(inversedBy: 'monsters')]
+    private ?Part $sourcePart = null;
 
     public function __construct()
     {
@@ -533,18 +538,6 @@ class SB
         return $this;
     }
 
-    public function getSource(): ?string
-    {
-        return $this->source;
-    }
-
-    public function setSource(?string $source): static
-    {
-        $this->source = $source;
-
-        return $this;
-    }
-
     public function getFp(): ?float
     {
         return $this->fp;
@@ -820,6 +813,30 @@ class SB
                 $spe->setMonster(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSource(): ?Source
+    {
+        return $this->source;
+    }
+
+    public function setSource(?Source $source): static
+    {
+        $this->source = $source;
+
+        return $this;
+    }
+
+    public function getSourcePart(): ?Part
+    {
+        return $this->sourcePart;
+    }
+
+    public function setSourcePart(?Part $sourcePart): static
+    {
+        $this->sourcePart = $sourcePart;
 
         return $this;
     }

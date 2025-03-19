@@ -3,6 +3,8 @@
 namespace App\Form\Spell;
 
 use App\Entity\Classe\Classe;
+use App\Entity\Source\Part;
+use App\Entity\Source\Source;
 use App\Entity\Spell\Spell;
 use App\Entity\Spell\SpellSchool;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -87,8 +89,13 @@ class SpellType extends AbstractType
             ->add('upper_level', TextareaType::class, [
                 'required' =>false
             ])
-            ->add('source', TextType::class)
-            ->add('ua_part', TextType::class, [
+            ->add('source', EntityType::class, [
+                'class' => Source::class,
+                'choice_label' => 'name'
+            ])
+            ->add('sourcePart', EntityType::class, [
+                'class' => Part::class,
+                'choice_label' => 'number',
                 'required' => false
             ])
             ->add('ua')

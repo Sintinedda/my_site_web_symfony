@@ -3,6 +3,8 @@
 namespace App\Entity\Spell;
 
 use App\Entity\Classe\Classe;
+use App\Entity\Source\Part;
+use App\Entity\Source\Source;
 use App\Repository\Spell\SpellRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -46,9 +48,6 @@ class Spell
 
     #[ORM\Column(length: 1000, nullable: true)]
     private ?string $upper_level = null;
-
-    #[ORM\Column(length: 100)]
-    private ?string $source = null;
 
     #[ORM\Column]
     private ?bool $ritual = null;
@@ -122,8 +121,11 @@ class Spell
     #[ORM\OneToMany(targetEntity: SpellList::class, mappedBy: 'spell', orphanRemoval: true)]
     private Collection $lists;
 
-    #[ORM\Column(length: 50, nullable: true)]
-    private ?string $ua_part = null;
+    #[ORM\ManyToOne(inversedBy: 'spells')]
+    private ?Source $source = null;
+
+    #[ORM\ManyToOne(inversedBy: 'spells')]
+    private ?Part $sourcePart = null;
 
     public function __construct()
     {
@@ -253,18 +255,6 @@ class Spell
     public function setUpperLevel(?string $upper_level): static
     {
         $this->upper_level = $upper_level;
-
-        return $this;
-    }
-
-    public function getSource(): ?string
-    {
-        return $this->source;
-    }
-
-    public function setSource(string $source): static
-    {
-        $this->source = $source;
 
         return $this;
     }
@@ -569,14 +559,26 @@ class Spell
         return $this;
     }
 
-    public function getUaPart(): ?string
+    public function getSource(): ?Source
     {
-        return $this->ua_part;
+        return $this->source;
     }
 
-    public function setUaPart(?string $ua_part): static
+    public function setSource(?Source $source): static
     {
-        $this->ua_part = $ua_part;
+        $this->source = $source;
+
+        return $this;
+    }
+
+    public function getSourcePart(): ?Part
+    {
+        return $this->sourcePart;
+    }
+
+    public function setSourcePart(?Part $sourcePart): static
+    {
+        $this->sourcePart = $sourcePart;
 
         return $this;
     }
